@@ -1,0 +1,233 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;                                                          ;;;;;;;;
+;;;;;;  All files in this directory are copyright 1997, 1998    ;;;;;;;;
+;;;;;;  by Rafael D. Sorkin.     All rights reserved.           ;;;;;;;;
+;;;;;;                                                          ;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;==========================================================================
+;             General Preparations for TrueCommonLisp (TCL)
+;==========================================================================
+;
+;                        ; Time-stamp:< 21:13:22 Jul 16 1998 (13742 42290) >
+;
+; Intended for all TCL but specifically GCL  (gnu common lisp)
+;  (The version { preparations.el } is for use with elisp)
+;=======================================================================
+
+(in-package 'user)
+
+;: Decide whether or to recompile everything 
+
+(defvar recompile nil)  
+;; (setq recompile t)
+
+;=======================================================================
+
+;: Table of Contents
+;
+;   Declarations, "proclamations", definitions of global constants
+;   Set some global variables
+;   Define various aliases and macros 
+;   Try to define Infinity% and NaN%
+;   Set Load Path
+;   Load various libraries (with recompilation if requested)
+;   Other 
+;----------------------------------------------------------------------
+;: Declarations, "proclamations", definitions of global constants
+;----------------------------------------------------------------------
+(progn
+ 
+(defconstant *lisp-type* 'gcl)		; gcl = gnu common lisp
+(defconstant *gcl* t)
+(defconstant *GCL* t)
+(defconstant *TCL* t)                   ; TCL = True Common Lisp
+(defconstant *clisp* nil)
+(defconstant *sun-lisp* nil)
+(defconstant *sunlisp* nil)
+(defconstant *SCL* nil)
+(defconstant *elisp* nil)
+
+;;;
+(defconstant *define-infinity* nil) ;;;
+;;;
+ 
+"Declarations completed")
+ 
+;: Adjust compilation options if recompiling
+(if recompile
+   (proclaim 
+    '(optimize  
+      (Safety 0)
+;      (Safety 3)
+      (Speed 3)
+      (Space 0)
+      (Compilation-speed 0)
+      )))
+ ;
+ ; Here is default provided by gcl
+ ; OPTIMIZE levels: Safety=0 (No runtime error checking), Space=0, Speed=3
+ ;
+ ;  Here are some other possibilities used by scl
+ ; (safety 3) (speed 2) (compilation-speed 3)))
+ ; (safety 3) (speed 2) (compilation-speed 0)))
+ ; (safety 0) (speed 3) (compilation-speed 0)))
+ ; (safety 3) (speed 3) (compilation-speed 0)))  
+ ;  (First is scl standard for "development mode", second is their standard for
+ ;   "production mode", third yields in theory fastest code (but not in
+ ;    practice?) 
+
+;---------------------------------------------------------
+;: Set some global variables 
+;---------------------------------------------------------
+(progn
+
+(defvar *mrv* nil
+  " Place to deposit multiple return values")
+
+(defvar *carefully* t 
+  " 
+ Makes various functions operate with more checking, 
+ e.g. poset functions may check for transitivity, and sorting,
+ matrix multiplication may check dimension of factors match, etc.")
+ ;
+ ; [Note: the default value will not override a value the vble has already]
+
+;; Following need not be specified since they are the builtin defaults anyhow:
+
+; (setq *print-length*  nil)		; number of elements of a data object
+					; will be printed (nil=unlimited)
+
+; (setq *print-level* nil)              ;  controls depth of printing,
+                                        ; nil means no limit
+
+; (setq *print-pretty* t)		; makes arrays etc print nicer (but
+					; they take more space)
+
+; (setq *print-array* t)		; makes vectors print intelligibly
+
+"some global vbles set")
+ 
+;-------------------------------------------------
+;: Define Infinity% and NaN% (if possible)
+;-------------------------------------------------
+; All other numerical constants are loaded from "bibliotek.constants.el"
+;
+; We don't do this with TCL until figure out how to do it
+
+(cond
+ (*define-infinity*
+  ;--------------------------------------------------
+  ;; The funny syntax is to prevent 1e5000 from being evaluated when 
+  ;; this clause is being bypassed
+  ;--------------------------------------------------
+  (defconst 
+    Infinity%
+    (read-from-string "1e5000")
+    "The ``infinite number''")
+  (defconst Infinity  Infinity% "The ``infinite number''")
+  (defconst NaN% (- Infinity% Infinity%) "``Not a Number''")
+  (defconst NaN NaN%)
+ ;--------------------------------------------------
+ ; [Now test for them really being +Infinity and NaN]
+ ;--------------------------------------------------
+  (unless 
+      (and
+       (numberp NaN)
+       (numberp Infinity)
+       (not(or
+            (> NaN 0)
+            (< NaN 0)
+            (= NaN 0)))
+       (= Infinity (+ Infinity Infinity))
+       (/= Infinity 0)
+       (> Infinity 0))
+    (error 
+     "Error in `preparations': Infinity => ~s and NaN => ~s." 
+     Infinity% NaN%))
+ ;------------------
+ ; report success 
+ ;------------------
+  (print "Infinity%% and NaN%% defined successfully"))
+ ;--------------
+ ; can't do it
+ ;--------------
+ (t " Not defining Infinity and NaN "))
+ ;  
+ ; Note that one NaN is often not equal (or = or eql or equalp) to another.
+ ; Note that Infinity and NaN% are lisp "numbers" (numberp=t)
+  
+;-------------------------------------------------------------------------
+;: Set Load Path 
+;-------------------------------------------------------------------------
+;; Set the "load path", i.e. the default initial segment of pathname
+;;
+;;  Can we use a list here?
+;;
+;; For athena only??
+;;
+;; following mishagas is because somehow  *default-pathname-defaults*  
+;; gets reset!!! (this applies when "require", not when "load" !!!!)
+;; in fact any time you `require' something, it resets it to the empty
+;; string!!!
+ ;
+(setq 
+ *path-prefix*  "/usr/export/home/users/grav/inv/sorkin/lisp/"
+ *default-pathname-defaults* (pathname *path-prefix*))
+
+;--------------------------------------------------------
+;: Load various libraries 
+;--------------------------------------------------------
+ ; We load macros and functions only after constants have been defined
+
+(load  "bibliotek.constants.el")        ; We do NOT compile this one
+
+(when recompile
+
+ (load  "bibliotek.TCL.gcl")  
+ (load  "bibliotek.macros.el")
+ (load  "bibliotek.constants.el")        ; We do NOT compile this one
+ (load  "bibliotek.general.el")
+ (load  "bibliotek.poset.el")
+ (load  "bibliotek.float.el")
+ (load  "bibliotek.extras.el")
+ 
+;; why can't it find these??  See apparent answer above!
+;
+;  (compile-file "bibliotek.macros.el")
+;  (compile-file "bibliotek.general.el")
+;  (compile-file "bibliotek.poset.el")
+;  (compile-file "bibliotek.float.el")
+;  (compile-file "bibliotek.extras.el")
+
+ (compile-file (concatenate 'string *path-prefix* "bibliotek.TCL.gcl"))
+ (compile-file (concatenate 'string *path-prefix* "bibliotek.macros.el"))
+ (compile-file (concatenate 'string *path-prefix* "bibliotek.general.el"))
+ (compile-file (concatenate 'string *path-prefix* "bibliotek.poset.el"))
+ (compile-file (concatenate 'string *path-prefix* "bibliotek.float.el"))
+ (compile-file (concatenate 'string *path-prefix* "bibliotek.extras.el"))
+
+ (princ "Bibliotek's recompiled"))
+
+(progn
+  
+ (load "bibliotek.TCL.o")  
+ (load "bibliotek.macros.o")
+ (load "bibliotek.constants.el")        ; We do NOT compile this one
+ (load "bibliotek.general.o")
+ (load "bibliotek.poset.o")
+ (load "bibliotek.float.o")
+ (load "bibliotek.extras.o")
+ 
+ (princ "Compiled bibliotek's loaded"))
+ 
+;--------------------------------------------------------
+;: Other
+;--------------------------------------------------------
+
+(setq recompile nil)
+
+;===============================================================
+(provide 'preparations)      ; see *modules* for what this means
+;===============================================================

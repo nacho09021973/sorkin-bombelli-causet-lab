@@ -1,0 +1,282 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;                                                          ;;;;;;;;
+;;;;;;  All files in this directory are copyright 1997, 1998,   ;;;;;;;;
+;;;;;;  1999, 2000 by Rafael D. Sorkin.  All rights reserved.   ;;;;;;;;
+;;;;;;                                                          ;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+         A PACKAGE OF LISP FUNCTIONS FOR USE WITH POSETS
+
+=======================================================================
+Contents of this file
+
+   Uses of this package
+   Why use Lisp for posets/causal sets?
+   Terminology used in the documentation
+   A few of the poset functions defined in this package
+   Lisp functions and macros of general utility in this package
+   Improvements to Lisp in this package    
+   Other packages available for posets
+   Problems with using Lisp for posets
+   Elisp versus Common Lisp
+   Lisp versus C
+=======================================================================
+
+
+Uses of this package
+====================
+
+   The package can be used as a "scratch pad" for doing mathematics with
+   individual posets or families of posets; it also makes possible a
+   large range of causal set simulations.  For example, one can generate
+   causal sets randomly with certain families of probability
+   distributions and collect statistics about properties such as their
+   fractal dimensions.  The package can also be used to validate
+   programs for posets written in other languages like C or Fortran.
+
+
+Why use Lisp for posets/causal sets?
+====================================
+
+   Posets are more combinatorial than numerical in nature.
+   Conceptually, they are more naturally expressed as either mappings or
+   sets of ordered pairs, than as matrices of 1's and 0's.  Thus, for
+   example, a poset can be represented as the mapping that takes each
+   element to the set of elements strictly to its past.  Such a
+   representation is congenial to Lisp because `symbols' and `lists' are
+   the basic structural elements of the language, and `evaluation' is
+   the basic activity of the Lisp interpreter.  In this package, symbols
+   serve as the poset elements and lists-as-sets serve as their pasts.
+   The mapping from an element to its past is represented by making the
+   symbol evaluate to its past.  Other pertinent properties of an
+   element (its level in the poset, its future, the value of some scalar
+   field at that element, etc.) can be kept conveniently on the symbol's
+   `property list'.
+
+   An important convenience of using Lisp is that lists can change size
+   "dynamically", whence storage for them does not have to be allocated
+   explicitly.  For example, in taking the transitive closure of a
+   relation (or in a Monte Carlo type simulation), the pasts of the
+   individual elements are constantly changing in size.  All this is
+   handled automatically by the Lisp housekeeping routines.
+
+   Lisp is interactive like Maple or APL.  This makes it especially
+   useful for "developmental" work, as opposed to "production" runs (aka
+   playing around with posets in order to get a feel for them).  It also
+   makes for more flexibility in "one off" situations, since one is not
+   required to write and compile a special purpose program for each
+   computation.  A particular convenience in this connection is that the
+   editor emacs offers very flexible facilities for running elisp, and
+   for running other dialects of Lisp from within emacs.
+
+   Lisp is also a high level language, making it easier to code simply
+   and accurately.  This also makes it useful for checking code
+   written in other languages, e.g. Alan Daughton's and Roberto
+   Salgado's Fortran code for studying the locality of the scalar field
+   on a background causal set, or David Rideout's code for simulating
+   causet dynamics.  The qualitative difference between Lisp and Fortran
+   or C makes such a check all the more effective.
+
+   Lisp code is written is such a way that it ought to be readily
+   parallelizable.  For example the function `mapcar' could just be made
+   to act on all the elements of its argument-list simultaneously,
+   rather than sequentially.  
+
+   Common Lisp provides a large number of "builtins" for working with
+   lists-as-sets, for example the functions `subsetp', `member', `union'
+   `intersection', `set-difference', `delete', `sort'.  (Elisp as such
+   lacks most of these, but they are available in the CL package that
+   comes as part of the emacs distribution.)
+
+   For drawbacks of using Lisp see "Problems with using Lisp", below.
+
+
+Terminology used in the documentation
+=====================================
+
+  order = poset = partial order = acyclic transitive directed graph
+
+  preorder = preposet = acyclic irreflexive relation
+
+      NB: some people define `preorder' differently
+
+  past : will be taken with respect to the *irreflexive* convention
+
+  pre-pseudo-order = directed graph = digraph = relation 
+
+  link = an irreducible relation in an order = covering relation
+
+  chain = a linearly ordered subset of an order
+
+  path = saturated chain 
+       = chain all of whose links are links of the ambient order
+
+  substrate = the underlying set of symbols "supporting" the partial order
+
+  causet = causal set = poset regarded as a discrete spacetime 
+
+
+A few of the poset functions defined in this package
+====================================================
+
+ See the files "bibliotek.poset.el" and "bibliotek.extras.el" for a full
+ listing and much more extensive documentation.
+
+   past      (returns the past of an element, setf method also provided)
+  
+       (The defining relation x < y is represented by making the `value'
+        of y be the set of all x which precede it). 
+
+   future    (the future of an element relative to a subposet)
+
+   interval  (the interval or ``Alexandrov set'' between two elements) 
+
+   jana      (the set of elements ``covered'' by its argument, i.e.
+              the set of it ``parents'' or ``past nearest neighbors'')
+
+   prec      (true if x < y) (returns `t'(true) or `nil'(false))
+
+   prepare-substrate  (makes a "blank" substrate) 
+   
+   create-order  (useful for making small posets by hand) 
+
+   maximal   (the set of maximal elements of a poset)
+   minimal   (the set of minimal elements of a poset)
+
+   t-close-preorder  (forms the transitive closure of an acyclic relation)
+
+   transitive-p   (is this relation transitive?)
+
+   t-close-digraph   (a transitive closer that allows for cycles)
+
+   posort    (sorts a preorder upward or downward as specified)
+
+   sortedp   (is this poset sorted upward?)
+
+   compute-levels-for
+
+   level          (returns the level of a poset element)
+
+   n-delete-from-poset  (deletes an element from a poset)
+
+   copy-subposet
+
+   count-relations
+
+   count-links-for
+
+   count-chains-for
+
+   count-paths-for
+
+   count-spanning-trees-for
+
+   count-spanning-hasse-trees-for
+
+   disconnected-part  (of a poset rel. a subset)
+
+
+
+Lisp functions and macros of general utility in this package
+============================================================
+
+  These include various set-theoretic functions, arithmetic functions,
+  statistics function, etc., and can be found (together with document-
+  ation) mainly in the following files:
+
+    bibliotek.general.el
+    bibliotek.float.el
+    bibliotek.extras.el
+
+
+ [this part still to be written]
+
+
+
+Improvements to Lisp in this package
+=====================================
+
+  (To be found mainly in the file "bibliotek.macros.el".)
+  (See especially the macros `deff' `varbind' and `fbind')
+
+  This package contains a set of macros to circumvent one of the
+  deficiencies of elisp, namely the fact that all elisp variables are
+  what is called `special' in lisp terminology.  (To a much smaller
+  extent, an analogous problem exists within true Common Lisp.)  My
+  macros provide truly local variables for use within defined functions,
+  which is important in the present setup in order to avoid a function's
+  inadvertently changing the values of poset elements whose names it
+  doesn't necessarily know.
+
+  In addition the package defines, and utilizes, several macros to
+  simplify the syntax of commonly used Lisp constructs.  For example,
+  instead of writing, `(let ((x 3)) ...)' you can say simply 
+  `(varbind x 3)'.
+
+  [this part still to be written]
+
+
+
+Other packages available for posets
+===================================
+
+  John Stembridge has written an interesting looking one in Maple.  He
+  mentions that, for greater efficiency one should probably use
+  either Lisp or C.
+
+
+Problems with using Lisp for posets
+===================================
+
+   Lisp is slower than Fortran and C, possibly because it is so flexible
+   and high level.  There are optimizing compilers for most lisps which
+   speed things up considerably (and potentially moreso when the types
+   of the variables are `declared' to the compiler, as one is required
+   to do in languages like C); however, in my experience, the code they
+   produce is still nowhere near as fast as that produced by C or
+   Fortran.  I suspect that speed will remain a serious problem until
+   such time as more efficient lisp compilers are produced.
+
+   The printed representation of lisp code is awkward, with virtually
+   all grouping done by parentheses, in contrast to languages which
+   utilize separating words like `then' and `else'.  However, the
+   formatting facilities of editors like emacs make the visual parsing
+   of multiple parentheses fairly painless.  
+
+   In this package, I have also introduced and utilized some macros that
+   help make the syntax clearer (see above).
+
+
+Elisp versus Common Lisp
+========================
+
+   Emacs Lisp (elisp) is widely available since virtually all unix
+     systems come with emacs; other lisps are not.
+
+   Using the CL package distributed with emacs provides most of the
+     common lisp functions which elisp lacks, but not having truly local
+     function-parameters (variables with `lexical scope') is a major
+     nuisance.
+
+
+Lisp versus C
+=============
+
+   C has structures and pointers, so in principle it affords 
+   the same possibilities as Lisp does for representing 
+   posets naturally.
+  
+   Sets with dynamically changing sizes are possible in C, as 
+   in Lisp.  A difference is that memory allocation is done
+   automatically in Lisp, but controlled explicitly by the 
+   programmer in C.
+
+   C is not interactive, Lisp is.
+
+   C is not as high level as Lisp.
+
+   C lacks built-ins for dealing with sets.
+
+   C code runs much faster than Lisp code.
+

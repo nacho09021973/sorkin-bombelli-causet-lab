@@ -1,0 +1,35 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;                                                            ;;;;;;
+;;;;;;  All files in this directory are copyright 1997,1998,1999  ;;;;;;
+;;;;;;  by Rafael D. Sorkin.     All rights reserved.             ;;;;;;
+;;;;;;                                                            ;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+Version 1.4 Tue Dec 22 1998
+Version 1.3 Thu Jul 16 1998
+Version 1.2 Sun May 10 1998 
+Version 1.1 Sat May  9 1998
+Version 1.0 Mon Mar  3 1997
+
+
+Changes in version 1.4
+
+  A few functions have been added, among them:
+  `count-relations', `create-order' (macro)
+
+  A few functions have been improved.
+
+  Some names of poset functions have been changed, a la
+  `count-chains-of-poset-inayoitwa' --> `count-chains-for'
+  
+  Some documentation has been added.
+
+Changes in version 1.3
+
+  A few new functions have been added, and some corrections made.
+  The file "Some.more.documentation" has been brought more up to date.
+
+Changes in version 1.1
+
+  `posort-upward' and `posort' replaced by much faster versions
+  

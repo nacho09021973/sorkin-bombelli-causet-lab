@@ -1,0 +1,34 @@
+How to use the stand alone version of eltex
+
+0. You must have gnu emacs (and the `cl' package that comes with it)
+
+1. Download the file "eltex.standalone.elc" and put it in a place of your choice.
+   (Its name can be changed, if you wish, to anything else ending in ".elc")
+
+(The next two steps are done within emacs)
+
+2. Load the file "eltex.standalone.elc" into emacs
+   (you can do this using the command `load-file')
+
+3. Go into the buffer where you are editing your manuscript 
+   and issue the command `eltex-do'
+
+   This should produce a file called "tmp.tex" residing in the same
+   directory as your manuscript.  This is a normal .tex file with the
+   equations and references numbered, and symbols provided for the
+   footnotes.  
+
+4. The preceding step will have suspended emacs, so you are now back at
+   the command line.  Process the file tmp.tex as you would any tex file.
+
+
+For further explanations, see the documentation for the command
+`eltex-do' and for the other eltex commands, especially
+`eltex-number-eqs' and `eltex-number-refs'
+(You can access such documentation from within emacs by using the
+command `describe-function')
+
+In addition to the primary command `eltex-do', the following commands
+are available as editing aids: 
+
+ ref  equation  footnote  eltex-list-refs  eltex-list-eqs   

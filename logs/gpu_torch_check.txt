@@ -1,0 +1,4 @@
+torch: 2.11.0+cu128
+cuda available: True
+device: NVIDIA GeForce RTX 5060
+cuda runtime: 12.8

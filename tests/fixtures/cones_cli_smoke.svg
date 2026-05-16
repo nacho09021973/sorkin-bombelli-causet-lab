@@ -1,0 +1,15 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='900' height='600' viewBox='0 0 900 600'>
+  <rect width='100%' height='100%' fill='#f7f4ed'/>
+  <line x1='70' y1='530' x2='830' y2='530' stroke='#333' stroke-width='2'/>
+  <line x1='70' y1='70' x2='70' y2='530' stroke='#333' stroke-width='2'/>
+  <text x='450' y='34' text-anchor='middle' font-family='serif' font-size='22' fill='#222'>T vs Eave</text>
+  <text x='450' y='582' text-anchor='middle' font-family='monospace' font-size='16' fill='#222'>T</text>
+  <text x='20' y='300' text-anchor='middle' font-family='monospace' font-size='16' fill='#222' transform='rotate(-90 20 300)'>Eave</text>
+  <polyline fill='none' stroke='#1f77b4' stroke-width='2.5' points='830.00,70.00 609.01,530.00 410.11,530.00 231.10,530.00 70.00,530.00' />
+  <circle cx='830.00' cy='70.00' r='3.5' fill='#e4572e' />
+<circle cx='609.01' cy='530.00' r='3.5' fill='#e4572e' />
+<circle cx='410.11' cy='530.00' r='3.5' fill='#e4572e' />
+<circle cx='231.10' cy='530.00' r='3.5' fill='#e4572e' />
+<circle cx='70.00' cy='530.00' r='3.5' fill='#e4572e' />
+  <text x='70' y='52' font-family='monospace' font-size='14' fill='#444'>n=5</text>
+</svg>

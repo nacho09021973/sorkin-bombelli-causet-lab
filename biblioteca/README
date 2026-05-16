@@ -1,0 +1,96 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;                                                          ;;;;;;;;
+;;;;;;  All files in this directory are copyright 1997, 1998,   ;;;;;;;;
+;;;;;;  1999, 2000 by Rafael D. Sorkin.  All rights reserved.   ;;;;;;;;
+;;;;;;                                                          ;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+CONTENTS OF THIS DIRECTORY
+
+  README
+  Version.notice
+  Some.more.documentation
+
+  preparations.el
+  preparations.gcl
+  bibliotek.elisp.patch.el
+  bibliotek.elisp.el
+  bibliotek.TCL.gcl
+  bibliotek.macros.el
+  bibliotek.constants.el
+  bibliotek.general.el
+  bibliotek.poset.el
+  bibliotek.float.el
+  bibliotek.extras.el
+  bibliotek.emacs.el
+
+
+BRIEF DESCRIPTION OF THIS PACKAGE
+
+The above files include a suite of lisp functions for working with
+finite posets (poset = order = partially ordered set).
+
+Included are functions to return the pasts and futures of individual 
+elements and of sets of elements; to transitively close a
+preorder (= acyclic relation) or a general relation; to pass from the
+poset relation `<' to its set of ``links'' (link = minimal relation,
+sometimes called ``covering relation''); to find the maximal and
+minimal layers of a poset and the levels of its individual elements
+(counting from the bottom); to compute the numbers of chains, paths
+(path=saturated chain), spanning trees and spanning hasse-trees of a
+poset.  From these last invariants, various fractal dimensions can be
+computed, e.g.  the Myrheim-Meyer dimension.
+
+Also present are several lisp functions and macros of general utility,
+some serving as auxiliaries for the poset functions, and some being
+useful in their own right.  Among them are macros designed to extend or
+simplify lisp syntax and macros designed to cope with the lack of local
+variables (mainly affecting emacs-lisp); examples of their use can be
+seen in the source code.
+
+All the functions and macros in this suite are designed to work equally
+well with Emacs Lisp (elisp) and with true Common Lisp (TCL).  However,
+most testing of them has been done with elisp.  Since the functioning of
+elisp is quite consistent from machine to machine, if you have a working
+emacs (of sufficiently high version number), you should be able to use
+this package.  (I'm using use the word `package' in its informal
+English sense, these libraries are not designed as a package in the
+technical TCL sense.)
+
+
+DOCUMENTATION
+
+A large amount of documentation is contained within, and together with,
+the functions themselves.  See in particular the listings at the
+beginnings of the "bibliotek" files and the documentation strings
+incorporated into the function definitions.  (The latter can be accessed
+conveniently using the emacs command `describe-function')
+
+There is also some general -- but still partly out of date -- documentation
+in the file `Some.more.documentation' in this directory.   I hope to add
+to it from time to time.
+
+
+INSTALLATION
+
+To get started, make a sub-directory of your home directory named "lisp"
+and put in it all the files listed above.  (Some are here in .gz form,
+and need to be decompressed.)
+
+Then start up an emacs and load (or evaluate the contents of) the file
+"preparations.el", after temporarily uncommenting the line
+"(setq recompile t)" 
+near the top of the file.  This should create byte-compiled versions
+of the library files with names like "bibliotek.poset.elc".
+
+Thereafter, just load the file "preparations.el" whenever you want to
+use the package.
+
+The installation procedure for gnu common lisp is similar, using the
+file preparations.gcl instead of preparations.el.
+
+COMMENTS AND BUG REPORTS
+
+Both are welcome.  Please send them to 
+
+    sorkin@physics.syr.edu (Rafael Sorkin)

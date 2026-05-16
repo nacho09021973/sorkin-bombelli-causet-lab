@@ -1,0 +1,88 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;                                                          ;;;;;;;;
+;;;;;;  All files in this directory are copyright 1997, 1998,   ;;;;;;;;
+;;;;;;  1999 by Rafael D. Sorkin. All rights reserved.          ;;;;;;;;
+;;;;;;                                                          ;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;                          Time-stamp:< Wed Dec 25 1996 23:45:31 >
+
+;; Provide some extra functions and macros for TCL which are built into elisp
+;; Also set up some aliases (again mainly for compatibility with elisp)
+;;
+;; Perhaps some (more) of these should be declared inline or made macros (if
+;; they aren't already)
+;;
+;; None of these depend on macros defined in bibliotek.macros.el
+;;
+;; KUFANYA if use SCL then don't redefine here things that it already
+;;         has, like `memq'
+;;
+
+
+;: Define `defalias'
+
+(defun defalias (sym def) 
+  " Provides the elisp function of this name, which makes sym an alias 
+ for def.  Example: (defalias 'ewa 'image)"  
+  (cond
+   ((macro-function def)                ; It's a macro
+    (setf (macro-function sym)   
+          (macro-function def)))
+   (t                                   ; Since not a macro, it must be a
+    (setf (symbol-function sym)         ; function (or special form)
+          (symbol-function def)))))
+
+;: Set up some aliases
+
+(defalias 'loop 'sloop:sloop)		; special for GCL
+
+(defalias 'defconst 'defconstant)
+
+(defalias 'copy-sequence 'copy-seq)
+
+(defalias 'setcar 'rplaca)              ; but the return value differs!
+(defalias 'setcdr 'rplacd)              ; but the return value differs!
+
+(defalias 'defmacro* 'defmacro)
+
+;: Make `lambda' a macro
+
+(defmacro lambda (&rest args-forms) 
+  " Defining `lambda' as this macro  will make lambda expressions evaluate to
+ functions--as they do in elisp."  
+  (list 'function (cons 'lambda args-forms)))
+
+
+;: Try to inline memq and delq
+
+;;;; following doesn't seem to do any harm, and might have helped in fact.
+;;;; Must check correct syntax for this!  Also add other small fcns
+
+(declaim (inline memq delq))  ; is this sytax correct??
+
+;: Provide some functions taken from elisp
+
+(defun memq (elt list) (member elt list :test 'eq))  
+
+(defun delq (elt list) (delete elt list :test 'eq))  
+
+(defun car-safe (x) (if (consp x) (car x)))
+
+(defun concat (&rest seqs) 
+  " This function exists in elisp, the result is always a string."
+  (apply #'concatenate (cons 'string seqs)))
+
+(defun fset (sym newval) 
+  " An elisp function for setting the ``function pointer''of a symbol.  The
+ new value must be a valid function definition (not macro, probably) for SCL"
+  (setf (symbol-function sym) newval))
+
+(defun setplist (sym newval)   " An elisp function for setting the plist of a
+ symbol.  This provides it in TCL."
+  (setf (symbol-plist sym) newval))
+
+(defun put (sym prop val) " An elisp function for putting a property in the
+ plist of a symbol. This provides it in SCL."
+  (setf (get sym prop) val))
+
