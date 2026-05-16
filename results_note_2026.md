@@ -328,6 +328,213 @@ discrepancy grows sharply. Thus Phase 1D strengthens the
 multi-observable ensemble diagnostic, but it still does not give
 robust per-causet classification at ``n <= 256``.
 
+## Phase 2: embedding bridge
+
+Phase 2 reconnects the structural atlas to the historical
+Bombelli-Sorkin annealer with a minimal fixed probe. The
+reproducible artifact is
+[`benchmarks/foundation/phase2_embedding_bridge.{csv,md}`](/home/adnac/sorkin/benchmarks/foundation/phase2_embedding_bridge.md),
+regenerable via ``make regen-phase2``.
+
+The probe uses ``n = 64``, case seed ``1959``, optimizer seed
+``1987``, and one row for each family: Minkowski ``d = 2, 3,
+4``, Kleitman-Rothschild, and suspended corona. The annealing
+schedule is intentionally short (``warmup_limit = 10``,
+``anneal_limit = 10``, ``max_data = 4``), because the goal is a
+cheap bridge artifact under test, not an optimized embedding
+campaign.
+
+Main rows:
+
+| family | d | MM | midpoint | \|disc\| | C3 abundance | final E | truth E | gap | RMSE |
+| --- | :---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Minkowski | 2 | 1.99 | 1.90 | 0.10 | 0.1659 | 821.87 | 0.00 | 821.87 | 77567276.68 |
+| Minkowski | 3 | 3.26 | 2.50 | 0.76 | 0.0141 | 637.20 | 0.00 | 637.20 | 40941762.23 |
+| Minkowski | 4 | 3.76 | 2.70 | 1.06 | 0.0044 | 661.64 | 0.00 | 661.64 | 17146618.97 |
+| Kleitman-Rothschild | - | 2.34 | 3.09 | 0.75 | 0.0521 | 866.43 | NA | NA | NA |
+| corona poset | - | 1.94 | 5.00 | 3.06 | 0.0461 | 952.64 | NA | NA | NA |
+
+The conservative reading is that this first bridge does **not**
+validate the historical annealer as a reliable manifoldness
+classifier. Even the Minkowski cases have known truth energy
+zero, yet the short annealing run ends with large energy gaps
+and huge interval residuals. That is exactly the useful
+diagnostic distinction: the structural atlas can say "this
+looks manifoldlike", while the embedding outcome can still say
+"this schedule did not find the geometry." For controls, truth
+energy and interval RMSE are undefined because no ground-truth
+coordinates exist; their final energies should therefore not be
+read as successful embeddings.
+
+## Phase 2B: annealer schedule probe
+
+Phase 2B asks whether the Phase 2 short schedule is what is
+producing the Minkowski energy gap, by sweeping the historical
+annealer over a small grid of iteration budgets while keeping
+the temperature schedule and the rest of the protocol fixed.
+The reproducible artifact is
+[`benchmarks/foundation/phase2b_annealer_schedule_probe.{csv,md}`](/home/adnac/sorkin/benchmarks/foundation/phase2b_annealer_schedule_probe.md),
+regenerable via ``make regen-phase2b``.
+
+The probe is Minkowski-only by construction. Non-manifoldlike
+controls (Kleitman-Rothschild, suspended corona) are excluded
+because they have no ground-truth coordinates and therefore no
+defined ``truth_energy``, ``energy_gap``, or ``interval_rmse``.
+The grid is ``d in {2, 3, 4}`` x ``n in {32, 64}`` x three
+seeds ``(1959, 1962, 1987)`` x three schedule labels:
+
+| label | warmup_limit | anneal_limit | max_data | budget |
+| --- | ---: | ---: | ---: | ---: |
+| short | 10 | 10 | 4 | 50 |
+| medium | 20 | 20 | 6 | 140 |
+| long | 30 | 30 | 10 | 330 |
+
+``short`` reproduces the Phase 2 configuration exactly.
+``long`` is the largest budget that keeps the full grid under
+a reproducible smoke (the historical annealer at default
+budget ``warmup_limit=anneal_limit=100``, ``max_data=35``
+exceeds ten minutes per ``n=64, d=4`` cell on this build and
+is therefore not used).
+
+Headline result. Mean ``energy_gap`` across all cells:
+
+| schedule | runs | mean gap | min gap |
+| --- | ---: | ---: | ---: |
+| short | 18 | 405.16 | 122.23 |
+| medium | 18 | 727.95 | 253.37 |
+| long | 18 | 634.89 | 227.36 |
+
+Conservative reading: across this small grid, increasing the
+historical annealer's iteration budget by ~7x does *not* close
+the gap. The mean gap actually grows, and the best per-cell
+gap of the short schedule (122.23 at ``d=4, n=32``) is not
+beaten by either larger schedule. The same qualitative trend
+appears at every target dimension. The ``success_flag`` is
+``False`` in 54 out of 54 runs under the conservative
+threshold ``energy_gap <= 1.0``.
+
+The reading that follows the interpretation rules fixed in
+advance is therefore:
+
+- The failure of Phase 2 to recover Minkowski coordinates is
+  not adequately explained by 'the Phase 2 schedule was too
+  short'. The simplest budget hypothesis is removed.
+- The remaining candidates are the historical Bombelli energy
+  definition itself, its parametrization, or the historical
+  move set in :class:`cones.ConesSimulator`. Phase 2B does
+  *not* discriminate between those candidates.
+- This is *not* a claim that Minkowski sprinklings are
+  non-manifoldlike. It is a claim about the annealer at fixed
+  energy and fixed move set.
+- The probe never touches KR or corona causets and is not a
+  manifoldness classifier.
+
+Phase 2B does not introduce a new optimizer; it only varies
+the existing knobs of the historical annealer. The full
+numeric table and per-(d,n,seed) breakdown live in the
+artifact's markdown report.
+
+## Phase 2C: oracle embedding audit
+
+Phase 2C closes the ambiguity left after Phase 2B: is the
+Minkowski failure in the energy formula / causal convention,
+or in the optimizer? The reproducible artifact is
+[`benchmarks/foundation/phase2c_oracle_embedding_audit.{csv,md}`](/home/adnac/sorkin/benchmarks/foundation/phase2c_oracle_embedding_audit.md),
+regenerable via ``make regen-phase2c``.
+
+For each case in the Phase 2/2B Minkowski grid (d ∈ {2,3,4},
+n ∈ {32,64}, seeds 1959/1962/1987) the oracle evaluates:
+
+1. Bombelli energy at ground-truth coordinates (no annealing).
+2. Causal matrix reconstructed from stored coordinates vs. the
+   stored causal matrix (discordant-pair count).
+3. Lorentz-invariant interval RMSE of truth against itself.
+
+**Verdict: ORACLE PASSES — 18/18 cases.**
+
+Key numbers:
+
+| check | result across all 18 rows |
+| --- | --- |
+| max \|oracle_energy\| | 0.0 (exactly) |
+| total discordant pairs | 0 |
+| max oracle_interval_rmse | 0.0 (exactly) |
+| oracle_pass_energy | True in 18/18 |
+| oracle_pass_causal_matrix | True in 18/18 |
+| oracle_pass_interval_rmse | True in 18/18 |
+
+Conservative interpretation:
+
+- The Bombelli energy formula returns **exactly 0.0** at the
+  ground-truth coordinates. The target is internally consistent:
+  the energy minimum is where the geometry is.
+- Zero discordant pairs: the causal matrix built by the sprinkler
+  and the one reconstructed from the stored coordinates are
+  identical in floating-point. No convention drift.
+- The self-interval RMSE is identically zero. The Lorentz-
+  invariant residual formula is self-consistent.
+- These three checks confirm: the failure in Phase 2 and Phase 2B
+  is **not** caused by a broken energy, a broken causal
+  criterion, or a broken interval formula.
+- The failure is localized to the optimizer: the move set or
+  annealing landscape prevents the historical
+  :class:`cones.ConesSimulator` from finding the configuration
+  that the energy already identifies as optimal.
+- The next diagnostic step is a **move-set or initialization
+  audit**, not an energy redesign and not more budget.
+
+## Phase 2D: initialization / basin audit
+
+Phase 2D audits the basin structure around the truth by injecting
+four controlled initializations into ConesSimulator with the Phase
+2 short schedule (warmup_limit=10, anneal_limit=10, max_data=4).
+The reproducible artifact is
+[`benchmarks/foundation/phase2d_initialization_basin_audit.{csv,md}`](/home/adnac/sorkin/benchmarks/foundation/phase2d_initialization_basin_audit.md),
+regenerable via ``make regen-phase2d``.
+
+Grid: d ∈ {2,3,4}, n ∈ {32,64}, seeds 1959/1962/1987,
+4 init labels = 72 rows.
+
+**Verdict: NARROW_BASIN.**
+
+Per-label aggregate (ensemble means across 18 cells per label):
+
+| init | runs | mean init E | mean final E | mean ΔE | preserved |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| truth | 18 | 0.0000 | 0.0000 | 0.0000 | 18/18 |
+| truth_plus_small_noise | 18 | 0.0047 | 18.92 | 18.92 | 16/18 |
+| truth_plus_medium_noise | 18 | 11.23 | 395.80 | 384.57 | 0/18 |
+| random_init | 18 | 340.80 | 405.16 | 64.36 | 8/18 |
+
+Conservative interpretation:
+
+- **Truth preserved (18/18).** The warmup exits in 0 steps when
+  ``energies[0] ≤ 0``. No moves are made; the configuration stays
+  exactly at the ground truth.
+- **Small perturbations destroyed.** A noise of ε = 1e-3 gives
+  initial energy ≈ 0.005; the warmup raises it to a mean of 18.9.
+  16/18 rows pass the ``preserved_near_truth`` criterion only
+  because some small-noise cases happen to keep energy tiny after
+  the unconditional warmup.
+- **Medium perturbations destroyed universally (0/18).** Noise
+  ε = 5e-2 is enough to put the configuration well outside the
+  zero-energy attractor. Warmup pushes the mean energy from 11.2
+  to 395.8 before annealing even starts.
+- **Random init consistent with Phase 2B (8/18 preserved).** The
+  same random_init result as Phase 2B short schedule. The annealer
+  makes small improvements from the default start in some cells
+  but never approaches the truth.
+- The dominant failure mode is the **warmup dynamics**: the
+  historical warmup loop makes unconditional accepts (no
+  Metropolis criterion) for all cells with energy > 0. It is
+  designed to equilibrate at high temperature, but it destroys
+  near-optimal starting configurations.
+- This is not a move-set failure and not an energy failure (Phase
+  2C confirmed energy is correct). The root cause is the
+  unconditional warmup.
+- Recommended next step: skip or replace the warmup when starting
+  near a known low-energy configuration. No new optimizer assumed.
+
 ## Next Plan
 
 The next step is now a two-stage search:

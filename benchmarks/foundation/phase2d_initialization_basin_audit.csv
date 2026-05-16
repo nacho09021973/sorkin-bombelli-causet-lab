@@ -1,0 +1,73 @@
+family,target_dim,n,seed,init_label,noise_epsilon,initial_energy,final_energy,delta_energy,initial_interval_rmse,final_interval_rmse,initial_distance_to_truth_rms,final_distance_to_truth_rms,improved_energy,improved_interval_rmse,preserved_near_truth,notes
+minkowski,2,32,1959,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,2,32,1959,truth_plus_small_noise,0.0010,0.0017,0.0009,-0.0007,0.1483,0.1720,0.0160,0.0197,true,false,true,warmup+anneal improved energy 0.001657 -> 0.0009447
+minkowski,2,32,1959,truth_plus_medium_noise,0.0500,7.6546,213.6539,205.9994,36.6760,3238377.1124,1.7454,1498.7460,false,false,false,warmup destroyed near-truth: energy 7.655 -> 213.7; unconditional warmup accepts likely cause
+minkowski,2,32,1959,random_init,NA,62.1468,231.9320,169.7851,48.6806,44024.6503,3.2984,127.2016,false,false,false,random_init not improved: 62.15 -> 231.9
+minkowski,2,32,1962,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,2,32,1962,truth_plus_small_noise,0.0010,0.0000,0.0000,0.0000,0.0644,0.0644,0.0109,0.0109,false,false,true,warmup destroyed near-truth: energy 0 -> 0; unconditional warmup accepts likely cause
+minkowski,2,32,1962,truth_plus_medium_noise,0.0500,4.8757,194.4276,189.5519,4.6181,8111.8910,0.6487,44.3700,false,false,false,warmup destroyed near-truth: energy 4.876 -> 194.4; unconditional warmup accepts likely cause
+minkowski,2,32,1962,random_init,NA,56.5293,195.7065,139.1772,52.0455,32272.4159,3.7170,112.9968,false,false,false,random_init not improved: 56.53 -> 195.7
+minkowski,2,32,1987,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,2,32,1987,truth_plus_small_noise,0.0010,0.0127,0.0091,-0.0037,0.1779,0.4260,0.0181,0.0487,true,false,true,warmup+anneal improved energy 0.01275 -> 0.009053
+minkowski,2,32,1987,truth_plus_medium_noise,0.0500,7.9057,182.9881,175.0824,60522229892712652341248.0000,33282.2202,73055723283.1654,102.7226,false,true,false,warmup destroyed near-truth: energy 7.906 -> 183; unconditional warmup accepts likely cause
+minkowski,2,32,1987,random_init,NA,77.2711,208.8548,131.5837,68.8448,6099.4917,4.3631,71.5018,false,false,false,random_init not improved: 77.27 -> 208.9
+minkowski,2,64,1959,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,2,64,1959,truth_plus_small_noise,0.0010,0.0060,0.0019,-0.0041,0.1262,0.1508,0.0158,0.0184,true,false,true,warmup+anneal improved energy 0.006003 -> 0.001908
+minkowski,2,64,1959,truth_plus_medium_noise,0.0500,26.9055,774.9770,748.0715,20.3725,237825405.9351,1.4024,9929.7766,false,false,false,warmup destroyed near-truth: energy 26.91 -> 775; unconditional warmup accepts likely cause
+minkowski,2,64,1959,random_init,NA,279.7231,821.8675,542.1443,222.7269,19700.1701,7.0369,96.0359,false,false,false,random_init not improved: 279.7 -> 821.9
+minkowski,2,64,1962,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,2,64,1962,truth_plus_small_noise,0.0010,0.0026,0.0014,-0.0011,5.1897,6.2020,0.0951,0.1112,true,false,true,warmup+anneal improved energy 0.002561 -> 0.001447
+minkowski,2,64,1962,truth_plus_medium_noise,0.0500,25.5288,859.1365,833.6078,10.3677,229577.6192,0.9526,317.3446,false,false,false,warmup destroyed near-truth: energy 25.53 -> 859.1; unconditional warmup accepts likely cause
+minkowski,2,64,1962,random_init,NA,309.0265,711.2924,402.2660,260.4812,316828.5908,8.3483,353.3178,false,false,false,random_init not improved: 309 -> 711.3
+minkowski,2,64,1987,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,2,64,1987,truth_plus_small_noise,0.0010,0.0122,0.0015,-0.0107,0.2967,0.3312,0.0200,0.0219,true,false,true,warmup+anneal improved energy 0.01221 -> 0.001471
+minkowski,2,64,1987,truth_plus_medium_noise,0.0500,23.3229,693.9368,670.6139,55771599478108872245248.0000,183994.1256,61110775141.9093,277.7634,false,true,false,warmup destroyed near-truth: energy 23.32 -> 693.9; unconditional warmup accepts likely cause
+minkowski,2,64,1987,random_init,NA,347.0023,753.0743,406.0720,288.9549,3303.6320,8.8817,39.8585,false,false,false,random_init not improved: 347 -> 753.1
+minkowski,3,32,1959,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,3,32,1959,truth_plus_small_noise,0.0010,0.0058,0.0292,0.0234,0.0633,0.4861,0.0122,0.1008,false,false,false,warmup destroyed near-truth: energy 0.005846 -> 0.02921; unconditional warmup accepts likely cause
+minkowski,3,32,1959,truth_plus_medium_noise,0.0500,5.5739,140.1931,134.6193,2.0892,1162873.6551,0.4889,443.6726,false,false,false,warmup destroyed near-truth: energy 5.574 -> 140.2; unconditional warmup accepts likely cause
+minkowski,3,32,1959,random_init,NA,177.8374,142.1317,-35.7057,121.4556,32052.0888,6.3494,150.0380,true,false,true,anneal improved over random_init: 177.8 -> 142.1
+minkowski,3,32,1962,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,3,32,1962,truth_plus_small_noise,0.0010,0.0008,0.0002,-0.0006,0.0184,0.0185,0.0067,0.0069,true,false,true,warmup+anneal improved energy 0.0007897 -> 0.0001565
+minkowski,3,32,1962,truth_plus_medium_noise,0.0500,5.0775,125.7512,120.6737,0.7443,576633.7994,0.3039,474.5481,false,false,false,warmup destroyed near-truth: energy 5.077 -> 125.8; unconditional warmup accepts likely cause
+minkowski,3,32,1962,random_init,NA,148.7281,151.7462,3.0181,86.7636,72930.6953,4.9914,169.6529,false,false,false,random_init not improved: 148.7 -> 151.7
+minkowski,3,32,1987,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,3,32,1987,truth_plus_small_noise,0.0010,0.0000,0.0000,-0.0000,0.0276,0.0276,0.0087,0.0087,true,true,true,warmup+anneal improved energy 4.518e-05 -> 3.624e-06
+minkowski,3,32,1987,truth_plus_medium_noise,0.0500,5.2624,154.5473,149.2849,2.1956,227489.9653,0.5457,247.8743,false,false,false,warmup destroyed near-truth: energy 5.262 -> 154.5; unconditional warmup accepts likely cause
+minkowski,3,32,1987,random_init,NA,145.2319,173.0916,27.8597,91.5150,48442.5904,5.2885,181.8391,false,false,false,random_init not improved: 145.2 -> 173.1
+minkowski,3,64,1959,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,3,64,1959,truth_plus_small_noise,0.0010,0.0078,0.0031,-0.0047,0.0492,0.0709,0.0106,0.0172,true,false,true,warmup+anneal improved energy 0.007785 -> 0.003117
+minkowski,3,64,1959,truth_plus_medium_noise,0.0500,16.4860,589.6979,573.2119,3.0140,191278.1362,0.5782,316.2390,false,false,false,warmup destroyed near-truth: energy 16.49 -> 589.7; unconditional warmup accepts likely cause
+minkowski,3,64,1959,random_init,NA,614.1638,637.2047,23.0408,378.2405,31958583.8812,10.8249,2797.9689,false,false,false,random_init not improved: 614.2 -> 637.2
+minkowski,3,64,1962,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,3,64,1962,truth_plus_small_noise,0.0010,0.0000,0.0000,0.0000,0.0307,0.0307,0.0087,0.0087,false,false,true,warmup destroyed near-truth: energy 0 -> 0; unconditional warmup accepts likely cause
+minkowski,3,64,1962,truth_plus_medium_noise,0.0500,17.4783,571.2987,553.8204,1.0992,71183.0184,0.3656,151.6453,false,false,false,warmup destroyed near-truth: energy 17.48 -> 571.3; unconditional warmup accepts likely cause
+minkowski,3,64,1962,random_init,NA,591.5364,556.7254,-34.8111,348.7196,315872.1467,10.2221,351.3855,true,false,true,anneal improved over random_init: 591.5 -> 556.7
+minkowski,3,64,1987,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,3,64,1987,truth_plus_small_noise,0.0010,0.0201,340.5726,340.5525,0.0261,58785.5841,0.0078,179.6205,false,false,false,warmup destroyed near-truth: energy 0.02011 -> 340.6; unconditional warmup accepts likely cause
+minkowski,3,64,1987,truth_plus_medium_noise,0.0500,15.8894,509.5348,493.6454,2.1304,1274738.7898,0.4929,643.2645,false,false,false,warmup destroyed near-truth: energy 15.89 -> 509.5; unconditional warmup accepts likely cause
+minkowski,3,64,1987,random_init,NA,648.9576,589.5010,-59.4567,372.0017,35240.2510,10.7639,132.1201,true,false,true,anneal improved over random_init: 649 -> 589.5
+minkowski,4,32,1959,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,4,32,1959,truth_plus_small_noise,0.0010,0.0038,0.0017,-0.0020,0.0543,0.0662,0.0128,0.0163,true,false,true,warmup+anneal improved energy 0.003763 -> 0.001714
+minkowski,4,32,1959,truth_plus_medium_noise,0.0500,3.0763,142.9455,139.8691,8.5443,4510268.0069,1.1538,918.8475,false,false,false,warmup destroyed near-truth: energy 3.076 -> 142.9; unconditional warmup accepts likely cause
+minkowski,4,32,1959,random_init,NA,175.7553,152.4355,-23.3198,108.5900,16065570.8976,6.2656,2029.1494,true,false,true,anneal improved over random_init: 175.8 -> 152.4
+minkowski,4,32,1962,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,4,32,1962,truth_plus_small_noise,0.0010,0.0000,0.0000,0.0000,0.0421,0.0421,0.0122,0.0122,false,false,true,warmup destroyed near-truth: energy 0 -> 0; unconditional warmup accepts likely cause
+minkowski,4,32,1962,truth_plus_medium_noise,0.0500,3.5958,184.1474,180.5516,1.4008,1255475.7286,0.4877,596.4287,false,false,false,warmup destroyed near-truth: energy 3.596 -> 184.1; unconditional warmup accepts likely cause
+minkowski,4,32,1962,random_init,NA,150.9673,187.7623,36.7950,94.5911,1581703.6550,5.5908,754.8656,false,false,false,random_init not improved: 151 -> 187.8
+minkowski,4,32,1987,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,4,32,1987,truth_plus_small_noise,0.0010,0.0000,0.0000,0.0000,0.0239,0.0239,0.0081,0.0081,false,false,true,warmup destroyed near-truth: energy 0 -> 0; unconditional warmup accepts likely cause
+minkowski,4,32,1987,truth_plus_medium_noise,0.0500,2.1370,116.2877,114.1507,2.4732,175176.8792,0.5583,261.3620,false,false,false,warmup destroyed near-truth: energy 2.137 -> 116.3; unconditional warmup accepts likely cause
+minkowski,4,32,1987,random_init,NA,171.7091,122.2291,-49.4800,104.5585,11741138.9409,6.0988,2475.7811,true,false,true,anneal improved over random_init: 171.7 -> 122.2
+minkowski,4,64,1959,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,4,64,1959,truth_plus_small_noise,0.0010,0.0053,0.0018,-0.0035,0.0528,0.0613,0.0127,0.0144,true,false,true,warmup+anneal improved energy 0.005301 -> 0.001821
+minkowski,4,64,1959,truth_plus_medium_noise,0.0500,14.9831,715.2261,700.2430,2.3798,9614555.8717,0.5816,1598.0586,false,false,false,warmup destroyed near-truth: energy 14.98 -> 715.2; unconditional warmup accepts likely cause
+minkowski,4,64,1959,random_init,NA,695.6267,661.6395,-33.9872,401.9495,2138453.4329,11.5905,1149.1825,true,false,true,anneal improved over random_init: 695.6 -> 661.6
+minkowski,4,64,1962,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,4,64,1962,truth_plus_small_noise,0.0010,0.0038,0.0012,-0.0026,0.0460,0.0502,0.0126,0.0136,true,false,true,warmup+anneal improved energy 0.003811 -> 0.001224
+minkowski,4,64,1962,truth_plus_medium_noise,0.0500,10.3482,578.3825,568.0343,4.3321,50408471.0997,0.8441,4548.5985,false,false,false,warmup destroyed near-truth: energy 10.35 -> 578.4; unconditional warmup accepts likely cause
+minkowski,4,64,1962,random_init,NA,694.9196,608.5696,-86.3500,385.0895,810255.5844,11.2254,399.4161,true,false,true,anneal improved over random_init: 694.9 -> 608.6
+minkowski,4,64,1987,truth,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,0.0000,false,false,true,truth preserved: energy remains zero
+minkowski,4,64,1987,truth_plus_small_noise,0.0010,0.0025,0.0005,-0.0020,0.0241,0.0240,0.0077,0.0076,true,true,true,warmup+anneal improved energy 0.002469 -> 0.0004868
+minkowski,4,64,1987,truth_plus_medium_noise,0.0500,6.1137,377.2862,371.1725,3.6619,3828307.2675,0.6646,1061.5095,false,false,false,warmup destroyed near-truth: energy 6.114 -> 377.3; unconditional warmup accepts likely cause
+minkowski,4,64,1987,random_init,NA,787.3426,387.1911,-400.1515,407.4939,454888.7900,11.8553,332.4331,true,false,true,anneal improved over random_init: 787.3 -> 387.2

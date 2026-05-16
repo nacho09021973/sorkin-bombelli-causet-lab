@@ -453,3 +453,188 @@ separating high-dimensional Minkowski sprinklings from dense
 low-dimensional or layered controls, but it is not a standalone
 manifoldness classifier. The right object remains the joint
 trajectory of MM, midpoint, and structural chain abundance.
+
+## Phase 2: embedding bridge
+
+Phase 2 begins the connection back to the historical
+Bombelli-Sorkin embedding code without turning the project into
+an optimizer search. The artifact is
+[`benchmarks/foundation/phase2_embedding_bridge.{csv,md}`](/home/adnac/sorkin/benchmarks/foundation/phase2_embedding_bridge.md),
+regenerable via ``make regen-phase2``.
+
+The first bridge uses a deliberately small fixed probe:
+``n = 64``, case seed ``1959``, optimizer seed ``1987``, one
+case each for Minkowski ``d = 2, 3, 4``, Kleitman-Rothschild,
+and suspended corona. The schedule is short
+(``warmup_limit = 10``, ``anneal_limit = 10``, ``max_data = 4``)
+so the bridge is cheap enough to keep under regression. It is
+therefore a diagnostic probe, not a production annealing run.
+
+The CSV records the Phase 1D pre-embedding observables
+(``mm_dim``, ``midpoint_dim``, discrepancy, raw chain counts,
+and ``chain3_abundance``) beside embedding outputs available
+from the existing code: ``initial_energy``, ``warmup_energy``,
+``final_energy``, ``truth_energy`` and ``interval_rmse`` for
+Minkowski sprinklings with known coordinates, and ``NA`` for
+truth-dependent columns on controls.
+
+The immediate physical use is triage. If a Minkowski case has
+good structural diagnostics but a large energy gap or interval
+RMSE, the failure is evidence about the annealing schedule or
+energy landscape, not evidence that the causet is
+non-manifoldlike. If a control has bad structural diagnostics
+but a deceptively modest final energy, the energy functional
+needs auditing before it is trusted as a manifoldness test.
+
+## Phase 2B: annealer schedule probe
+
+Phase 2B is a minimal diagnostic of where the Phase 2 failure
+mode sits on the budget/quality curve. The Phase 2 short
+schedule leaves Minkowski cases with large ``energy_gap`` and
+large ``interval_rmse`` despite a known ``truth_energy = 0``.
+The natural follow-up question is whether widening the
+historical annealer's budget alone closes that gap.
+
+The artifact is
+[`benchmarks/foundation/phase2b_annealer_schedule_probe.{csv,md}`](/home/adnac/sorkin/benchmarks/foundation/phase2b_annealer_schedule_probe.md),
+regenerable via ``make regen-phase2b``. The probe varies only
+``warmup_limit``, ``anneal_limit`` and ``max_data`` over a
+small Minkowski-only grid in ``d in {2, 3, 4}``, ``n in
+{32, 64}``, three case seeds drawn from the Phase 1B atlas
+(the first three of ``SEEDS``), and one optimizer seed
+(``1987``). The temperature schedule (``initial_temp = 100``,
+``cooling_factor = 0.9``) is held fixed so the comparison is a
+pure budget probe rather than a temperature search. Three
+schedule labels — ``short`` (matching Phase 2 exactly),
+``medium`` and ``long`` — span a reconfigure-budget range of
+50 -> 140 -> 330 (roughly 7x).
+
+By construction Phase 2B does **not** include
+Kleitman-Rothschild or suspended corona controls. They have
+no ground-truth coordinates, so ``truth_energy``,
+``energy_gap`` and ``interval_rmse`` are undefined for them.
+This probe is therefore not a manifoldness classifier and
+should never be cited as one. The conservative interpretation
+rule is fixed: a budget-induced drop in ``energy_gap`` is
+evidence of schedule/optimizer failure, and a flat gap across
+budgets is evidence about the energy or implementation, not
+about the manifoldlikeness of the underlying sprinkling.
+
+Phase 2B does not introduce any new optimizer (no basin
+hopping, parallel tempering, or ML-assisted initialization).
+Those remain explicitly outside the v2 foundation scope.
+
+## Phase 2C: oracle embedding audit
+
+Phase 2B narrowed the failure candidates to energy definition,
+parametrization, or move set. Phase 2C eliminates the energy
+and convention candidates by evaluating the Bombelli energy
+*directly at the ground-truth coordinates*, with no annealing.
+The artifact is
+[`benchmarks/foundation/phase2c_oracle_embedding_audit.{csv,md}`](/home/adnac/sorkin/benchmarks/foundation/phase2c_oracle_embedding_audit.md),
+regenerable via ``make regen-phase2c``.
+
+Three oracle checks are run for each Minkowski case in the
+Phase 2/2B grid (d ∈ {2,3,4}, n ∈ {32,64}, three seeds):
+
+1. **oracle_pass_energy** — Bombelli energy at ground-truth
+   coordinates is numerically zero (threshold |E| ≤ 1e-9).
+2. **oracle_pass_causal_matrix** — causal matrix reconstructed
+   from the stored coordinates matches the stored matrix
+   bit-for-bit (zero discordant pairs).
+3. **oracle_pass_interval_rmse** — Lorentz-invariant RMSE of
+   the truth embedding against itself is numerically zero.
+
+Verdict: **ORACLE PASSES** on all 18/18 cases.
+
+Conservative interpretation:
+
+- The Bombelli energy formula returns exactly 0.0 at the
+  ground-truth coordinates in every case. The energy objective
+  correctly identifies the truth as the global minimum.
+- The causal matrices reconstructed from stored coordinates
+  match the originals with zero discordant pairs in every case.
+  No floating-point drift or sign-convention mismatch.
+- The Lorentz-invariant interval residual is identically zero
+  when comparing the truth to itself.
+- All three checks pass; there is **no convention or formula
+  inconsistency** to fix.
+- The failure in Phase 2/2B is therefore localized to the
+  **optimizer**: move set, initialization, or annealing
+  landscape. More budget (Phase 2B) did not help; the optimizer
+  is not finding the geometry the energy already recognises.
+- The next diagnostic step is a move-set or initialization
+  audit — not an energy redesign, and not more budget.
+
+Phase 2C does not introduce a new optimizer or touch the energy
+definition.
+
+## Phase 2D: initialization / basin audit
+
+Phase 2C localized the failure to the optimizer: move set,
+initialization, or annealing landscape. Phase 2D discriminates
+between those candidates by injecting four controlled
+initializations into ConesSimulator and measuring what happens
+during warmup and annealing. The artifact is
+[`benchmarks/foundation/phase2d_initialization_basin_audit.{csv,md}`](/home/adnac/sorkin/benchmarks/foundation/phase2d_initialization_basin_audit.md),
+regenerable via ``make regen-phase2d``.
+
+Four initialization strategies are run on the same Minkowski
+grid as Phase 2B (d ∈ {2,3,4}, n ∈ {32,64}, seeds
+1959/1962/1987) with the Phase 2 short schedule
+(warmup_limit=10, anneal_limit=10, max_data=4):
+
+1. **truth** — exact ground-truth coordinates (ε = 0).
+2. **truth_plus_small_noise** — truth + Gaussian noise at
+   ε = 1e-3 per coordinate.
+3. **truth_plus_medium_noise** — truth + Gaussian noise at
+   ε = 5e-2 per coordinate.
+4. **random_init** — the historical ConesSimulator default
+   (rnew[i] = i+2, xnew[i] = 0, then energy()+update()).
+
+Custom initialization bypasses ``startup()`` by setting
+``sim.rnew``/``sim.xnew`` directly and calling
+``sim.energy()`` + ``sim.update()``. No changes are made to
+``cones.py``.
+
+Metrics recorded at two checkpoints (last-accepted positions
+``rold``/``xold``):
+
+- ``initial_energy`` / ``final_energy``: Bombelli energy
+  before and after warmup+anneal.
+- ``initial_interval_rmse`` / ``final_interval_rmse``:
+  Lorentz-invariant RMSE relative to scaled truth.
+- ``initial_distance_to_truth_rms`` /
+  ``final_distance_to_truth_rms``: RMS coordinate distance
+  to ground-truth positions.
+- ``preserved_near_truth``: ``delta_energy ≤ 1e-6``.
+
+Verdict: **NARROW_BASIN**.
+
+Truth initialization (energy = 0) is preserved exactly in
+18/18 cells. The warmup exits immediately because
+``energies[0] ≤ 0`` and no moves are made. Any
+positive-energy perturbation — even ε = 1e-3, which gives
+initial energy ≈ 0.005 — activates the warmup, which makes
+unconditional accepts for 10 steps and systematically
+scrambles the configuration. The mean final energy for
+small-noise starts is 18.9 vs. an initial mean of 0.005.
+Medium-noise and random starts both worsen substantially.
+
+Conservative interpretation:
+
+- The warmup loop ``while count < warmup_limit and
+  energies[0] > 0`` exits immediately at energy = 0.
+  For any positive energy it makes 10 unconditional moves
+  with no Metropolis criterion, deliberately exploring
+  high-energy regions before annealing.
+- The effective basin of attraction is measure-zero: only
+  the exact zero-energy configuration is preserved.
+- This is a **warmup-dynamics failure**, not a move-set
+  failure in isolation, and not an energy failure (Phase 2C).
+- Recommended next step: skip warmup or replace it with a
+  conditioned equilibration when starting near a known
+  low-energy configuration. No new optimizer is assumed.
+
+Phase 2D does not introduce a new optimizer or modify the
+energy definition or the move set.

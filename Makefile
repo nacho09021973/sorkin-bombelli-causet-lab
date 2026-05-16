@@ -1,5 +1,5 @@
 .RECIPEPREFIX := >
-.PHONY: test regen-fixtures regen-foundation regen-phase1 regen-phase1b regen-phase1c regen-phase1d smoke smoke-cuda ensemble phase refine
+.PHONY: test regen-fixtures regen-foundation regen-phase1 regen-phase1b regen-phase1c regen-phase1d regen-phase2 regen-phase2b regen-phase2c regen-phase2d smoke smoke-cuda ensemble phase refine
 
 test:
 >python3 -m unittest discover -s tests -v
@@ -27,6 +27,22 @@ regen-phase1c:
 regen-phase1d:
 >python3 tools/build_phase1d_structural_atlas.py
 >python3 -m unittest tests.test_phase1d_structural_atlas -v
+
+regen-phase2:
+>python3 tools/build_phase2_embedding_bridge.py
+>python3 -m unittest tests.test_phase2_embedding_bridge -v
+
+regen-phase2b:
+>python3 tools/build_phase2b_annealer_schedule_probe.py
+>python3 -m unittest tests.test_phase2b_annealer_schedule_probe -v
+
+regen-phase2c:
+>python3 tools/build_phase2c_oracle_embedding_audit.py
+>python3 -m unittest tests.test_phase2c_oracle_embedding_audit -v
+
+regen-phase2d:
+>python3 tools/build_phase2d_initialization_basin_audit.py
+>python3 -m unittest tests.test_phase2d_initialization_basin_audit -v
 
 smoke:
 >python3 cones.py benchmarks/tesis_like_6.in --dim 2 --output /tmp/cone.out --plot /tmp/cone.svg --max-data 5
