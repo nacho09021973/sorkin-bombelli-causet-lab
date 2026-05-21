@@ -43,7 +43,7 @@ The useful observables are now:
 - success probability
 - median final energy
 - mean final energy
-- best seed
+- lowest-loss seed under the current optimizer metric
 - timeout rate
 - sensitivity to target dimension
 - sensitivity to schedule
@@ -100,13 +100,13 @@ Results:
 The fast scan is not meant to produce final physics numbers. It is a triage tool.
 It identifies where deeper runs are worth spending time.
 
-## Main Discoveries So Far
+## Main Diagnostics So Far
 
 1. The historical algorithm works, but it is fragile.
 
 2. Schedule choice can change outcomes by orders of magnitude.
 
-3. Embeddability should be treated statistically, not as a one-run yes/no question.
+3. Optimizer recoverability should be treated statistically, not as a one-run yes/no question.
 
 4. The first computational frontier appears between `n=16` and `n=24` for the current implementation and settings.
 
@@ -118,7 +118,7 @@ It identifies where deeper runs are worth spending time.
 
 The revived thesis program now supports a stronger scientific question:
 
-Which regions of causal-set space are embeddable with high probability, in which target dimension, and under which annealing schedules?
+Which regions of causal-set space are recoverable with low optimizer-response energy under the current pipeline, in which target dimension, and under which annealing schedules?
 
 That is the experiment that was out of reach in 1987.
 
@@ -516,7 +516,7 @@ Conservative interpretation:
   16/18 rows pass the ``preserved_near_truth`` criterion only
   because some small-noise cases happen to keep energy tiny after
   the unconditional warmup.
-- **Medium perturbations destroyed universally (0/18).** Noise
+- **Medium perturbations destroyed on this grid (0/18).** Noise
   ε = 5e-2 is enough to put the configuration well outside the
   zero-energy attractor. Warmup pushes the mean energy from 11.2
   to 395.8 before annealing even starts.
@@ -534,6 +534,116 @@ Conservative interpretation:
   unconditional warmup.
 - Recommended next step: skip or replace the warmup when starting
   near a known low-energy configuration. No new optimizer assumed.
+
+## Phase 2E: warmup-skip probe
+
+Phase 2E is a paired diagnostic: the same Phase 2D grid
+(d∈{2,3,4}, n∈{32,64}, seeds 1959/1962/1987, 4 init labels) is
+run with ``with_warmup`` and ``skip_warmup`` side by side, with
+each physical case identified by a ``paired_key``. The artifact is
+[`benchmarks/foundation/phase2e_warmup_skip_probe.{csv,md}`](/home/adnac/sorkin/benchmarks/foundation/phase2e_warmup_skip_probe.md),
+regenerable via ``make regen-phase2e``. Total rows: 144.
+
+**Verdict: WARMUP_IS_PRIMARY_FAILURE.**
+
+Per-label aggregate by warmup mode:
+
+| init | warmup_mode | mean init E | mean final E | preserved |
+| --- | --- | ---: | ---: | ---: |
+| truth | with_warmup | 0.0000 | 0.0000 | 18/18 |
+| truth | skip_warmup | 0.0000 | 0.0000 | 18/18 |
+| truth_plus_small_noise | with_warmup | 0.0047 | 18.92 | 16/18 |
+| truth_plus_small_noise | skip_warmup | 0.0047 | 12.12 | 17/18 |
+| truth_plus_medium_noise | with_warmup | 11.23 | 395.80 | 0/18 |
+| truth_plus_medium_noise | skip_warmup | 11.23 | 286.03 | 0/18 |
+| random_init | with_warmup | 340.80 | 405.16 | 8/18 |
+| random_init | skip_warmup | 340.80 | 307.89 | 11/18 |
+
+Paired deltas (skip − with, mean over 18 cells per label):
+
+| init | mean Δ final E | skip pres | with pres |
+| --- | ---: | ---: | ---: |
+| truth | 0.0 | 18/18 | 18/18 |
+| truth_plus_small_noise | −6.8 | 17/18 | 16/18 |
+| truth_plus_medium_noise | −109.8 | 0/18 | 0/18 |
+| random_init | −97.3 | 11/18 | 8/18 |
+
+Conservative interpretation:
+
+- **On this paired grid, warmup is the primary observed failure mode.** Removing the warmup
+  improves or holds every label. The 10 unconditional accepts
+  are not an equilibration benefit: they raise energy from
+  near-truth starts and scramble the random-init ladder alike.
+- **Anneal-only preserves small-noise in 17/18 cases.** The one
+  failure is residual instability in the annealing phase, not
+  the warmup. The effective basin in anneal-only mode is narrow
+  but non-zero for ε = 1e-3.
+- **Medium-noise not recoverable by either mode.** The
+  anneal-only basin does not extend to ε = 5e-2.
+- **Random-init: skipping warmup also helps.** The 10
+  unconditional warmup steps are counterproductive even from
+  the historical default start; removing them lets the annealing
+  phase work from the linear ladder directly.
+- This is not a claim about embedding quality. Both modes fail to
+  recover ground-truth geometry from random_init (final energies
+  remain far above zero). The diagnostic finding is about the
+  warmup's role in the failure, not about finding a solution.
+- Recommended next step: a conditioned equilibration or
+  energy-gated warmup that makes unconditional accepts only if
+  the proposed move does not worsen the energy beyond a threshold.
+
+## Phase 2F: guarded-warmup probe
+
+Phase 2F tests whether an energy-gated warmup can preserve the
+exploratory benefit of warmup for random starts without destroying
+near-truth configurations. Three warmup modes compared on the same
+Phase 2D/2E grid (d∈{2,3,4}, n∈{32,64}, seeds 1959/1962/1987,
+4 init labels) = 216 rows. The artifact is
+[`benchmarks/foundation/phase2f_guarded_warmup_probe.{csv,md}`](/home/adnac/sorkin/benchmarks/foundation/phase2f_guarded_warmup_probe.md),
+regenerable via ``make regen-phase2f``.
+
+**Verdict: GUARDED_WARMUP_FIXES_PRIMARY_FAILURE_ON_TESTED_GRID.**
+
+Per-label aggregate (mean over 18 cells per label):
+
+| init | legacy final E | legacy pres | skip final E | skip pres | guarded final E | guarded pres |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| truth | 0.0000 | 18/18 | 0.0000 | 18/18 | 0.0000 | 18/18 |
+| truth_plus_small_noise | 18.92 | 16/18 | 12.12 | 17/18 | **0.0013** | **18/18** |
+| truth_plus_medium_noise | 395.80 | 0/18 | 286.03 | 0/18 | 255.32 | 0/18 |
+| random_init | 405.16 | 8/18 | 307.89 | 11/18 | **271.42** | **12/18** |
+
+Guarded-warmup details:
+
+- ``GUARD_THRESHOLD = 0.0``: accept a proposed warmup move iff
+  ``sim.deltae ≤ 0`` (pre-normalization, greedy descent).
+- External wrapper around ConesSimulator — no changes to
+  ``cones.py``, same energy, same move set.
+- Records per-row move statistics: warmup_attempted_moves,
+  warmup_accepted_moves, warmup_rejected_moves.
+- ``warmup_energy_before``/``warmup_energy_after`` both recorded;
+  normalization effects documented.
+
+Conservative interpretation:
+
+- **Small-noise failure removed on this grid.** guarded_warmup achieves
+  18/18 preserved with mean final energy 0.0013, compared to
+  17/18 and 12.12 for skip_warmup. The greedy-descent warmup
+  actively improves the near-truth configuration before anneal.
+- **Random-init also improves** (12/18 vs 11/18 skip). The
+  greedy warmup moves provide useful descent steps from the
+  historical linear ladder initialization.
+- **Medium-noise not recoverable.** All three modes fail 0/18.
+  The ε = 5e-2 perturbation places the configuration outside
+  the basin reachable by 10 greedy steps + 10 anneal steps.
+  Further improvement requires a larger budget or a smarter
+  move set, not just a better warmup.
+- **Truth trivially preserved** in all modes (warmup exits in
+  0 steps when energy = 0).
+- This is diagnostic, not a production embedding. The guarded
+  warmup confirms that the unconditional accepts in legacy
+  warmup are the primary cause of failure — replacing them with
+  greedy descent removes the observed small-noise failure on this grid.
 
 ## Next Plan
 

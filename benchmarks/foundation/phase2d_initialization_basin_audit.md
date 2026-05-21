@@ -53,7 +53,7 @@ typically increases the energy significantly.
    mean initial_energy for small-noise rows: 0.004727. mean final_energy: 18.92. Final energy greatly exceeds initial (18.9 vs 0.004727). The warmup scrambles near-truth configurations. Perturbations do NOT converge back to truth under the historical annealer.
 
 3. **Is there a visible radius of attraction around the truth?**
-   medium-noise rows: mean initial_energy 11.23, mean final_energy 395.8. The annealer cannot recover toward truth from medium perturbations either. The effective basin of attraction around the truth is measure-zero under the historical annealer: only the exact zero-energy configuration is preserved.
+   medium-noise rows: mean initial_energy 11.23, mean final_energy 395.8. The annealer cannot recover toward truth from medium perturbations either. Under this Phase 2D grid, only the exact zero-energy configuration is preserved; the effective near-truth basin appears extremely narrow under the historical annealer.
 
 4. **Does random_init still fail as in Phase 2B?**
    random_init: mean initial_energy 340.8, mean final_energy 405.2. Consistent with Phase 2B short-schedule results. No improvement from the historical default initialization.

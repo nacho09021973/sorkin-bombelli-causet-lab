@@ -77,7 +77,7 @@ All-three-pass count: 18 / 18.
    No failures in this run. All oracle checks pass. There is no evidence of a convention error in the energy formula, the causal criterion, or the interval metric.
 
 5. **If oracle passes — what does that tell us about Phase 2B?**
-   The energy objective recognises the ground-truth solution as a zero-energy configuration. The annealing failure in Phase 2/2B is therefore not caused by a broken energy formula. The optimizer does not find the geometry because of move-set or landscape issues, not because the target is wrong. The next diagnostic step is a move-set or initialization audit — not more budget, and not an energy redesign.
+   The energy objective recognises the ground-truth solution as a zero-energy configuration. The annealing failure in Phase 2/2B is therefore not caused by a broken energy formula. The optimizer does not recover the oracle configuration under the current move set / landscape because of move-set or landscape issues, not because the target is wrong. The next diagnostic step is a move-set or initialization audit — not more budget, and not an energy redesign.
 
 ## Normalization audit
 

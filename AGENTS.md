@@ -1,6 +1,47 @@
 # Project Guidance
 
-This repository is an archive of Rafael D. Sorkin materials, including Emacs Lisp source under `biblioteca/`, archived papers in `papers/`, and PostScript figures in `PostScript/`.
+## Scientific Computing Work (active — read this first)
+
+This repository contains a revival of the Bombelli 1987 causal set annealing program. The core question: which finite causal sets are recoverable with low optimizer-response energy under the current annealing pipeline, and what controls the transition between easy, hard, and non-embeddable cases.
+
+### Quick orientation for subagents
+
+- **Primary language:** Python 3.12. Julia used for performance-critical and KAN work.
+- **Core module:** `cones.py` — Pascal port of ConesSimulator (do not modify without documenting why; changes break the historical baseline)
+- **Invariants:** `causet_invariants.py` — order-theoretic descriptors (height, width, density, interval profile)
+- **GPU:** `cuda_backend.py` + `build/libcones_cuda.so`. Use `--backend auto` to prefer CUDA.
+- **Canonical inputs:** `benchmarks/tesis_like_6.in` (fast), `benchmarks/tesis_like_12.in` (medium)
+- **Benchmark data:** `benchmarks/foundation/phaseXY_name.{csv,md}` — never edit CSVs manually; regenerate via `make regen-phaseXY`
+- **Seeds:** 1959, 1962, 1987 are canonical across all phases
+
+### Phase progression (do not skip or retroactively alter completed data)
+
+Phase 1 (a–e): atlas — success rate vs n, dim, structure  
+Phase 2 (a–g): annealing internals — schedule, oracle, init basins, warmup modes  
+Phase 3 (a–f): PySR symbolic regression on annealing features  
+Phase 4 (a–d): epsilon sweep, survival probe, seed robustness, robustness audit  
+Phase 5: seed curve morphology  
+
+Technical diagnostic: on the Phase2F grid, guarded warmup preserves all small-noise starts under the current criterion.
+
+### When dispatched as a subagent
+
+- Read the relevant `benchmarks/foundation/phaseXY_name.md` for the phase you're extending
+- Run `make test` before and after any change to the core modules
+- Output goes to `benchmarks/foundation/` with the established naming convention
+- Do not touch `Pascal.pdf`, `PostScript/`, `biblioteca/`, or `obj14.bin`
+
+### Scientific interpretation
+
+- Single failed run ≠ non-embeddability; use ≥8 seeds at fixed (n, dim, schedule)
+- Final energy = 0 means exact embedding; >0 means local minimum
+- Schedule sensitivity is a numerical artifact to map, not a physical observable
+
+---
+
+## Biblioteca Archive (historical — read this for `biblioteca/` work)
+
+This repository is also an archive of Rafael D. Sorkin materials, including Emacs Lisp source under `biblioteca/`, archived papers in `papers/`, and PostScript figures in `PostScript/`.
 
 ## Working Rules
 

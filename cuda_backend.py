@@ -260,4 +260,12 @@ def cuda_device_count() -> int:
 
 
 def cuda_available() -> bool:
-    return cuda_device_count() > 0
+    """Return whether a CUDA device is available.
+
+    This probe must be safe on machines without NVIDIA/CUDA because
+    test decorators call it during pytest collection.
+    """
+    try:
+        return cuda_device_count() > 0
+    except (RuntimeError, OSError):
+        return False

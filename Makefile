@@ -1,5 +1,5 @@
 .RECIPEPREFIX := >
-.PHONY: test regen-fixtures regen-foundation regen-phase1 regen-phase1b regen-phase1c regen-phase1d regen-phase2 regen-phase2b regen-phase2c regen-phase2d smoke smoke-cuda ensemble phase refine
+.PHONY: test regen-fixtures regen-foundation regen-phase1 regen-phase1b regen-phase1c regen-phase1d regen-phase1e regen-phase2 regen-phase2b regen-phase2c regen-phase2d regen-phase2e regen-phase2f regen-phase2g regen-phase3a regen-phase3b regen-phase3c regen-phase3d regen-phase3e regen-phase3f regen-phase4a regen-phase4b test-phase4b regen-phase4c test-phase4c regen-phase4d test-phase4d regen-phase5 test-phase5 smoke smoke-cuda ensemble phase refine
 
 test:
 >python3 -m unittest discover -s tests -v
@@ -43,6 +43,70 @@ regen-phase2c:
 regen-phase2d:
 >python3 tools/build_phase2d_initialization_basin_audit.py
 >python3 -m unittest tests.test_phase2d_initialization_basin_audit -v
+
+regen-phase2e:
+>python3 tools/build_phase2e_warmup_skip_probe.py
+>python3 -m unittest tests.test_phase2e_warmup_skip_probe -v
+
+regen-phase2f:
+>python3 tools/build_phase2f_guarded_warmup_probe.py
+>python3 -m unittest tests.test_phase2f_guarded_warmup_probe -v
+
+# Phase3, Phase4A/4B, and Phase5 targets are exploratory and are not provenance-freeze benchmark artifacts.
+regen-phase3a:
+>python3 tools/build_phase3a_pysr_warmup_rule.py
+
+regen-phase3b:
+>python3 tools/build_phase3b_pysr_order_only.py
+
+regen-phase3c:
+>python3 tools/build_phase3c_ablation.py
+
+regen-phase3d:
+>python3 tools/build_phase3d_pysr_residual_target.py
+
+regen-phase3e:
+>python3 tools/build_phase3e_pysr_residual_by_warmup_mode.py
+
+regen-phase1e:
+>python3 tools/build_phase1e_extended_structural_atlas.py
+
+regen-phase2g:
+>python3 tools/build_phase2g_extended_guarded_warmup_probe.py
+
+regen-phase3f:
+>python3 tools/build_phase3f_pysr_final_ablation.py
+
+regen-phase4a:
+>python3 tools/build_phase4a_epsilon_sweep.py
+
+regen-phase4b:
+>python3 tools/build_phase4b_survival_probe.py --grid pilot
+>python3 -m unittest tests.test_phase4b_survival_probe -v
+
+test-phase4b:
+>python3 -m unittest tests.test_phase4b_survival_probe -v
+
+regen-phase4c:
+>python3 tools/build_phase4c_optimizer_seed_probe.py
+>python3 -m unittest tests.test_phase4c_optimizer_seed_probe -v
+
+test-phase4c:
+>python3 -m unittest tests.test_phase4c_optimizer_seed_probe -v
+
+regen-phase4d:
+>python3 tools/build_phase4d_robustness_audit.py
+>python3 -m unittest tests.test_phase4d_robustness_audit -v
+
+test-phase4d:
+>python3 -m unittest tests.test_phase4d_robustness_audit -v
+
+regen-phase5:
+>python3 tools/build_phase5_seed_curve_morphology.py
+>python3 -m unittest tests.test_phase5_seed_curve_morphology -v
+
+test-phase5:
+>python3 -m unittest tests.test_phase5_seed_curve_morphology -v
 
 smoke:
 >python3 cones.py benchmarks/tesis_like_6.in --dim 2 --output /tmp/cone.out --plot /tmp/cone.svg --max-data 5

@@ -568,9 +568,9 @@ def write_markdown(rows: list[dict], path: Path) -> None:
         f"mean final_energy {mean_med_final:.4g}. "
         + (
             "The annealer cannot recover toward truth from medium perturbations "
-            "either. The effective basin of attraction around the truth is "
-            "measure-zero under the historical annealer: only the exact "
-            "zero-energy configuration is preserved."
+            "either. Under this Phase 2D grid, only the exact zero-energy "
+            "configuration is preserved; the effective near-truth basin "
+            "appears extremely narrow under the historical annealer."
             if mean_med_final > mean_med_init else
             "Some recovery toward truth is visible at medium noise level."
         )

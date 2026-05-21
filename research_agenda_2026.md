@@ -6,15 +6,15 @@ Current empirical results are summarized in [`results_note_2026.md`](/home/adnac
 
 ## Central Question
 
-Which finite causal sets are naturally embeddable into low-dimensional Minkowski space, and what controls the transition between easy, hard, and apparently non-embeddable cases?
+Which finite causal sets are recoverable with low optimizer-response energy in low-dimensional Minkowski targets under the current annealing pipeline, and what controls the transition between easy, hard, and apparently non-embeddable cases?
 
 The old program asks whether one causet can be fitted. The modern tool should ask how whole families behave.
 
 ## Working Hypotheses
 
-- Embeddability is not controlled only by `n`; density, dimension, and order structure matter.
+- Optimizer recoverability is not controlled only by `n`; density, dimension, and order structure matter.
 - The annealing landscape has basins of attraction that can be mapped statistically.
-- Schedule sensitivity is itself physical information if it correlates with causal-set structure.
+- Schedule sensitivity may become scientifically informative if it correlates reproducibly with causal-set structure, but it is not by itself a physical observable.
 - Failure to embed cleanly may separate numerical difficulty from genuinely non-manifoldlike order.
 
 ## Five-Step Program
@@ -46,7 +46,7 @@ Primary output:
 - success probability
 - mean and median final energy
 - variance across seeds
-- best seed per region
+- lowest-final-energy seed per region under the current optimizer metric
 - heatmaps over dimension and schedule
 
 This turns the old annealing run into a map of where the method works.
@@ -71,7 +71,7 @@ Then compare those descriptors against:
 - sensitivity to seed
 - sensitivity to schedule
 
-The scientific target is to identify which order-theoretic features predict geometric embeddability.
+The scientific target is to identify which order-theoretic features predict optimizer recoverability under the current embedding pipeline.
 
 4. Compare energy models.
 
@@ -83,7 +83,7 @@ Keep the thesis energy as the historical baseline, then test variants:
 - interval-aware penalties
 - multiobjective versions that separate false positives from false negatives
 
-The question is not only whether the old energy works. It is which energy best detects manifoldlike causal structure.
+The question is not only whether the old energy works. It is which energy is most useful for separating optimizer success from failure on manifoldlike reference cases.
 
 5. Separate algorithmic failure from physical failure.
 
@@ -91,11 +91,11 @@ For hard cases, rerun with stronger methods:
 
 - more seeds
 - broader schedules
-- local refinements near the best embedding
+- local refinements near the lowest-energy configuration found under the current metric
 - higher target dimension
 - alternative energy functions
 
-If all methods fail, treat the causet as a candidate non-manifoldlike order.
+If all methods fail, treat the case as a candidate hard instance for the current pipeline, not yet as evidence of non-manifoldlikeness.
 If only the original schedule fails, the lesson is algorithmic rather than physical.
 
 ## Near-Term Experiments
@@ -132,7 +132,7 @@ Without these fields, the run is only anecdotal.
 
 ## Interpretation Rules
 
-- Energy near zero means a good embedding was found, not that the causet is uniquely geometric.
+- Energy near zero means a low-energy configuration was found under the current objective, not that the causet is uniquely geometric.
 - High final energy after one run is not evidence of non-embeddability.
 - Repeated high energy across many schedules and seeds is evidence of difficulty.
 - If higher dimension fixes the problem, the original target dimension was too restrictive.
@@ -148,7 +148,7 @@ The first serious milestone is a phase diagram:
 
 A second layer should show median final energy.
 
-This is the experiment that Bombelli and Sorkin could not practically do in 1987: not a single optimized causet, but a statistical map of embeddability.
+This is the experiment that Bombelli and Sorkin could not practically do in 1987: not a single optimized causet, but a statistical map of optimizer recoverability under the current objective.
 
 The first implementation is [`phase_diagram.py`](/home/adnac/sorkin/phase_diagram.py).
 
@@ -171,7 +171,7 @@ Use `--fast-frontier` for exploratory runs near the computational boundary; it r
 ## Current Tools
 
 - [`cones.py`](/home/adnac/sorkin/cones.py): revived annealing program
-- [`phase_diagram.py`](/home/adnac/sorkin/phase_diagram.py): n-vs-dim embeddability maps
+- [`phase_diagram.py`](/home/adnac/sorkin/phase_diagram.py): n-vs-dim optimizer-recoverability maps
 - [`ensemble_scan.py`](/home/adnac/sorkin/ensemble_scan.py): seed and schedule ensembles
 - [`dimension_sweep.py`](/home/adnac/sorkin/dimension_sweep.py): dimension comparison
 - [`schedule_sweep.py`](/home/adnac/sorkin/schedule_sweep.py): schedule comparison
@@ -187,7 +187,7 @@ Use `--fast-frontier` for exploratory runs near the computational boundary; it r
 Before scaling the original annealing program to larger ``n`` or
 substituting it with new optimization strategies, the v2 line of
 work is laying down a diagnostic foundation that lets us tell
-*algorithmic* failure from *physical* non-embeddability. Without
+*algorithmic* failure from *candidate structural obstruction*. Without
 this layer, every failure of the optimizer is uninterpretable.
 
 The foundation has four components.
@@ -628,7 +628,7 @@ Conservative interpretation:
   For any positive energy it makes 10 unconditional moves
   with no Metropolis criterion, deliberately exploring
   high-energy regions before annealing.
-- The effective basin of attraction is measure-zero: only
+- The effective basin of attraction is extremely narrow in this grid: only
   the exact zero-energy configuration is preserved.
 - This is a **warmup-dynamics failure**, not a move-set
   failure in isolation, and not an energy failure (Phase 2C).
@@ -638,3 +638,127 @@ Conservative interpretation:
 
 Phase 2D does not introduce a new optimizer or modify the
 energy definition or the move set.
+
+## Phase 2E: warmup-skip probe
+
+Phase 2D attributed the near-truth destruction to the unconditional
+warmup loop. Phase 2E tests this directly with a paired comparison:
+the same grid and the same four initialization strategies are run
+with ``with_warmup`` (Phase 2D baseline) and ``skip_warmup``
+(anneal-only) side by side. Each physical case is identified by a
+``paired_key`` so the two modes are compared row-for-row. The
+artifact is
+[`benchmarks/foundation/phase2e_warmup_skip_probe.{csv,md}`](/home/adnac/sorkin/benchmarks/foundation/phase2e_warmup_skip_probe.md),
+regenerable via ``make regen-phase2e``.
+
+The diagnostic question: is the warmup the primary cause of
+near-truth destruction, or does the annealing phase fail
+independently?
+
+Verdict: **WARMUP_IS_PRIMARY_FAILURE**.
+
+Skipping the warmup improves small-noise preservation (17/18
+vs 16/18 with warmup) and reduces mean final energy for small-
+noise starts from 18.9 to 12.1. Medium-noise starts are also
+lower without warmup (mean 286 vs 396), although both remain
+non-preserved (0/18). Random-init unexpectedly also benefits
+from skipping warmup (11/18 vs 8/18 preserved).
+
+Paired deltas (skip − with, mean over all cells):
+
+| init | mean Δ final E | skip pres | with pres |
+| --- | ---: | ---: | ---: |
+| truth | 0.0000 | 18/18 | 18/18 |
+| truth_plus_small_noise | −6.8 | 17/18 | 16/18 |
+| truth_plus_medium_noise | −109.8 | 0/18 | 0/18 |
+| random_init | −97.3 | 11/18 | 8/18 |
+
+Conservative interpretation:
+
+- The warmup phase is confirmed as the primary cause of near-truth
+  destruction. Removing it strictly improves or preserves all
+  label categories.
+- The one small-noise row that fails even without warmup indicates
+  the annealing phase has some residual instability near the
+  truth minimum. Skipping warmup is necessary but not universally
+  sufficient for small perturbations.
+- Medium-noise starts are not recovered by either mode. The basin
+  that the anneal-only phase can hold is narrower than ε = 5e-2.
+- Random-init improvement is a secondary finding: the 10
+  unconditional warmup steps are not helping random starts
+  either; they raise the energy from the default linear ladder
+  rather than exploring productively.
+- Next diagnostic step: a conditioned equilibration or
+  energy-gated warmup that makes unconditional accepts only when
+  the proposed move does not increase energy by more than a
+  threshold.
+
+Phase 2E does not introduce a new optimizer or modify the energy,
+move set, or cooling schedule.
+
+## Phase 2F: guarded-warmup probe
+
+Phase 2E confirmed that the warmup is the primary failure. Phase 2F
+tests whether a non-destructive alternative — the guarded warmup —
+can preserve the exploratory intent of warmup for random starts
+while not destroying near-truth configurations. The artifact is
+[`benchmarks/foundation/phase2f_guarded_warmup_probe.{csv,md}`](/home/adnac/sorkin/benchmarks/foundation/phase2f_guarded_warmup_probe.md),
+regenerable via ``make regen-phase2f``.
+
+Three warmup modes are compared in a three-way paired comparison on
+the same Phase 2D/2E grid (d∈{2,3,4}, n∈{32,64}, seeds
+1959/1962/1987, 4 init labels) = 216 rows:
+
+1. **legacy_warmup** — ``sim.warmup(buf)`` + ``sim.anneal(buf)``
+   (Phase 2E baseline).
+2. **skip_warmup** — ``sim.anneal(buf)`` only (Phase 2E baseline).
+3. **guarded_warmup** — energy-gated warmup + ``sim.anneal(buf)``.
+   External wrapper; no changes to ``cones.py``.
+
+Guarded-warmup implementation:
+
+- ``GUARD_THRESHOLD = 0.0`` (strictly non-worsening).
+- Accept a proposed move iff ``sim.deltae ≤ 0`` (pre-normalization).
+- On rejection: clear ``change[i]`` flags, restore ``sim.rave``
+  to ``sim.r``. ``rnew``/``xnew`` are not explicitly reset because
+  ``reconfigure()`` overwrites them from ``rold``/``xold`` at the
+  start of each new call.
+- Records ``warmup_attempted_moves``, ``warmup_accepted_moves``,
+  ``warmup_rejected_moves``, ``warmup_energy_before``,
+  ``warmup_energy_after``, ``warmup_delta_energy`` per row.
+
+Verdict: **GUARDED_WARMUP_FIXES_PRIMARY_FAILURE**.
+
+Per-label aggregate (mean over 18 cells per label):
+
+| init | legacy final E | skip final E | guarded final E | guarded pres |
+| --- | ---: | ---: | ---: | ---: |
+| truth | 0.0000 | 0.0000 | 0.0000 | 18/18 |
+| truth_plus_small_noise | 18.92 | 12.12 | **0.0013** | **18/18** |
+| truth_plus_medium_noise | 395.80 | 286.03 | 255.32 | 0/18 |
+| random_init | 405.16 | 307.89 | **271.42** | **12/18** |
+
+Conservative interpretation:
+
+- **guarded_warmup dominates on every label.** Small-noise: 18/18
+  preserved, mean final E = 0.0013 (vs 12.12 skip, 18.92 legacy).
+  The energy-gated warmup removes the observed small-noise failure
+  on this Phase2F grid.
+- **random_init also improves** (12/18 vs 11/18 skip, 8/18
+  legacy). The greedy warmup moves do help random starts explore
+  without the unconditional-accept damage.
+- **Medium-noise not recovered** by any mode (0/18 all). The
+  anneal-only basin does not extend to ε = 5e-2 regardless of
+  warmup strategy. This is a move-set or cooling-schedule limit,
+  not a warmup limit.
+- **Normalization note.** The guard is applied to pre-normalization
+  ``sim.deltae``; post-normalization ``warmup_energy_after`` may
+  differ from ``warmup_energy_before`` by a normalization factor.
+  This is documented and does not invalidate the guard.
+- This is a diagnostic finding, not a new optimizer. The guarded
+  warmup is an external wrapper around the same
+  ``ConesSimulator`` internals. No new energy, no new move set,
+  no changes to ``cones.py``.
+
+Phase 2F does not introduce a new optimizer or modify the energy,
+move set, or cooling schedule.
