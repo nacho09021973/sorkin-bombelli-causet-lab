@@ -2,40 +2,61 @@
 
 ## Scientific Computing Work (active — read this first)
 
-This repository contains a revival of the Bombelli 1987 causal set annealing program. The core question: which finite causal sets are recoverable with low optimizer-response energy under the current annealing pipeline, and what controls the transition between easy, hard, and non-embeddable cases.
+This repository contains a revival of the Bombelli 1987 causal set annealing program. The v1.0.0 revival is complete as a historical reconstruction. The active continuation is **SORKIN-2: algorithmic recoverability in the Bombelli annealer**.
+
+Core framing:
+
+- SORKIN-2 is a separate diagnostic continuation, not a replacement for the historical revival.
+- The working question is algorithmic recoverability, not physical embeddability.
+- Distinguish causal realization / embedding existence from annealer accessibility / recoverability.
+- Do not interpret annealer failure as non-embeddability.
+- Do not interpret low final energy as manifoldlikeness.
+- Do not describe the project with language like "discovers", "proves", "solves", "physical law", "Hauptvermutung test", "embeddability detector", or "manifoldlikeness detector".
+- Use conservative terms: diagnostic, known-truth case, recoverability, accessibility, schedule sensitivity, basin accessibility, historical energy/move-set limitation.
 
 ### Quick orientation for subagents
 
-- **Primary language:** Python 3.12. Julia used for performance-critical and KAN work.
+- **Primary language:** Python 3.12.
 - **Core module:** `cones.py` — Pascal port of ConesSimulator (do not modify without documenting why; changes break the historical baseline)
 - **Invariants:** `causet_invariants.py` — order-theoretic descriptors (height, width, density, interval profile)
 - **GPU:** `cuda_backend.py` + `build/libcones_cuda.so`. Use `--backend auto` to prefer CUDA.
 - **Canonical inputs:** `benchmarks/tesis_like_6.in` (fast), `benchmarks/tesis_like_12.in` (medium)
 - **Benchmark data:** `benchmarks/foundation/phaseXY_name.{csv,md}` — never edit CSVs manually; regenerate via `make regen-phaseXY`
+- **Legacy archive:** `legacy/` — exploratory branches and local outputs preserved for provenance, not active claims
 - **Seeds:** 1959, 1962, 1987 are canonical across all phases
 
 ### Phase progression (do not skip or retroactively alter completed data)
 
 Phase 1 (a–e): atlas — success rate vs n, dim, structure  
 Phase 2 (a–g): annealing internals — schedule, oracle, init basins, warmup modes  
-Phase 3 (a–f): PySR symbolic regression on annealing features  
-Phase 4 (a–d): epsilon sweep, survival probe, seed robustness, robustness audit  
-Phase 5: seed curve morphology  
+Phase 3 (a–f): PySR symbolic regression on annealing features (exploratory; do not treat as a claim)
+Phase 4 (a–d): epsilon sweep, survival probe, seed robustness, robustness audit (diagnostic/exploratory)
+Phase 5: seed curve morphology (exploratory)
 
 Technical diagnostic: on the Phase2F grid, guarded warmup preserves all small-noise starts under the current criterion.
 
 ### When dispatched as a subagent
 
 - Read the relevant `benchmarks/foundation/phaseXY_name.md` for the phase you're extending
+- Before creating any new script, check whether the answer already exists in existing docs/results
+- Reuse existing generators/tests before adding new ones
+- Keep work scoped: one question, one target, one file
 - Run `make test` before and after any change to the core modules
 - Output goes to `benchmarks/foundation/` with the established naming convention
 - Do not touch `Pascal.pdf`, `PostScript/`, `biblioteca/`, or `obj14.bin`
+- No KAN/PySR/GAM until a clean multi-family known-truth dataset exists
+- Do not version exploratory Phase3/4A/4B/5 outputs as claims
+- Do not use `legacy/` as a source of claims without a new audit
+- Do not reactivate Phase3/4A/4B/5 without an explicit decision
+- Treat Phase2E/2F and Phase4C/4D as diagnostics of warmup, seed, and robustness behavior, not physics
 
 ### Scientific interpretation
 
-- Single failed run ≠ non-embeddability; use ≥8 seeds at fixed (n, dim, schedule)
-- Final energy = 0 means exact embedding; >0 means local minimum
-- Schedule sensitivity is a numerical artifact to map, not a physical observable
+- Single failed run is not evidence of non-embeddability; use known-truth cases and repeated seeds to study recoverability.
+- Final energy = 0 means the historical energy found a configuration with correct causal relations under the current representation.
+- Final energy > 0 means the algorithm did not reach zero in that run; do not infer non-existence.
+- Schedule sensitivity is an algorithmic diagnostic to map, not a physical observable.
+- Phase2E/2F are warmup diagnostics. Phase4C/4D are optimizer-seed and robustness diagnostics.
 
 ---
 

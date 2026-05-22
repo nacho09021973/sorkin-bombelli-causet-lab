@@ -1,0 +1,27 @@
+Energy of initial configuration:     0.000
+Count Temp.   E[1].   Eave.   Evar.  spheat
+warmup -------    0.000    0.000    0.000    0.000
+
+Incidence matrix:
+
+0 1 1 1
+0 0 1 1
+0 0 0 1
+0 0 0 0
+
+dimension:  2
+
+i= 1 X=    0.000    0.000  R=   1.000
+i= 2 X=    0.000    0.000  R=   1.500
+i= 3 X=    0.000    0.000  R=   2.000
+i= 4 X=    0.000    0.000  R=   2.500
+
+Energy matrix:
+
+    0.000000     0.000000     0.000000     0.000000
+    0.000000     0.000000     0.000000     0.000000
+    0.000000     0.000000     0.000000     0.000000
+    0.000000     0.000000     0.000000     0.000000
+
+Total energy: 0.000000
+Schedule: warmup_limit=100 anneal_limit=100 initial_temp=100.000 cooling_factor=0.900000 acceptance_scale=4.000

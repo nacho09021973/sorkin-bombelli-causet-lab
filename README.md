@@ -1,28 +1,45 @@
-# Sorkin–Bombelli Causal Set Lab
+# Sorkin-Bombelli Causal Set Lab
 
-Order-theoretic diagnostics and reproducible benchmarks inspired by the Bombelli–Sorkin causal set embedding program.
+This repository contains a reproducible revival of Bombelli's 1987 causal-set
+annealer. The v1.0.0 revival is complete as a historical reconstruction.
 
-This repository is an independent exploratory project on causal sets. It started as a reconstruction of the historical idea of embedding finite causal sets into Minkowski-like coordinates using energy minimization / annealing, and has evolved into a more conservative diagnostic framework:
+The current continuation is **SORKIN-2 — algorithmic recoverability in the
+Bombelli annealer**. SORKIN-2 studies when the historical annealer recovers
+known-truth causal realizations and when it fails to access them.
 
-> Before asking whether an algorithm can embed a causal set, ask whether the partial order itself carries structural evidence of manifoldlike behavior.
+SORKIN-2 is not a proof of non-embeddability, not a manifoldlikeness
+classifier, not a Hauptvermutung test, and not currently an ML project.
+
+The framing note is
+[`docs/SORKIN2_algorithmic_recoverability_note.md`](docs/SORKIN2_algorithmic_recoverability_note.md).
 
 ## Motivation
 
-Causal set theory suggests that spacetime geometry may be encoded in a locally finite partial order. A central question is therefore not merely whether a numerical optimizer can find coordinates for a given causet, but whether the causet itself contains order-theoretic signatures compatible with a manifoldlike origin.
-
-This project explores that question through small, reproducible benchmarks.
+The original Bombelli program asks a constructive question: given a causal set
+and a target dimension, can a particular simulated annealing procedure find
+coordinates whose induced causal relations match the input order?
 
 The guiding distinction is:
 
-1. **Order structure**: does the causet have internal invariants compatible with a manifoldlike sprinkling?
-2. **Embeddability**: does a low-energy embedding exist?
-3. **Algorithmic recovery**: can the historical optimizer actually find it?
+1. **Causal realization / embedding existence**: does a zero-energy realization
+   exist?
+2. **Annealer accessibility / algorithmic recoverability**: can the historical
+   energy, move set, schedule, and acceptance rule find it?
 
-Earlier embedding experiments can mix these questions together. This repository tries to separate them.
+Failure to reach zero energy is therefore a diagnostic of this algorithmic
+setup. It is not direct evidence that no realization exists.
 
 ## Current status
 
-The project currently contains a reproducible diagnostic foundation and a growing structural atlas.
+- **Historical revival:** complete and archived in v1.0.0.
+- **Current continuation:** SORKIN-2 diagnostic framing is fixed.
+- **Next scientific step:** design a minimal matrix of known-truth cases.
+- **Provenance freeze:** warmup and robustness diagnostics are committed locally.
+- **Exploratory artifacts:** Phase3/4A/4B/5 remain non-claim exploratory
+  material unless later formalized. Non-active exploratory branches are archived
+  under `legacy/`.
+- **Foundation README reconciliation:** may still be pending if
+  `benchmarks/foundation/README.md` has unresolved diff.
 
 Implemented so far:
 
@@ -37,11 +54,15 @@ Implemented so far:
 - reproducible CSV / Markdown benchmark outputs;
 - regression and integrity tests.
 
-The current focus is **not** on optimizing embeddings. The current focus is on identifying which order-theoretic observables carry geometric signal before any embedding algorithm is run.
+The current focus is **not** on optimizing embeddings and **not** on ML. The
+current focus is defining known-truth recoverability diagnostics for the
+historical annealer.
 
 ## Scientific conclusion so far
 
-The current diagnostics separate families of causal sets better than individual causal sets.
+The current diagnostics separate families of causal sets better than individual
+causal sets, but this remains background context for SORKIN-2 rather than a
+claim that the annealer classifies physics.
 
 For Minkowski sprinklings, the dimension estimators show convergence behavior with increasing `n`.
 
@@ -51,17 +72,21 @@ The main current conclusion is conservative:
 
 > The present diagnostics provide ensemble-level separation between manifoldlike sprinklings and non-manifoldlike controls, but they do not yet provide a robust per-causal-set classifier.
 
-This repository does **not** claim to solve the causal set Hauptvermutung. It provides a reproducible laboratory for testing which order-theoretic invariants carry useful geometric information.
+The next SORKIN-2 step is narrower: build a minimal known-truth matrix and ask
+whether the historical annealer reaches zero energy or exact relation recovery.
 
 ## Project philosophy
 
 - Reproducibility over impressive claims.
-- Order-theoretic diagnostics before embedding.
+- Known-truth diagnostics before modeling.
 - Negative controls before interpretation.
 - Conservative conclusions.
 - No temporary scripts without provenance.
 - Tests and benchmark outputs should be versioned.
 - A good negative result is still a result.
+- No KAN/PySR/GAM until a clean multi-family known-truth dataset exists.
+- Do not use `legacy/` as a source of claims without a new audit.
+- Do not reactivate Phase3/4A/4B/5 without an explicit decision.
 
 ## Repository structure
 
@@ -77,6 +102,7 @@ This repository does **not** claim to solve the causal set Hauptvermutung. It pr
 ├── tests/
 ├── benchmarks/
 │   └── foundation/
+├── legacy/
 ├── research_agenda_2026.md
 ├── results_note_2026.md
 ├── Makefile

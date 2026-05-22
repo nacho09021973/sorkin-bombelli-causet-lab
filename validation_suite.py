@@ -37,7 +37,9 @@ import contextlib
 import io
 import math
 import random
+import struct
 import tempfile
+import zlib
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import List, Sequence, Tuple
@@ -622,6 +624,415 @@ def run_recovery(
         interval_rmse=interval_residual,
         mm_dim_truth=float(case.d_spacetime),
         mm_dim_recovered=causet_invariants.myrheim_meyer_dimension(case.matrix),
+    )
+
+
+# ---------------------------------------------------------------------
+# SORKIN-2 order verification
+# ---------------------------------------------------------------------
+
+
+@dataclass(frozen=True)
+class OrderComparison:
+    """Binary comparison of a target causal order against an induced order.
+
+    Produced by :func:`compare_causal_orders`. All fields are exact
+    relation counts or lists of offending pairs; no energy, no
+    continuous observable, and no dimension estimator is involved.
+
+    Fields
+    ------
+    n:
+        Number of events.
+    total_relations_target:
+        Number of True entries in the upper-triangular target matrix.
+    total_relations_induced:
+        Number of True entries in the upper-triangular induced matrix.
+    missing_relations:
+        Pairs ``(i, j)`` with ``i < j`` that are present in the target
+        order but absent in the induced order.
+    extra_relations:
+        Pairs ``(i, j)`` with ``i < j`` that are absent in the target
+        order but present in the induced order.
+    exact_match:
+        ``True`` iff ``missing_relations`` and ``extra_relations`` are
+        both empty, i.e. the induced order reproduces the target exactly.
+    """
+
+    n: int
+    total_relations_target: int
+    total_relations_induced: int
+    missing_relations: Tuple[Tuple[int, int], ...]
+    extra_relations: Tuple[Tuple[int, int], ...]
+    exact_match: bool
+
+
+@dataclass(frozen=True)
+class OrderMatrixPlotPaths:
+    """PNG outputs for an order-matrix comparison."""
+
+    target_order_matrix: Path
+    induced_order_matrix: Path
+    order_difference_matrix: Path
+
+
+def induced_order_from_coords(coords: Sequence[Coord]) -> CausalMatrix:
+    """Causal order induced by a set of annealer coordinates.
+
+    Accepts coordinates in the format used by :class:`~cones.ConesSimulator`:
+    each entry is ``(r_i, x_i_1, ..., x_i_d)`` where ``r_i`` is the
+    time-like radius (``sim.rold[i]``) and ``x_i_k`` are the spatial
+    components (``sim.xold[i][k]``).
+
+    In the annealer convention, event ``i`` causally precedes event ``j``
+    iff both conditions hold:
+
+    .. code-block:: text
+
+        r_i <= r_j                                   (earlier label has no larger r)
+        (r_i - r_j)^2 >= sum_k (x_ik - x_jk)^2     (timelike or null interval)
+
+    This matches the zero-energy condition in
+    :meth:`~cones.ConesSimulator.energy` exactly: for a pair with
+    ``z[i][j] = True``, the Bombelli energy contribution is zero iff
+    ``r_i <= r_j`` and the Minkowski interval is non-positive.
+
+    The function is independent of the Bombelli energy: it uses only the
+    geometric Minkowski causal relation applied to the coordinate values.
+    It does not call the simulator, does not use the energy matrix, and
+    does not invoke any invariant estimator.
+
+    Returns the upper-triangular causal matrix: ``z[i][j]`` is ``True``
+    for ``i < j`` (by label) iff event ``i`` causally precedes event ``j``
+    in the given geometry.
+    """
+    n = len(coords)
+    matrix: CausalMatrix = [[False] * n for _ in range(n)]
+    for i in range(n - 1):
+        ri = coords[i][0]
+        xi = coords[i][1:]
+        for j in range(i + 1, n):
+            rj = coords[j][0]
+            xj = coords[j][1:]
+            rij = ri - rj
+            if rij > 0.0:
+                continue
+            dx_sq = sum((a - b) * (a - b) for a, b in zip(xi, xj))
+            if rij * rij >= dx_sq:
+                matrix[i][j] = True
+    return matrix
+
+
+def compare_causal_orders(
+    z_target: CausalMatrix,
+    z_induced: CausalMatrix,
+) -> OrderComparison:
+    """Compare two upper-triangular causal order matrices element by element.
+
+    Returns an :class:`OrderComparison` with the sets of missing and extra
+    relations. This is a purely order-theoretic comparison: no energy,
+    no coordinates, no dimension estimator is involved.
+
+    Parameters
+    ----------
+    z_target:
+        The target causal order matrix (e.g., from a ``.in`` file or a
+        known sprinkling). ``z_target[i][j]`` is ``True`` iff event ``i``
+        should causally precede event ``j``.
+    z_induced:
+        The causal order matrix computed from a recovered embedding
+        (e.g., from :func:`induced_order_from_coords`).
+
+    Returns
+    -------
+    An :class:`OrderComparison` with ``exact_match=True`` iff the two
+    matrices agree on every pair ``(i, j)`` with ``i < j``.
+
+    Raises
+    ------
+    ValueError:
+        If the two matrices have different sizes.
+    """
+    n = len(z_target)
+    if len(z_induced) != n:
+        raise ValueError(
+            f"matrix sizes differ: target n={n}, induced n={len(z_induced)}"
+        )
+    total_target = 0
+    total_induced = 0
+    missing: list[Tuple[int, int]] = []
+    extra: list[Tuple[int, int]] = []
+    for i in range(n - 1):
+        for j in range(i + 1, n):
+            t = bool(z_target[i][j])
+            ind = bool(z_induced[i][j])
+            if t:
+                total_target += 1
+            if ind:
+                total_induced += 1
+            if t and not ind:
+                missing.append((i, j))
+            elif ind and not t:
+                extra.append((i, j))
+    return OrderComparison(
+        n=n,
+        total_relations_target=total_target,
+        total_relations_induced=total_induced,
+        missing_relations=tuple(missing),
+        extra_relations=tuple(extra),
+        exact_match=len(missing) == 0 and len(extra) == 0,
+    )
+
+
+def verify_recovery(sim: cones.ConesSimulator) -> OrderComparison:
+    """Check whether a simulator's final accepted state reproduces the target order.
+
+    Extracts the last-accepted coordinates (``rold``, ``xold``) from the
+    simulator, computes the induced causal order via
+    :func:`induced_order_from_coords`, and compares it against the target
+    order ``sim.z`` via :func:`compare_causal_orders`.
+
+    Uses ``rold``/``xold`` (last accepted state) rather than
+    ``rnew``/``xnew`` (last proposed state), consistent with what
+    :meth:`~cones.ConesSimulator.writeout` reports as the final
+    configuration.
+
+    This is the canonical SORKIN-2 recoverability check. A result with
+    ``exact_match=True`` means the recovered configuration induces
+    exactly the target causal order, independently of the final Bombelli
+    energy value.
+
+    Parameters
+    ----------
+    sim:
+        A :class:`~cones.ConesSimulator` after
+        :meth:`~cones.ConesSimulator.run` has been called.
+
+    Returns
+    -------
+    :class:`OrderComparison` with the exact-match verdict and the full
+    lists of missing and extra relations.
+    """
+    coords: List[Coord] = [(sim.rold[i], *sim.xold[i]) for i in range(sim.n)]
+    z_induced = induced_order_from_coords(coords)
+    return compare_causal_orders(sim.z, z_induced)
+
+
+# ---------------------------------------------------------------------
+# SORKIN-2 order-matrix diagnostic figures
+# ---------------------------------------------------------------------
+
+
+Color = Tuple[int, int, int]
+
+
+def _coerce_square_bool_matrix(matrix: Sequence[Sequence[object]], name: str) -> CausalMatrix:
+    """Return a square matrix of bools from a list-like matrix."""
+
+    n = len(matrix)
+    rows: CausalMatrix = []
+    for i, row in enumerate(matrix):
+        if len(row) != n:
+            raise ValueError(
+                f"{name} must be square: row {i} has length {len(row)}, expected {n}"
+            )
+        rows.append([bool(cell) for cell in row])
+    return rows
+
+
+def _write_png_rgb(path: Path, pixels: Sequence[Sequence[Color]]) -> None:
+    """Write an RGB PNG using only the standard library."""
+
+    height = len(pixels)
+    width = len(pixels[0]) if height else 0
+    if width <= 0 or height <= 0:
+        raise ValueError("PNG image must have positive width and height")
+    for row in pixels:
+        if len(row) != width:
+            raise ValueError("PNG rows must all have the same width")
+
+    def chunk(kind: bytes, data: bytes) -> bytes:
+        return (
+            struct.pack(">I", len(data))
+            + kind
+            + data
+            + struct.pack(">I", zlib.crc32(kind + data) & 0xFFFFFFFF)
+        )
+
+    raw = bytearray()
+    for row in pixels:
+        raw.append(0)  # filter type 0
+        for red, green, blue in row:
+            raw.extend((red, green, blue))
+
+    png = b"\x89PNG\r\n\x1a\n"
+    png += chunk("IHDR".encode("ascii"), struct.pack(">IIBBBBB", width, height, 8, 2, 0, 0, 0))
+    png += chunk("IDAT".encode("ascii"), zlib.compress(bytes(raw)))
+    png += chunk("IEND".encode("ascii"), b"")
+    path.write_bytes(png)
+
+
+def _matrix_to_pixels(codes: Sequence[Sequence[int]], palette: dict[int, Color]) -> List[List[Color]]:
+    """Expand a small matrix into a readable pixel grid."""
+
+    n = len(codes)
+    cell = max(18, min(48, 360 // max(n, 1)))
+    grid = 2
+    background = (245, 245, 242)
+    line = (70, 70, 70)
+    size = n * cell + (n + 1) * grid
+    pixels: List[List[Color]] = [[background for _ in range(size)] for _ in range(size)]
+
+    for r in range(size):
+        for c in range(size):
+            if r % (cell + grid) < grid or c % (cell + grid) < grid:
+                pixels[r][c] = line
+
+    for i, row in enumerate(codes):
+        if len(row) != n:
+            raise ValueError("plot matrix must be square")
+        for j, code in enumerate(row):
+            color = palette[code]
+            y0 = grid + i * (cell + grid)
+            x0 = grid + j * (cell + grid)
+            for y in range(y0, y0 + cell):
+                for x in range(x0, x0 + cell):
+                    pixels[y][x] = color
+    return pixels
+
+
+def _write_matrix_png(
+    matrix: Sequence[Sequence[int]],
+    path: Path,
+    *,
+    title: str,
+    palette: dict[int, Color],
+    matplotlib_cmap: object | None = None,
+    vmin: int = 0,
+    vmax: int = 1,
+) -> Path:
+    """Write one matrix plot, preferring matplotlib when available."""
+
+    try:
+        import matplotlib
+
+        matplotlib.use("Agg", force=True)
+        from matplotlib.colors import ListedColormap
+        import matplotlib.pyplot as plt
+    except Exception:
+        _write_png_rgb(path, _matrix_to_pixels(matrix, palette))
+        return path
+
+    if matplotlib_cmap is None:
+        ordered = [palette[i] for i in range(vmin, vmax + 1)]
+        matplotlib_cmap = ListedColormap(
+            [(red / 255.0, green / 255.0, blue / 255.0) for red, green, blue in ordered]
+        )
+
+    fig, ax = plt.subplots(figsize=(4.0, 4.0), constrained_layout=True)
+    ax.imshow(matrix, cmap=matplotlib_cmap, vmin=vmin, vmax=vmax, interpolation="nearest")
+    ax.set_title(title)
+    ax.set_xlabel("j")
+    ax.set_ylabel("i")
+    n = len(matrix)
+    ax.set_xticks(range(n))
+    ax.set_yticks(range(n))
+    ax.grid(which="minor", color="black", linewidth=0.5)
+    fig.savefig(path, dpi=160)
+    plt.close(fig)
+    return path
+
+
+def write_order_matrix_plots(
+    z_target: Sequence[Sequence[object]],
+    z_induced: Sequence[Sequence[object]],
+    output_dir: Path,
+) -> OrderMatrixPlotPaths:
+    """Write the three permanent order-matrix diagnostic PNGs.
+
+    The inputs are already-computed causal order matrices. This function does
+    not run the annealer, does not evaluate Bombelli energy, and does not call
+    any dimension estimator.
+
+    The difference plot uses four discrete classes:
+
+    - no relation in either matrix;
+    - matching relation in both matrices;
+    - missing relation, present in target but absent in induced;
+    - extra relation, absent in target but present in induced.
+    """
+
+    target = _coerce_square_bool_matrix(z_target, "z_target")
+    induced = _coerce_square_bool_matrix(z_induced, "z_induced")
+    if len(target) != len(induced):
+        raise ValueError(
+            f"matrix sizes differ: target n={len(target)}, induced n={len(induced)}"
+        )
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    target_path = output_dir / "target_order_matrix.png"
+    induced_path = output_dir / "induced_order_matrix.png"
+    difference_path = output_dir / "order_difference_matrix.png"
+
+    target_codes = [[1 if cell else 0 for cell in row] for row in target]
+    induced_codes = [[1 if cell else 0 for cell in row] for row in induced]
+    difference_codes: List[List[int]] = []
+    for target_row, induced_row in zip(target, induced):
+        diff_row: List[int] = []
+        for target_cell, induced_cell in zip(target_row, induced_row):
+            if target_cell and induced_cell:
+                diff_row.append(1)
+            elif target_cell and not induced_cell:
+                diff_row.append(2)
+            elif induced_cell and not target_cell:
+                diff_row.append(3)
+            else:
+                diff_row.append(0)
+        difference_codes.append(diff_row)
+
+    binary_palette = {
+        0: (245, 245, 242),
+        1: (34, 94, 168),
+    }
+    difference_palette = {
+        0: (245, 245, 242),  # no relation in either matrix
+        1: (35, 118, 82),    # matching relation
+        2: (217, 95, 2),     # missing relation
+        3: (117, 112, 179),  # extra relation
+    }
+
+    _write_matrix_png(
+        target_codes,
+        target_path,
+        title="Target causal order",
+        palette=binary_palette,
+        matplotlib_cmap="Blues",
+        vmin=0,
+        vmax=1,
+    )
+    _write_matrix_png(
+        induced_codes,
+        induced_path,
+        title="Induced causal order",
+        palette=binary_palette,
+        matplotlib_cmap="Blues",
+        vmin=0,
+        vmax=1,
+    )
+    _write_matrix_png(
+        difference_codes,
+        difference_path,
+        title="Order difference",
+        palette=difference_palette,
+        matplotlib_cmap=None,
+        vmin=0,
+        vmax=3,
+    )
+
+    return OrderMatrixPlotPaths(
+        target_order_matrix=target_path,
+        induced_order_matrix=induced_path,
+        order_difference_matrix=difference_path,
     )
 
 

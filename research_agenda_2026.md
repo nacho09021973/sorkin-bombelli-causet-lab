@@ -2,20 +2,27 @@
 
 This note frames the revived Bombelli 1987 annealing program as a research instrument rather than only a historical port.
 
+SORKIN-2 update: the v1.0.0 revival is complete as a historical reconstruction.
+The active continuation is algorithmic recoverability in the Bombelli annealer:
+the gap between known zero-energy causal realization and accessibility by the
+historical energy, move set, schedule, and acceptance rule. This is not a
+causal-set physics classification program, and ML is deferred until a clean
+multi-family known-truth dataset exists.
+
 Current empirical results are summarized in [`results_note_2026.md`](/home/adnac/sorkin/results_note_2026.md).
 
 ## Central Question
 
-Which finite causal sets are recoverable with low optimizer-response energy in low-dimensional Minkowski targets under the current annealing pipeline, and what controls the transition between easy, hard, and apparently non-embeddable cases?
+Which known-truth causal sets are recoverable with zero energy or verified exact relation recovery under the current historical annealing pipeline, and what controls the transition between accessible and inaccessible cases?
 
-The old program asks whether one causet can be fitted. The modern tool should ask how whole families behave.
+The old program asks whether one causet can be fitted by a particular constructive procedure. The modern diagnostic should ask how known-truth families behave under that procedure.
 
 ## Working Hypotheses
 
 - Optimizer recoverability is not controlled only by `n`; density, dimension, and order structure matter.
 - The annealing landscape has basins of attraction that can be mapped statistically.
-- Schedule sensitivity may become scientifically informative if it correlates reproducibly with causal-set structure, but it is not by itself a physical observable.
-- Failure to embed cleanly may separate numerical difficulty from genuinely non-manifoldlike order.
+- Schedule sensitivity may become diagnostically informative if it correlates reproducibly with causal-set structure, but it is not by itself a physical observable.
+- Failure to reach zero energy separates algorithmic accessibility from existence only when the case has known truth; it does not establish non-embeddability.
 
 ## Five-Step Program
 
@@ -73,7 +80,7 @@ Then compare those descriptors against:
 
 The scientific target is to identify which order-theoretic features predict optimizer recoverability under the current embedding pipeline.
 
-4. Compare energy models.
+4. Compare energy and move-set diagnostics.
 
 Keep the thesis energy as the historical baseline, then test variants:
 
@@ -83,9 +90,9 @@ Keep the thesis energy as the historical baseline, then test variants:
 - interval-aware penalties
 - multiobjective versions that separate false positives from false negatives
 
-The question is not only whether the old energy works. It is which energy is most useful for separating optimizer success from failure on manifoldlike reference cases.
+The question is not only whether the old energy works. It is which historical energy/move-set choices control optimizer success or failure on known-truth reference cases.
 
-5. Separate algorithmic failure from physical failure.
+5. Separate algorithmic inaccessibility from existence.
 
 For hard cases, rerun with stronger methods:
 
@@ -95,8 +102,8 @@ For hard cases, rerun with stronger methods:
 - higher target dimension
 - alternative energy functions
 
-If all methods fail, treat the case as a candidate hard instance for the current pipeline, not yet as evidence of non-manifoldlikeness.
-If only the original schedule fails, the lesson is algorithmic rather than physical.
+If all methods fail, treat the case as a candidate hard instance for the current pipeline, not as evidence of non-embeddability.
+If only the original schedule fails, the lesson is algorithmic.
 
 ## Near-Term Experiments
 
@@ -134,7 +141,7 @@ Without these fields, the run is only anecdotal.
 
 - Energy near zero means a low-energy configuration was found under the current objective, not that the causet is uniquely geometric.
 - High final energy after one run is not evidence of non-embeddability.
-- Repeated high energy across many schedules and seeds is evidence of difficulty.
+- Repeated high energy across many schedules and seeds is evidence of algorithmic difficulty.
 - If higher dimension fixes the problem, the original target dimension was too restrictive.
 - If schedule tuning fixes the problem, the original historical run was computationally limited.
 
@@ -208,10 +215,10 @@ f(d) = Gamma(d + 1) Gamma(d / 2) / (2 Gamma(3 d / 2)).
 ```
 
 When the annealing optimizer fails on a causet, the Myrheim-Meyer
-dimension is an *independent* witness: if it indicates a
+dimension is an *independent* diagnostic: if it indicates a
 well-defined ``d`` near the target embedding dimension, the failure
-is most likely algorithmic; if it diverges or sits far from the
-target, the causet is plausibly not manifoldlike.
+is plausibly algorithmic. If it diverges or sits far from the target,
+that is a structural warning, not a verdict from the annealer.
 
 ### Canonical Minkowski sprinkler
 
@@ -478,13 +485,13 @@ from the existing code: ``initial_energy``, ``warmup_energy``,
 Minkowski sprinklings with known coordinates, and ``NA`` for
 truth-dependent columns on controls.
 
-The immediate physical use is triage. If a Minkowski case has
+The immediate diagnostic use is triage. If a Minkowski case has
 good structural diagnostics but a large energy gap or interval
 RMSE, the failure is evidence about the annealing schedule or
 energy landscape, not evidence that the causet is
 non-manifoldlike. If a control has bad structural diagnostics
 but a deceptively modest final energy, the energy functional
-needs auditing before it is trusted as a manifoldness test.
+needs auditing before it is used for any interpretation.
 
 ## Phase 2B: annealer schedule probe
 

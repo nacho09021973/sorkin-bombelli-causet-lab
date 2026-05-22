@@ -1,0 +1,206 @@
+{
+  "annealer_mode": "historical/default",
+  "case_id": "layered_4_4_4_d2",
+  "code_paths": [
+    "tools/run_sorkin2_known_truth_case.py",
+    "cones.py",
+    "validation_suite.py"
+  ],
+  "dim": 2,
+  "exact_match": false,
+  "extra_relations": [
+    [
+      4,
+      5
+    ],
+    [
+      4,
+      7
+    ],
+    [
+      5,
+      7
+    ],
+    [
+      6,
+      7
+    ],
+    [
+      8,
+      10
+    ],
+    [
+      9,
+      10
+    ]
+  ],
+  "final_energy": 31.915134896118605,
+  "generated_figures": {
+    "induced_order_matrix": "induced_order_matrix.png",
+    "order_difference_matrix": "order_difference_matrix.png",
+    "target_order_matrix": "target_order_matrix.png"
+  },
+  "input_file": "benchmarks/known_truth/n12_topology_panel/layered_4_4_4_d2.in",
+  "missing_relations": [
+    [
+      0,
+      4
+    ],
+    [
+      0,
+      6
+    ],
+    [
+      0,
+      8
+    ],
+    [
+      0,
+      9
+    ],
+    [
+      0,
+      11
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      1,
+      6
+    ],
+    [
+      1,
+      8
+    ],
+    [
+      1,
+      9
+    ],
+    [
+      1,
+      11
+    ],
+    [
+      2,
+      4
+    ],
+    [
+      2,
+      6
+    ],
+    [
+      2,
+      8
+    ],
+    [
+      2,
+      11
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      3,
+      6
+    ],
+    [
+      3,
+      8
+    ],
+    [
+      3,
+      9
+    ],
+    [
+      3,
+      11
+    ],
+    [
+      4,
+      8
+    ],
+    [
+      4,
+      9
+    ],
+    [
+      4,
+      11
+    ],
+    [
+      5,
+      8
+    ],
+    [
+      5,
+      9
+    ],
+    [
+      5,
+      11
+    ],
+    [
+      6,
+      8
+    ],
+    [
+      6,
+      9
+    ],
+    [
+      6,
+      11
+    ],
+    [
+      7,
+      8
+    ],
+    [
+      7,
+      9
+    ],
+    [
+      7,
+      10
+    ],
+    [
+      7,
+      11
+    ]
+  ],
+  "n": 12,
+  "primary_recovery_criterion_warning": "exact_match from validation_suite.compare_causal_orders is the primary criterion for exact recovery; low final energy alone is not sufficient.",
+  "run_id": "20260522T120957Z_layered_4_4_4_d2_seed1962",
+  "schedule": {
+    "acceptance_scale": 4.0,
+    "anneal_limit": 100,
+    "backend": "cpu",
+    "cooling_factor": 0.9,
+    "initial_temp": 100.0,
+    "max_data": 35,
+    "warmup_limit": 100
+  },
+  "seed": 1962,
+  "total_relations_induced": 20,
+  "total_relations_target": 48,
+  "trace_artifacts": {
+    "note": "All columns are populated at every block when run via run_case() (block_callback captures rold/xold per block). Legacy/synthetic runs without a callback have causal-order columns populated at the final block only.",
+    "trace_coordinates": "trace_coordinates.jsonl",
+    "trace_csv": "trace.csv",
+    "trace_energy": "trace_energy.png",
+    "trace_pairs": "trace_pairs.jsonl",
+    "trace_relations": "trace_relations.png"
+  },
+  "verifier": "validation_suite.verify_recovery"
+}

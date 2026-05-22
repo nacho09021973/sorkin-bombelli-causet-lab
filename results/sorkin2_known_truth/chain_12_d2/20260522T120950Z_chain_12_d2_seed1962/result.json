@@ -1,0 +1,44 @@
+{
+  "annealer_mode": "historical/default",
+  "case_id": "chain_12_d2",
+  "code_paths": [
+    "tools/run_sorkin2_known_truth_case.py",
+    "cones.py",
+    "validation_suite.py"
+  ],
+  "dim": 2,
+  "exact_match": true,
+  "extra_relations": [],
+  "final_energy": 0.0,
+  "generated_figures": {
+    "induced_order_matrix": "induced_order_matrix.png",
+    "order_difference_matrix": "order_difference_matrix.png",
+    "target_order_matrix": "target_order_matrix.png"
+  },
+  "input_file": "benchmarks/known_truth/n12_topology_panel/chain_12_d2.in",
+  "missing_relations": [],
+  "n": 12,
+  "primary_recovery_criterion_warning": "exact_match from validation_suite.compare_causal_orders is the primary criterion for exact recovery; low final energy alone is not sufficient.",
+  "run_id": "20260522T120950Z_chain_12_d2_seed1962",
+  "schedule": {
+    "acceptance_scale": 4.0,
+    "anneal_limit": 100,
+    "backend": "cpu",
+    "cooling_factor": 0.9,
+    "initial_temp": 100.0,
+    "max_data": 35,
+    "warmup_limit": 100
+  },
+  "seed": 1962,
+  "total_relations_induced": 66,
+  "total_relations_target": 66,
+  "trace_artifacts": {
+    "note": "All columns are populated at every block when run via run_case() (block_callback captures rold/xold per block). Legacy/synthetic runs without a callback have causal-order columns populated at the final block only.",
+    "trace_coordinates": "trace_coordinates.jsonl",
+    "trace_csv": "trace.csv",
+    "trace_energy": "trace_energy.png",
+    "trace_pairs": "trace_pairs.jsonl",
+    "trace_relations": "trace_relations.png"
+  },
+  "verifier": "validation_suite.verify_recovery"
+}

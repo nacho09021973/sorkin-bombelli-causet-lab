@@ -1,0 +1,61 @@
+{
+  "annealer_mode": "historical/default",
+  "case_id": "chain_4_d2",
+  "code_paths": [
+    "tools/run_sorkin2_known_truth_case.py",
+    "cones.py",
+    "validation_suite.py"
+  ],
+  "dim": 2,
+  "exact_match": false,
+  "extra_relations": [],
+  "final_energy": 0.0,
+  "generated_figures": {
+    "induced_order_matrix": "induced_order_matrix.png",
+    "order_difference_matrix": "order_difference_matrix.png",
+    "target_order_matrix": "target_order_matrix.png"
+  },
+  "input_file": "benchmarks/known_truth/chain_4_d2.in",
+  "missing_relations": [
+    [
+      0,
+      1
+    ],
+    [
+      0,
+      2
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      3
+    ]
+  ],
+  "n": 4,
+  "primary_recovery_criterion_warning": "exact_match from validation_suite.compare_causal_orders is the primary criterion for exact recovery; low final energy alone is not sufficient.",
+  "run_id": "20260522T081703Z_chain_4_d2_seed1959",
+  "schedule": {
+    "acceptance_scale": 4.0,
+    "anneal_limit": 100,
+    "backend": "cpu",
+    "cooling_factor": 0.9,
+    "initial_temp": 100.0,
+    "max_data": 35,
+    "warmup_limit": 100
+  },
+  "seed": 1959,
+  "total_relations_induced": 0,
+  "total_relations_target": 6,
+  "verifier": "validation_suite.verify_recovery"
+}

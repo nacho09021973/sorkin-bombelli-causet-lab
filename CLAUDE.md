@@ -2,7 +2,17 @@
 
 ## What this project is
 
-Revival of the Bombelli 1987 PhD annealing program. The scientific question: which finite causal sets are recoverable by the current optimizer pipeline into low-dimensional Minkowski spacetime, and what controls the transition between easy, hard, and non-embeddable cases. The port is a faithful historical baseline; extensions probe the landscape statistically.
+Revival of the Bombelli 1987 PhD annealing program. The v1.0.0 revival is complete as a historical reconstruction. The active continuation is **SORKIN-2: algorithmic recoverability in the Bombelli annealer**.
+
+SORKIN-2 is a separate diagnostic continuation. The working question is whether the historical annealer, with its historical energy, move set, schedule, and acceptance rule, can access known-truth causal realizations. It is not a physical embeddability program.
+
+Core rules:
+
+- Distinguish causal realization / embedding existence from annealer accessibility / algorithmic recoverability.
+- Do not interpret annealer failure as non-embeddability.
+- Do not interpret low final energy as manifoldlikeness.
+- Avoid language like "discovers", "proves", "solves", "physical law", "Hauptvermutung test", "embeddability detector", or "manifoldlikeness detector".
+- Prefer conservative terms: diagnostic, known-truth case, recoverability, accessibility, schedule sensitivity, basin accessibility, historical energy/move-set limitation.
 
 The primary reference is `Pascal.pdf` (thesis code listing) and `Bombelli_1987_PhD.pdf`.
 
@@ -14,11 +24,11 @@ We are working through a numbered phase program. Each phase builds on the previo
 |---|---|
 | 1 (a–e) | Atlas: success rate vs n, dim, structure |
 | 2 (a–g) | Annealing internals: schedule, oracle, init basins, warmup modes |
-| 3 (a–f) | PySR symbolic regression on annealing features |
-| 4 (a–d) | Epsilon sweep, survival probe, seed robustness, robustness audit |
-| 5 | Seed curve morphology |
+| 3 (a–f) | PySR symbolic regression on annealing features; exploratory, not a claim |
+| 4 (a–d) | Epsilon sweep, survival probe, seed robustness, robustness audit; diagnostic/exploratory |
+| 5 | Seed curve morphology; exploratory |
 
-Current frontier: **Phase 5** complete. Phase 6 not yet defined.
+Current frontier: **SORKIN-2 framing note exists** at `docs/SORKIN2_algorithmic_recoverability_note.md`. The next scientific step is a minimal matrix of known-truth cases. Phase 6 is not yet defined.
 
 Phase2F diagnostic: guarded warmup preserves 18/18 small-noise rows on the tested grid.
 
@@ -37,6 +47,7 @@ Phase2F diagnostic: guarded warmup preserves 18/18 small-noise rows on the teste
 | `analyze_sweep.py` | Post-processing and aggregation |
 | `validation_suite.py` | Cross-phase consistency checks |
 | `tools/build_phase*.py` | One script per benchmark phase; generates CSV + MD |
+| `legacy/` | Archived exploratory branches and local outputs; provenance only |
 
 ## Benchmark conventions
 
@@ -60,12 +71,14 @@ make regen-phase2f           # regenerate a specific phase
 
 Backend selection: `--backend auto` prefers CUDA if available, falls back to CPU.
 
+Do not run experiments or regenerate data unless the user explicitly asks for that. For documentation-only work, do not run benchmark targets.
+
 ## Tools used daily
 
 - **Python 3.12** — everything except Julia-specific work
-- **Julia** — performance-critical runs, KAN experiments
-- **PySR** (`pysr`) — symbolic regression on annealing features (Phase 3)
-- **KAN** (Kolmogorov-Arnold Networks) — alternative function approximation
+- **Julia** — performance-critical runs when explicitly requested
+- **PySR** (`pysr`) — existing Phase 3 exploratory artifacts only
+- **KAN/GAM** — deferred until a clean multi-family known-truth dataset exists
 - **CUDA** — GPU annealing via `libcones_cuda.so`
 - **NumPy, SciPy, Matplotlib, Pandas** — standard stack
 - **context7** MCP — use for live docs on any of these libraries
@@ -76,6 +89,8 @@ Backend selection: `--backend auto` prefers CUDA if available, falls back to CPU
 - `obj14.bin` — Sorkin's original binary, reference only
 - Completed benchmark CSVs — regenerate, never manually edit
 - `cones.py` core internals — changes invalidate the historical baseline; document why before touching
+- `legacy/` — do not use as a source of claims without a new audit
+- Phase3/4A/4B/5 — do not reactivate without an explicit decision
 
 ## Multi-agent patterns
 
@@ -84,15 +99,21 @@ When dispatching parallel agents for this project, brief them with:
 - The target input file (`tesis_like_6.in` for fast, `tesis_like_12.in` for medium)
 - Whether CUDA is available
 - The output naming convention (`phaseXY_name.{csv,md}`)
+- The SORKIN-2 framing: recoverability/accessibility diagnostics, not physical embeddability claims
 
 Independent tasks suitable for parallel agents:
-- Regenerating different benchmark phases simultaneously
-- Running PySR fits on different feature subsets
-- Scanning different regions of the (n, dim) phase diagram
+- Reading existing docs/results before any new script is proposed
+- Auditing a single known-truth diagnostic question
+- Checking whether an existing generator/test already answers the question
 
 ## Scientific interpretation rules
 
 - A single failed run is not evidence of non-embeddability
-- Success rate across ≥8 seeds at fixed (n, dim, schedule) is the meaningful observable
-- Final energy = 0 means exact embedding found; >0 means optimizer stopped at a local minimum
-- Schedule sensitivity is not a physical observable — it is a numerical artifact to be mapped, not minimized blindly
+- Success rate across repeated seeds at fixed (n, dim, schedule) is a recoverability diagnostic, not a physics verdict
+- Final energy = 0 means the historical energy found correct causal relations under the current representation
+- Final energy >0 means the algorithm did not access zero energy in that run; do not infer non-existence
+- Schedule sensitivity is not a physical observable; it is an algorithmic diagnostic to map
+- Phase2E/2F are warmup diagnostics
+- Phase4C/4D are optimizer-seed and robustness diagnostics
+- One question, one target, one file
+- No KAN/PySR/GAM until a clean multi-family known-truth dataset exists

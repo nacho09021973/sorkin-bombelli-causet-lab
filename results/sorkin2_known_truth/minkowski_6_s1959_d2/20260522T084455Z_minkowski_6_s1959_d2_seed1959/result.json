@@ -1,0 +1,36 @@
+{
+  "annealer_mode": "historical/default",
+  "case_id": "minkowski_6_s1959_d2",
+  "code_paths": [
+    "tools/run_sorkin2_known_truth_case.py",
+    "cones.py",
+    "validation_suite.py"
+  ],
+  "dim": 2,
+  "exact_match": true,
+  "extra_relations": [],
+  "final_energy": 1.645239674297646e-11,
+  "generated_figures": {
+    "induced_order_matrix": "induced_order_matrix.png",
+    "order_difference_matrix": "order_difference_matrix.png",
+    "target_order_matrix": "target_order_matrix.png"
+  },
+  "input_file": "benchmarks/tesis_like_6.in",
+  "missing_relations": [],
+  "n": 6,
+  "primary_recovery_criterion_warning": "exact_match from validation_suite.compare_causal_orders is the primary criterion for exact recovery; low final energy alone is not sufficient.",
+  "run_id": "20260522T084455Z_minkowski_6_s1959_d2_seed1959",
+  "schedule": {
+    "acceptance_scale": 4.0,
+    "anneal_limit": 100,
+    "backend": "cpu",
+    "cooling_factor": 0.9,
+    "initial_temp": 100.0,
+    "max_data": 35,
+    "warmup_limit": 100
+  },
+  "seed": 1959,
+  "total_relations_induced": 4,
+  "total_relations_target": 4,
+  "verifier": "validation_suite.verify_recovery"
+}

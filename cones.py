@@ -509,6 +509,7 @@ class ConesSimulator:
     initial_temp: float = 100.0
     cooling_factor: float = 0.9
     acceptance_scale: float = 4.0
+    block_callback: Any | None = field(default=None, repr=False)
     rng: PascalRNG = field(init=False)
     cuda_backend: Any | None = field(init=False, default=None)
 
@@ -753,6 +754,8 @@ class ConesSimulator:
             self.statistics()
             self.ndata += 1
             self.data.append((self.t, self.eave))
+            if self.block_callback is not None:
+                self.block_callback(self, self.ndata, self.t, self.eave)
 
             if self.interactive:
                 reply = input("y/t/n: ").strip().lower()[:1] or "n"

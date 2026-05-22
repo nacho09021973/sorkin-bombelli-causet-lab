@@ -2,6 +2,16 @@
 
 This note records what has been learned so far from reviving Bombelli's 1987 annealing program.
 
+SORKIN-2 update: the v1.0.0 revival remains complete as a historical
+reconstruction. The continuation is a diagnostic study of algorithmic
+recoverability in the Bombelli annealer: when known-truth causal
+realizations exist, when does the historical energy, move set, schedule,
+and acceptance rule access zero energy or exact relation recovery?
+
+This note should not be read as causal-set physics classification. KAN,
+PySR, and GAM remain deferred until a clean multi-family known-truth
+dataset exists.
+
 ## Historical Baseline
 
 The revived Python code preserves the structure of the thesis program:
@@ -36,7 +46,7 @@ The main lesson is that the thesis algorithm is very schedule-sensitive.
 
 ## Statistical Interpretation
 
-The revived project changes the question from a single embedding attempt to an ensemble measurement.
+The revived project changes the question from a single embedding attempt to an ensemble recoverability diagnostic.
 
 The useful observables are now:
 
@@ -49,7 +59,7 @@ The useful observables are now:
 - sensitivity to schedule
 
 A single failed run is not evidence of non-embeddability.
-Repeated failure across seeds, schedules, and dimensions is evidence of computational or structural difficulty.
+Repeated failure across seeds, schedules, and dimensions is evidence of algorithmic or structural difficulty, not a direct existence verdict.
 
 ## First Phase Diagram
 
@@ -116,18 +126,19 @@ It identifies where deeper runs are worth spending time.
 
 ## Working Interpretation
 
-The revived thesis program now supports a stronger scientific question:
+The revived thesis program now supports a narrower diagnostic question:
 
-Which regions of causal-set space are recoverable with low optimizer-response energy under the current pipeline, in which target dimension, and under which annealing schedules?
+Which known-truth regions are recoverable with zero energy or exact relation recovery under the current pipeline, in which target dimension, and under which annealing schedules?
 
 That is the experiment that was out of reach in 1987.
 
 ## v2 Diagnostic Foundation (in place)
 
 A new layer of tooling has been added so that, going forward, the
-question "did the optimizer fail because the causet is not
-manifoldlike, or because annealing got stuck?" can be answered
-honestly. See the *v2: Diagnostic Foundation* section of
+question "did the optimizer fail because the known-truth case was
+algorithmically inaccessible under this setup, or because the setup
+itself was too weak?" can be studied honestly. See the *v2:
+Diagnostic Foundation* section of
 [`research_agenda_2026.md`](/home/adnac/sorkin/research_agenda_2026.md)
 for full discussion. The headline additions are:
 
@@ -230,7 +241,7 @@ via ``make regen-phase1b``. Headline numbers (ensemble means):
 
 Three observations are robust across the grid:
 
-1. **Manifoldlike cells converge.** For every Minkowski
+1. **Minkowski cells converge.** For every Minkowski
    ``d_spacetime in {2, 3, 4}``, ``mean_mm`` lands within ~0.1
    of the truth at ``n = 256`` and ``std_mm`` shrinks by roughly
    a factor of two between ``n = 32`` and ``n = 256``. The
@@ -254,8 +265,8 @@ Three observations are robust across the grid:
    the entire grid.
 
 The conservative reading: order-theoretic invariants now
-provide a working *ensemble-level* diagnostic for manifoldlike
-vs. non-manifoldlike structure across ``d_spacetime in {2, 3,
+provide a working *ensemble-level* diagnostic for reference
+sprinklings vs. controls across ``d_spacetime in {2, 3,
 4}`` and ``n in [32, 256]``, provided one reads the
 finite-size trajectory rather than any single ``n``. One honest
 limit remains:
@@ -355,13 +366,13 @@ Main rows:
 | corona poset | - | 1.94 | 5.00 | 3.06 | 0.0461 | 952.64 | NA | NA | NA |
 
 The conservative reading is that this first bridge does **not**
-validate the historical annealer as a reliable manifoldness
-classifier. Even the Minkowski cases have known truth energy
+validate the historical annealer as a classifier. Even the
+Minkowski cases have known truth energy
 zero, yet the short annealing run ends with large energy gaps
 and huge interval residuals. That is exactly the useful
-diagnostic distinction: the structural atlas can say "this
-looks manifoldlike", while the embedding outcome can still say
-"this schedule did not find the geometry." For controls, truth
+diagnostic distinction: a known-truth case can have zero-energy
+existence, while the annealing outcome can still say
+"this schedule did not access it." For controls, truth
 energy and interval RMSE are undefined because no ground-truth
 coordinates exist; their final energies should therefore not be
 read as successful embeddings.
@@ -424,7 +435,7 @@ advance is therefore:
   move set in :class:`cones.ConesSimulator`. Phase 2B does
   *not* discriminate between those candidates.
 - This is *not* a claim that Minkowski sprinklings are
-  non-manifoldlike. It is a claim about the annealer at fixed
+  non-manifoldlike. It is a diagnostic claim about the annealer at fixed
   energy and fixed move set.
 - The probe never touches KR or corona causets and is not a
   manifoldness classifier.
