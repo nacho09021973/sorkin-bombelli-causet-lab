@@ -1,0 +1,28 @@
+panel,complexity,loss,equation,is_best,uses_order,uses_design
+A,1,412.711,0.0029067164,true,false,false
+B,1,412.628,ordering_fraction,false,true,false
+B,2,411.325,log(midpoint_dim),false,true,false
+B,3,392.419,-0.012524564 / chain3_abundance,false,true,false
+B,4,381.227,-1.3747413e-5 / square(chain3_abundance),false,true,false
+B,5,345.207,noise_level / (abs_discrepancy_mm_mp - 0.7246527),false,true,true
+B,7,256.097,noise_level / (abs_discrepancy_mm_mp - (0.7341591 * warmup_mode_code)),false,true,true
+B,9,253.987,(noise_level / (abs_discrepancy_mm_mp - (0.7341591 * warmup_mode_code))) / warmup_mode_code,false,true,true
+B,10,253.46,(noise_level / (abs_discrepancy_mm_mp - (0.7341591 * warmup_mode_code))) / square(warmup_mode_code),true,true,true
+C,1,412.628,ordering_fraction,false,true,false
+C,2,411.325,log(midpoint_dim),false,true,false
+C,3,392.419,-0.01253002 / chain3_abundance,false,true,false
+C,4,381.227,-1.3747293e-5 / square(chain3_abundance),false,true,false
+C,5,381.16,0.29902807 / (link_density + -1.7936398),false,true,false
+C,6,374.897,(-1.3747293e-5 / square(chain3_abundance)) + midpoint_dim,false,true,false
+C,7,368.4,square(square(square(square(square(log(midpoint_dim)))))),false,true,false
+C,9,362.078,square(square(square(square(square(log(midpoint_dim)))))) - abs_discrepancy_mm_mp,false,true,false
+C,10,354.637,square(square(square(square(square(log(midpoint_dim)))))) - square(abs_discrepancy_mm_mp),true,true,false
+D,1,412.628,ordering_fraction,false,true,false
+D,2,411.325,log(midpoint_dim),false,true,false
+D,3,392.419,-0.012524527 / chain3_abundance,false,true,false
+D,5,381.7,(-0.019458313 / chain3_abundance) + mm_dim,false,true,false
+D,6,369.866,square(square(square(midpoint_dim - 1.5082731))),false,true,false
+D,7,365.162,square(square(square(square(midpoint_dim - 1.7721802)))),false,true,false
+D,8,362.457,square(square(square(1.5010043 - midpoint_dim))) - abs_discrepancy_mm_mp,false,true,false
+D,9,355.149,square(square(square(1.5010043 - midpoint_dim))) - square(abs_discrepancy_mm_mp),false,true,false
+D,10,350.982,square(square(square(square(1.7700238 - midpoint_dim)))) - square(abs_discrepancy_mm_mp),true,true,false

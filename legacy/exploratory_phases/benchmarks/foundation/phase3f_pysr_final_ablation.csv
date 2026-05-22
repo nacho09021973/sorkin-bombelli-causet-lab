@@ -1,0 +1,25 @@
+panel,complexity,loss,equation,is_best,uses_order,uses_design,uses_abs_discrepancy
+A,1,0.0231248,-1.6880264e-05,true,false,false,false
+B,1,0.0231248,-1.6923079e-5,false,false,false,false
+B,3,0.0231049,-0.000692426 / ordering_fraction,false,true,false,false
+B,4,0.0230479,-0.00012320875 / square(ordering_fraction),false,true,false,false
+B,5,0.0224952,-1.4022067 / (relation_count - chain4_count),false,true,false,false
+B,7,0.0220857,(noise_level - 1.9634908) / (chain2_count - chain4_count),false,true,true,false
+B,9,0.0213571,((midpoint_dim * noise_level) - link_density) / (chain2_count - chain4_count),true,true,true,false
+C,1,0.0231248,-1.6891574e-5,false,false,false,false
+C,3,0.0231049,-0.00069250586 / ordering_fraction,false,true,false,false
+C,4,0.023047,-0.16303729 / square(height),false,true,false,false
+C,5,0.0224952,-1.4022048 / (relation_count - chain4_count),false,true,false,false
+C,6,0.0223382,log(link_density) / (chain4_count - relation_count),false,true,false,false
+C,7,0.0222723,link_density * (0.5388285 / (chain4_count - chain2_count)),false,true,false,false
+C,8,0.0221645,-1.5957824 / (chain2_count - square(chain4_count + -0.71434915)),false,true,false,false
+C,9,0.0221138,-1.595925 / (chain2_count - square(square(chain4_count + -0.7092614))),false,true,false,false
+C,10,0.0220389,link_density / (-3.3345299 - ((chain2_count - square(chain4_count)) + chain4_count)),true,true,false,false
+D,1,0.0231248,-2.4020537e-6,false,false,false,false
+D,3,0.0231049,-0.00069250556 / ordering_fraction,false,true,false,false
+D,4,0.0228197,0.006839401 / log(link_density),false,true,false,false
+D,5,0.0226488,0.066558406 / (chain3_count - 0.26373217),false,true,false,false
+D,6,0.0226033,0.06995433 / (square(chain3_count) - 0.271868),false,true,false,false
+D,7,0.0220818,0.004561078 / ((link_density * 1.9845618) - height),false,true,false,false
+D,9,0.0220151,(abs_discrepancy_mm_mp * -0.0015563451) / log(mm_dim / square(link_density)),false,true,false,true
+D,10,0.0216834,(square(abs_discrepancy_mm_mp) * -0.0014540266) / log(mm_dim / square(link_density)),true,true,false,true

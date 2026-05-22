@@ -1,0 +1,16 @@
+n,target_dim,epsilon,role,seed,loss,mean_loss_cell_epsilon,abs_delta_from_mean,svg_path,curve_shape_cell,survival_label_cell,borderline_v_like_cell
+32,4,0.1,near_mean,2003,0.07596641182,0.0689378099,0.007028601920000002,benchmarks/foundation/phase4b_causet_svgs/phase4b_n32_d4_eps0p1_seed2003_near_mean.svg,v_shape,supporting,false
+32,4,0.1,best,1900,0.01025943505,0.0689378099,0.05867837484999999,benchmarks/foundation/phase4b_causet_svgs/phase4b_n32_d4_eps0p1_seed1900_best.svg,v_shape,supporting,false
+32,4,0.1,worst,2020,0.1308298899,0.0689378099,0.06189208,benchmarks/foundation/phase4b_causet_svgs/phase4b_n32_d4_eps0p1_seed2020_worst.svg,v_shape,supporting,false
+48,3,0.1,near_mean,1900,0.0,0.0002743721981,0.0002743721981,benchmarks/foundation/phase4b_causet_svgs/phase4b_n48_d3_eps0p1_seed1900_near_mean.svg,v_shape,counterexample,true
+48,3,0.1,best,1900,0.0,0.0002743721981,0.0002743721981,benchmarks/foundation/phase4b_causet_svgs/phase4b_n48_d3_eps0p1_seed1900_best.svg,v_shape,counterexample,true
+48,3,0.1,worst,1916,0.002743721981,0.0002743721981,0.0024693497829,benchmarks/foundation/phase4b_causet_svgs/phase4b_n48_d3_eps0p1_seed1916_worst.svg,v_shape,counterexample,true
+48,4,0.06,near_mean,1995,0.02316845134,0.01772485916,0.005443592180000002,benchmarks/foundation/phase4b_causet_svgs/phase4b_n48_d4_eps0p06_seed1995_near_mean.svg,monotone_decay,counterexample,true
+48,4,0.06,best,1900,0.0,0.01772485916,0.01772485916,benchmarks/foundation/phase4b_causet_svgs/phase4b_n48_d4_eps0p06_seed1900_best.svg,monotone_decay,counterexample,true
+48,4,0.06,worst,1973,0.06086350626,0.01772485916,0.0431386471,benchmarks/foundation/phase4b_causet_svgs/phase4b_n48_d4_eps0p06_seed1973_worst.svg,monotone_decay,counterexample,true
+64,4,0.06,near_mean,2003,0.001044769332,0.002943417137,0.001898647805,benchmarks/foundation/phase4b_causet_svgs/phase4b_n64_d4_eps0p06_seed2003_near_mean.svg,v_shape,supporting,true
+64,4,0.06,best,1900,0.0,0.002943417137,0.002943417137,benchmarks/foundation/phase4b_causet_svgs/phase4b_n64_d4_eps0p06_seed1900_best.svg,v_shape,supporting,true
+64,4,0.06,worst,1916,0.01753733833,0.002943417137,0.014593921192999999,benchmarks/foundation/phase4b_causet_svgs/phase4b_n64_d4_eps0p06_seed1916_worst.svg,v_shape,supporting,true
+32,2,0.06,near_mean,1923,0.001957243336,0.001637100939,0.00032014239699999997,benchmarks/foundation/phase4b_causet_svgs/phase4b_n32_d2_eps0p06_seed1923_near_mean.svg,monotone_decay,control_negative,true
+32,2,0.06,best,1900,0.0,0.001637100939,0.001637100939,benchmarks/foundation/phase4b_causet_svgs/phase4b_n32_d2_eps0p06_seed1900_best.svg,monotone_decay,control_negative,true
+32,2,0.06,worst,1973,0.01047277871,0.001637100939,0.008835677771,benchmarks/foundation/phase4b_causet_svgs/phase4b_n32_d2_eps0p06_seed1973_worst.svg,monotone_decay,control_negative,true

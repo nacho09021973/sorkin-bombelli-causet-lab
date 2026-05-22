@@ -1,0 +1,103 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='900' height='600' viewBox='0 0 900 600'>
+  <rect width='100%' height='100%' fill='#f4f1ea'/>
+  <line x1='70' y1='530' x2='830' y2='530' stroke='#333' stroke-width='2'/>
+  <line x1='70' y1='70' x2='70' y2='530' stroke='#333' stroke-width='2'/>
+  <text x='450' y='34' text-anchor='middle' font-family='serif' font-size='22' fill='#222'>Sprinkled causet</text>
+  <text x='450' y='582' text-anchor='middle' font-family='monospace' font-size='16' fill='#222'>t</text>
+  <text x='20' y='300' text-anchor='middle' font-family='monospace' font-size='16' fill='#222' transform='rotate(-90 20 300)'>x</text>
+  <line x1='70.00' y1='332.23' x2='249.20' y2='289.04' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='70.00' y1='332.23' x2='431.02' y2='530.00' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='70.00' y1='332.23' x2='433.18' y2='162.27' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='70.00' y1='332.23' x2='552.80' y2='293.83' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='70.00' y1='332.23' x2='555.52' y2='393.53' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='70.00' y1='332.23' x2='593.94' y2='75.31' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='80.44' y1='244.39' x2='249.20' y2='289.04' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='80.44' y1='244.39' x2='433.18' y2='162.27' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='80.44' y1='244.39' x2='555.52' y2='393.53' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='80.44' y1='244.39' x2='593.94' y2='75.31' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='86.72' y1='228.08' x2='284.79' y2='136.30' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='86.72' y1='228.08' x2='338.31' y2='162.93' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='86.72' y1='228.08' x2='433.18' y2='162.27' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='86.72' y1='228.08' x2='496.13' y2='284.22' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='86.72' y1='228.08' x2='555.52' y2='393.53' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='86.72' y1='228.08' x2='573.43' y2='324.91' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='86.72' y1='228.08' x2='614.66' y2='461.15' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='88.75' y1='117.47' x2='284.79' y2='136.30' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='88.75' y1='117.47' x2='338.31' y2='162.93' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='88.75' y1='117.47' x2='433.18' y2='162.27' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='88.75' y1='117.47' x2='496.13' y2='284.22' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='88.75' y1='117.47' x2='573.43' y2='324.91' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='147.72' y1='443.78' x2='508.69' y2='477.41' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='147.72' y1='443.78' x2='552.80' y2='293.83' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='147.72' y1='443.78' x2='555.52' y2='393.53' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='147.72' y1='443.78' x2='573.43' y2='324.91' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='147.72' y1='443.78' x2='614.66' y2='461.15' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='147.72' y1='443.78' x2='712.77' y2='155.43' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='166.08' y1='134.01' x2='434.43' y2='251.21' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='166.08' y1='134.01' x2='488.19' y2='159.61' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='166.08' y1='134.01' x2='552.80' y2='293.83' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='177.79' y1='254.32' x2='249.20' y2='289.04' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='177.79' y1='254.32' x2='433.18' y2='162.27' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='177.79' y1='254.32' x2='552.80' y2='293.83' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='177.79' y1='254.32' x2='555.52' y2='393.53' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='200.45' y1='313.82' x2='334.95' y2='355.60' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='200.45' y1='313.82' x2='712.77' y2='155.43' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='232.04' y1='70.00' x2='488.19' y2='159.61' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='249.20' y1='289.04' x2='496.13' y2='284.22' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='249.20' y1='289.04' x2='573.43' y2='324.91' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='249.20' y1='289.04' x2='614.66' y2='461.15' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='249.20' y1='289.04' x2='712.77' y2='155.43' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='256.61' y1='307.89' x2='434.43' y2='251.21' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='256.61' y1='307.89' x2='552.80' y2='293.83' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='256.61' y1='307.89' x2='712.77' y2='155.43' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='256.61' y1='307.89' x2='830.00' y2='301.19' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='277.04' y1='143.32' x2='488.19' y2='159.61' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='277.04' y1='143.32' x2='593.94' y2='75.31' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='279.54' y1='182.40' x2='830.00' y2='301.19' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='284.79' y1='136.30' x2='593.94' y2='75.31' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='284.79' y1='136.30' x2='712.77' y2='155.43' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='284.79' y1='136.30' x2='830.00' y2='301.19' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='314.84' y1='371.39' x2='830.00' y2='301.19' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='318.64' y1='362.38' x2='830.00' y2='301.19' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='334.95' y1='355.60' x2='830.00' y2='301.19' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='338.31' y1='162.93' x2='488.19' y2='159.61' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='338.31' y1='162.93' x2='593.94' y2='75.31' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='394.58' y1='441.28' x2='830.00' y2='301.19' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='488.19' y1='159.61' x2='712.77' y2='155.43' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='488.19' y1='159.61' x2='830.00' y2='301.19' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='508.69' y1='477.41' x2='830.00' y2='301.19' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='573.43' y1='324.91' x2='830.00' y2='301.19' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <circle cx='70.00' cy='332.23' r='4' fill='#2a9d8f' />
+<circle cx='80.44' cy='244.39' r='4' fill='#2a9d8f' />
+<circle cx='86.72' cy='228.08' r='4' fill='#2a9d8f' />
+<circle cx='88.75' cy='117.47' r='4' fill='#2a9d8f' />
+<circle cx='147.72' cy='443.78' r='4' fill='#2a9d8f' />
+<circle cx='166.08' cy='134.01' r='4' fill='#2a9d8f' />
+<circle cx='177.79' cy='254.32' r='4' fill='#2a9d8f' />
+<circle cx='200.45' cy='313.82' r='4' fill='#2a9d8f' />
+<circle cx='232.04' cy='70.00' r='4' fill='#2a9d8f' />
+<circle cx='249.20' cy='289.04' r='4' fill='#2a9d8f' />
+<circle cx='256.61' cy='307.89' r='4' fill='#2a9d8f' />
+<circle cx='277.04' cy='143.32' r='4' fill='#2a9d8f' />
+<circle cx='279.54' cy='182.40' r='4' fill='#2a9d8f' />
+<circle cx='284.79' cy='136.30' r='4' fill='#2a9d8f' />
+<circle cx='314.84' cy='371.39' r='4' fill='#2a9d8f' />
+<circle cx='318.64' cy='362.38' r='4' fill='#2a9d8f' />
+<circle cx='334.95' cy='355.60' r='4' fill='#2a9d8f' />
+<circle cx='338.31' cy='162.93' r='4' fill='#2a9d8f' />
+<circle cx='394.58' cy='441.28' r='4' fill='#2a9d8f' />
+<circle cx='431.02' cy='530.00' r='4' fill='#2a9d8f' />
+<circle cx='433.18' cy='162.27' r='4' fill='#2a9d8f' />
+<circle cx='434.43' cy='251.21' r='4' fill='#2a9d8f' />
+<circle cx='488.19' cy='159.61' r='4' fill='#2a9d8f' />
+<circle cx='496.13' cy='284.22' r='4' fill='#2a9d8f' />
+<circle cx='508.69' cy='477.41' r='4' fill='#2a9d8f' />
+<circle cx='552.80' cy='293.83' r='4' fill='#2a9d8f' />
+<circle cx='555.52' cy='393.53' r='4' fill='#2a9d8f' />
+<circle cx='573.43' cy='324.91' r='4' fill='#2a9d8f' />
+<circle cx='593.94' cy='75.31' r='4' fill='#2a9d8f' />
+<circle cx='614.66' cy='461.15' r='4' fill='#2a9d8f' />
+<circle cx='712.77' cy='155.43' r='4' fill='#2a9d8f' />
+<circle cx='830.00' cy='301.19' r='4' fill='#2a9d8f' />
+  <text x='70' y='52' font-family='monospace' font-size='14' fill='#444'>n=32</text>
+</svg>

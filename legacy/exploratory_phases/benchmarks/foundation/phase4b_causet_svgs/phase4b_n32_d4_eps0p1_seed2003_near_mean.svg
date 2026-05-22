@@ -1,0 +1,66 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='900' height='600' viewBox='0 0 900 600'>
+  <rect width='100%' height='100%' fill='#f4f1ea'/>
+  <line x1='70' y1='530' x2='830' y2='530' stroke='#333' stroke-width='2'/>
+  <line x1='70' y1='70' x2='70' y2='530' stroke='#333' stroke-width='2'/>
+  <text x='450' y='34' text-anchor='middle' font-family='serif' font-size='22' fill='#222'>Sprinkled causet</text>
+  <text x='450' y='582' text-anchor='middle' font-family='monospace' font-size='16' fill='#222'>t</text>
+  <text x='20' y='300' text-anchor='middle' font-family='monospace' font-size='16' fill='#222' transform='rotate(-90 20 300)'>x</text>
+  <line x1='70.00' y1='384.82' x2='394.08' y2='347.92' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='70.00' y1='384.82' x2='411.92' y2='421.06' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='70.00' y1='384.82' x2='561.90' y2='400.91' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='70.00' y1='384.82' x2='593.20' y2='490.41' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='70.00' y1='384.82' x2='600.08' y2='344.05' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='70.00' y1='384.82' x2='631.81' y2='149.27' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='70.00' y1='384.82' x2='632.10' y2='360.65' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='70.00' y1='384.82' x2='636.06' y2='210.55' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='70.00' y1='384.82' x2='655.26' y2='291.60' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='70.00' y1='384.82' x2='673.17' y2='510.32' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='70.00' y1='384.82' x2='770.11' y2='476.80' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='70.00' y1='384.82' x2='819.38' y2='357.80' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='394.08' y1='347.92' x2='725.85' y2='273.60' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='394.08' y1='347.92' x2='764.74' y2='371.43' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='394.08' y1='347.92' x2='830.00' y2='466.25' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='411.92' y1='421.06' x2='683.05' y2='407.43' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='411.92' y1='421.06' x2='701.79' y2='530.00' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='411.92' y1='421.06' x2='764.74' y2='371.43' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='411.92' y1='421.06' x2='830.00' y2='466.25' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='437.04' y1='292.36' x2='795.37' y2='261.26' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='437.04' y1='292.36' x2='819.38' y2='357.80' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='481.43' y1='344.17' x2='830.00' y2='466.25' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='554.90' y1='324.38' x2='795.37' y2='261.26' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='561.90' y1='400.91' x2='830.00' y2='466.25' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <line x1='600.08' y1='344.05' x2='795.37' y2='261.26' stroke='#9b9b9b' stroke-width='1.2' opacity='0.75' />
+  <circle cx='70.00' cy='384.82' r='4' fill='#2a9d8f' />
+<circle cx='394.08' cy='347.92' r='4' fill='#2a9d8f' />
+<circle cx='411.92' cy='421.06' r='4' fill='#2a9d8f' />
+<circle cx='437.04' cy='292.36' r='4' fill='#2a9d8f' />
+<circle cx='481.43' cy='344.17' r='4' fill='#2a9d8f' />
+<circle cx='540.07' cy='473.30' r='4' fill='#2a9d8f' />
+<circle cx='545.27' cy='405.45' r='4' fill='#2a9d8f' />
+<circle cx='550.40' cy='202.49' r='4' fill='#2a9d8f' />
+<circle cx='554.90' cy='324.38' r='4' fill='#2a9d8f' />
+<circle cx='561.90' cy='400.91' r='4' fill='#2a9d8f' />
+<circle cx='566.57' cy='418.64' r='4' fill='#2a9d8f' />
+<circle cx='576.66' cy='495.92' r='4' fill='#2a9d8f' />
+<circle cx='593.20' cy='490.41' r='4' fill='#2a9d8f' />
+<circle cx='600.08' cy='344.05' r='4' fill='#2a9d8f' />
+<circle cx='600.66' cy='129.17' r='4' fill='#2a9d8f' />
+<circle cx='617.40' cy='321.97' r='4' fill='#2a9d8f' />
+<circle cx='631.81' cy='149.27' r='4' fill='#2a9d8f' />
+<circle cx='632.10' cy='360.65' r='4' fill='#2a9d8f' />
+<circle cx='636.06' cy='210.55' r='4' fill='#2a9d8f' />
+<circle cx='643.65' cy='420.85' r='4' fill='#2a9d8f' />
+<circle cx='648.88' cy='311.44' r='4' fill='#2a9d8f' />
+<circle cx='655.26' cy='291.60' r='4' fill='#2a9d8f' />
+<circle cx='661.83' cy='70.00' r='4' fill='#2a9d8f' />
+<circle cx='673.17' cy='510.32' r='4' fill='#2a9d8f' />
+<circle cx='683.05' cy='407.43' r='4' fill='#2a9d8f' />
+<circle cx='701.79' cy='530.00' r='4' fill='#2a9d8f' />
+<circle cx='725.85' cy='273.60' r='4' fill='#2a9d8f' />
+<circle cx='764.74' cy='371.43' r='4' fill='#2a9d8f' />
+<circle cx='770.11' cy='476.80' r='4' fill='#2a9d8f' />
+<circle cx='795.37' cy='261.26' r='4' fill='#2a9d8f' />
+<circle cx='819.38' cy='357.80' r='4' fill='#2a9d8f' />
+<circle cx='830.00' cy='466.25' r='4' fill='#2a9d8f' />
+  <text x='70' y='52' font-family='monospace' font-size='14' fill='#444'>n=32</text>
+</svg>

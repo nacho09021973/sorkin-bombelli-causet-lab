@@ -1,0 +1,32 @@
+experiment,complexity,loss,equation,is_best
+A,1,7.82863,2.8777664,false
+A,2,3.63175,sqrt(initial_energy),false
+A,3,0.933205,noise_epsilon * 110.168755,false
+A,5,0.791563,sqrt(sqrt(initial_energy * 91.53967)),false
+A,6,0.657592,log((29.975407 * initial_energy) + 1.0806619),false
+A,8,0.385972,abs(log(abs((n * initial_energy) - 1.2976338))),false
+A,10,0.246277,abs(log(abs((initial_energy * n) + -1.2938378)) * -0.9135673),false
+A,12,0.212703,abs(log(abs((n * initial_energy) - 1.2984009))) - (initial_energy * 0.043432042),false
+A,13,0.212604,abs(log(abs((initial_energy * n) - 1.2980788))) - abs(initial_energy * -0.042988848),false
+A,14,0.208176,(abs(log(abs(1.2749882 - (initial_energy * n)))) - (0.044887207 * initial_energy)) - 0.06988208,false
+A,15,0.195806,abs(log(abs((initial_energy * n) - 1.2962997))) - abs(-0.14997852 - (-0.05244016 * initial_energy)),false
+A,16,0.19576,abs(abs((initial_energy * -0.05244016) - -0.14997852) - abs(log(abs((n * initial_energy) - 1.2962997)))),false
+A,17,0.194903,abs(log(abs((initial_energy * n) - 1.2968028))) - (abs(-0.14381775 - (initial_energy * -0.05200797)) + 0.022145815),false
+A,18,0.191641,abs(abs((-0.047207233 * initial_energy) - -0.13998367) - abs(log(abs(1.2964337 - (n * initial_energy))))) - 0.08523293,false
+A,19,0.191589,abs(abs(abs(log(abs((n * initial_energy) - 1.2964337))) - abs((initial_energy * -0.047207233) - -0.13998367)) - 0.08523293),true
+B,1,0.248628,0.4629699,false
+B,3,0.0344649,0.00092555606 / noise_epsilon,false
+B,5,0.02871,0.041143913 / (initial_energy + 0.040237892),false
+B,6,0.0285095,square(0.08370819 / (initial_energy + 0.08257621)),false
+B,7,0.0202995,0.030685078 / ((initial_energy * abs_discrepancy_mm_midpoint) + 0.02979767),false
+B,8,0.0193808,square(0.06068767 / ((abs_discrepancy_mm_midpoint * initial_energy) + 0.05938534)),false
+B,9,0.0157442,0.031480845 / ((abs_discrepancy_mm_midpoint * (initial_energy + warmup_delta_energy)) + 0.030225035),false
+B,10,0.015172,square(0.067162216 / ((abs_discrepancy_mm_midpoint * (initial_energy + warmup_delta_energy)) + 0.06592686)),false
+B,12,0.0139301,0.048731018 / ((((initial_energy + warmup_delta_energy) * abs_discrepancy_mm_midpoint) / log(midpoint_dim)) + 0.046959013),false
+B,13,0.0127561,0.08785749 / ((((warmup_delta_energy + initial_energy) * abs_discrepancy_mm_midpoint) / square(log(midpoint_dim))) + 0.08496517),false
+B,15,0.0105185,square(0.6297455 / (((warmup_delta_energy + initial_energy) * (abs_discrepancy_mm_midpoint / square(square(log(midpoint_dim))))) + 0.6219816)),false
+B,16,0.0105179,square(abs(0.6271797 / (((abs_discrepancy_mm_midpoint * (initial_energy + warmup_delta_energy)) / square(square(log(midpoint_dim)))) + 0.61946356))),false
+B,17,0.00988495,square(0.36135474 / ((((initial_energy / midpoint_dim) + warmup_delta_energy) * (abs_discrepancy_mm_midpoint / square(square(log(midpoint_dim))))) + 0.35860553)),false
+B,18,0.00959921,square(0.5492915 / square(((warmup_delta_energy + (initial_energy / midpoint_dim)) * (abs_discrepancy_mm_midpoint / square(square(log(midpoint_dim))))) + 0.7379694)),false
+B,19,0.00934311,square(square(0.72691613 / (((((initial_energy / sqrt(target_dim)) + warmup_delta_energy) * abs_discrepancy_mm_midpoint) / square(square(log(midpoint_dim)))) + 0.7235194))),false
+B,20,0.00754153,square(square(0.55567336 / ((((((initial_energy / midpoint_dim) + warmup_delta_energy) * initial_energy) / chain3_abundance) / square(square(log(midpoint_dim)))) + 0.5534699))),true

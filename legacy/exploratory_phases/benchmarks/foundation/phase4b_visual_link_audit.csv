@@ -1,0 +1,16 @@
+n,target_dim,epsilon,role,seed,loss,n_links_Hasse,curve_shape_cell,survival_label_cell,borderline_v_like_cell
+32,4,0.1,near_mean,2003,0.07596641182,25,v_shape,supporting,false
+32,4,0.1,best,1900,0.01025943505,62,v_shape,supporting,false
+32,4,0.1,worst,2020,0.1308298899,40,v_shape,supporting,false
+48,3,0.1,near_mean,1900,0.0,150,v_shape,counterexample,true
+48,3,0.1,best,1900,0.0,150,v_shape,counterexample,true
+48,3,0.1,worst,1916,0.002743721981,111,v_shape,counterexample,true
+48,4,0.06,near_mean,1995,0.02316845134,99,monotone_decay,counterexample,true
+48,4,0.06,best,1900,0.0,117,monotone_decay,counterexample,true
+48,4,0.06,worst,1973,0.06086350626,97,monotone_decay,counterexample,true
+64,4,0.06,near_mean,2003,0.001044769332,102,v_shape,supporting,true
+64,4,0.06,best,1900,0.0,183,v_shape,supporting,true
+64,4,0.06,worst,1916,0.01753733833,241,v_shape,supporting,true
+32,2,0.06,near_mean,1923,0.001957243336,88,monotone_decay,control_negative,true
+32,2,0.06,best,1900,0.0,58,monotone_decay,control_negative,true
+32,2,0.06,worst,1973,0.01047277871,74,monotone_decay,control_negative,true

@@ -1,0 +1,32 @@
+panel,complexity,loss,equation,is_best,uses_order,uses_design
+A,1,0.248889,0.46665585,false,false,false
+A,3,0.0322222,0.9666716 - noise_level,false,false,true
+A,4,0.0311118,square(noise_level - 0.96610177),false,false,true
+A,5,0.0311111,(noise_level * -0.9333492) + 0.9333378,true,false,true
+B,1,0.248889,0.4666556,false,false,false
+B,3,0.0322222,0.9666648 - noise_level,false,false,true
+B,4,0.0311118,square(0.9661015 - noise_level),false,false,true
+B,5,0.0311111,0.9333341 - (noise_level * 0.93333405),false,false,true
+B,7,0.0303491,(0.9980096 - noise_level) * (chain3_abundance + 0.8787318),false,true,true
+B,8,0.0296533,square(((abs_discrepancy_mm_mp / -32.10843) + 1.0005388) - noise_level),false,true,true
+B,9,0.0251616,((-3.0833972 / (chain2_count - chain3_count)) - noise_level) + 1.0226815,false,true,true
+B,10,0.0183505,square(((-3.0601213 / (relation_count - chain3_count)) + 1.0200946) - noise_level),false,true,true
+B,11,0.017832,square((-3.2800174 / abs(relation_count - chain3_count)) + (1.0315465 - noise_level)),false,true,true
+B,12,0.0174072,square(((midpoint_dim - height) / (chain2_count - chain3_count)) + (1.0204413 - noise_level)),true,true,true
+C,1,0.248889,0.46665585,false,false,false
+C,4,0.248503,square(chain3_abundance) + 0.45833024,false,true,false
+C,5,0.247684,log(target_dim) * sqrt(ordering_fraction),false,true,true
+C,6,0.24654,(ordering_fraction + 0.22811761) * log(target_dim),false,true,true
+C,7,0.246105,(log(sqrt(target_dim)) + ordering_fraction) - 0.3212177,false,true,true
+C,8,0.245865,log(ordering_fraction + ((target_dim * 0.19099434) + 0.76419413)),false,true,true
+C,9,0.245553,log(log((target_dim - (ordering_fraction / -0.18843183)) / 0.88146645)),false,true,true
+C,10,0.245408,sqrt(log(log(target_dim - (ordering_fraction / -0.1942946))) + -0.15338896),false,true,true
+C,12,0.245279,sqrt(log(log((target_dim - (ordering_fraction / -0.18680938)) + -0.40594018)) / 1.4314072),true,true,true
+D,1,0.248889,0.466627,false,false,false
+D,4,0.248503,square(chain3_abundance) + 0.45833045,false,true,false
+D,5,0.247961,sqrt(sqrt(link_count) / n),false,true,false
+D,7,0.247938,sqrt(sqrt(link_density / (abs_discrepancy_mm_mp + n))),false,true,false
+D,8,0.247915,sqrt(sqrt(sqrt(midpoint_dim * link_density) / n)),false,true,false
+D,9,0.247665,sqrt(sqrt(link_density / ((-0.020058928 / chain3_abundance) + n))),false,true,false
+D,11,0.24727,sqrt(sqrt((link_density + -0.37415913) / ((-0.03155158 / chain3_abundance) + n))),false,true,false
+D,12,0.246997,sqrt(sqrt(sqrt(link_density / (n + (-0.024405533 / chain3_abundance))) + -0.18019497)),true,true,false

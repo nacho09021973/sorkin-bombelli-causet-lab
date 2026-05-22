@@ -1,0 +1,17 @@
+complexity,loss,equation,is_best,uses_order_features
+1,0.248889,0.46665585,false,false
+3,0.0322222,0.9666648 - noise_level,false,false
+4,0.0311118,square(0.9661014 - noise_level),false,false
+5,0.0311111,(1.0000014 - noise_level) * 0.93332934,false,false
+6,0.0298962,sqrt(target_dim / mm_dim) - noise_level,false,true
+7,0.0267968,square(noise_level - sqrt(target_dim / mm_dim)),false,true
+9,0.0261266,square(noise_level - sqrt((target_dim / mm_dim) - 0.036516163)),false,true
+11,0.0243469,square((noise_level + abs(0.980196 - (mm_dim / target_dim))) - 1.0550709),false,true
+12,0.0241354,square(square((noise_level + square(0.91809475 - (mm_dim / target_dim))) - 1.0061866)),false,true
+13,0.021302,square((noise_level + square((0.97227865 - (mm_dim / target_dim)) * link_density)) - 1.0204235),false,true
+14,0.020042,square(square(square(link_density * (0.9934859 - (mm_dim / target_dim))) + (noise_level - 1.0232702))),false,true
+15,0.0198216,square((noise_level + square((link_density * (0.991036 - (mm_dim / target_dim))) / 0.7511943)) - 1.0422794),false,true
+16,0.0160554,square(noise_level + (square(square((link_density / 0.5411445) * (0.9811886 - (mm_dim / target_dim)))) - 1.0198423)),false,true
+17,0.0134605,square(1.0076478 - (noise_level + square(square(square(link_density * ((0.9695584 - (mm_dim / target_dim)) / 0.48843363)))))),false,true
+18,0.0128534,square(square(noise_level + (square(square(square(link_density * (((mm_dim / target_dim) - 0.96768034) / 0.524281)))) - 1.0046176))),false,true
+20,0.0125863,square((target_dim / target_dim) - (noise_level + square(square(square(square(((mm_dim / target_dim) - 0.97010595) * (link_density * 2.1930192))))))),true,true

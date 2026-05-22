@@ -1,0 +1,296 @@
+=== START 2026-05-19T13:09:31+02:00 ===
+python3 tools/build_foundation_benchmarks.py
+Wrote 45 cells to /home/ignac/sorkin/benchmarks/foundation
+python3 -m unittest tests.test_foundation_benchmarks -v
+test_cells_cover_expected_grid (tests.test_foundation_benchmarks.FoundationBenchmarkIntegrityTests.test_cells_cover_expected_grid) ... ok
+test_frozen_invariants_match_recomputation (tests.test_foundation_benchmarks.FoundationBenchmarkIntegrityTests.test_frozen_invariants_match_recomputation) ... ok
+test_mean_myrheim_meyer_per_dimension_is_consistent (tests.test_foundation_benchmarks.FoundationBenchmarkIntegrityTests.test_mean_myrheim_meyer_per_dimension_is_consistent) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.045s
+
+OK
+python3 tools/build_phase1_atlas.py
+Wrote 60 atlas rows (12 summary rows) to /home/ignac/sorkin/benchmarks/foundation
+python3 -m unittest tests.test_phase1_atlas -v
+test_atlas_covers_every_cell (tests.test_phase1_atlas.Phase1AtlasIntegrityTests.test_atlas_covers_every_cell) ... ok
+test_files_exist (tests.test_phase1_atlas.Phase1AtlasIntegrityTests.test_files_exist) ... ok
+test_kleitman_rothschild_rows_have_blank_dimension (tests.test_phase1_atlas.Phase1AtlasIntegrityTests.test_kleitman_rothschild_rows_have_blank_dimension) ... ok
+test_regeneration_matches_frozen_artifact (tests.test_phase1_atlas.Phase1AtlasIntegrityTests.test_regeneration_matches_frozen_artifact) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.054s
+
+OK
+python3 tools/build_phase1b_scaling_atlas.py
+Wrote 80 atlas rows (16 summary rows) to /home/ignac/sorkin/benchmarks/foundation
+python3 -m unittest tests.test_phase1b_scaling_atlas -v
+test_columns_match_expected (tests.test_phase1b_scaling_atlas.Phase1BScalingAtlasIntegrityTests.test_columns_match_expected) ... ok
+test_covers_full_grid (tests.test_phase1b_scaling_atlas.Phase1BScalingAtlasIntegrityTests.test_covers_full_grid) ... ok
+test_markdown_exists (tests.test_phase1b_scaling_atlas.Phase1BScalingAtlasIntegrityTests.test_markdown_exists) ... ok
+test_no_nan_or_inf_in_dimension_columns (tests.test_phase1b_scaling_atlas.Phase1BScalingAtlasIntegrityTests.test_no_nan_or_inf_in_dimension_columns) ... ok
+test_row_count_and_families (tests.test_phase1b_scaling_atlas.Phase1BScalingAtlasIntegrityTests.test_row_count_and_families) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK
+python3 tools/build_phase1c_scaling_atlas.py
+Wrote 100 atlas rows (20 summary rows) to /home/ignac/sorkin/benchmarks/foundation
+python3 -m unittest tests.test_phase1c_scaling_atlas -v
+test_columns_match_expected (tests.test_phase1c_scaling_atlas.Phase1CScalingAtlasIntegrityTests.test_columns_match_expected) ... ok
+test_covers_full_grid (tests.test_phase1c_scaling_atlas.Phase1CScalingAtlasIntegrityTests.test_covers_full_grid) ... ok
+test_markdown_exists (tests.test_phase1c_scaling_atlas.Phase1CScalingAtlasIntegrityTests.test_markdown_exists) ... ok
+test_no_nan_or_inf_in_dimension_columns (tests.test_phase1c_scaling_atlas.Phase1CScalingAtlasIntegrityTests.test_no_nan_or_inf_in_dimension_columns) ... ok
+test_row_count_and_families (tests.test_phase1c_scaling_atlas.Phase1CScalingAtlasIntegrityTests.test_row_count_and_families) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK
+python3 tools/build_phase1d_structural_atlas.py
+Wrote 100 structural rows (20 summary rows) to /home/ignac/sorkin/benchmarks/foundation
+python3 -m unittest tests.test_phase1d_structural_atlas -v
+test_chain_abundance_is_probability (tests.test_phase1d_structural_atlas.Phase1DStructuralAtlasIntegrityTests.test_chain_abundance_is_probability) ... ok
+test_columns_match_expected (tests.test_phase1d_structural_atlas.Phase1DStructuralAtlasIntegrityTests.test_columns_match_expected) ... ok
+test_covers_full_grid (tests.test_phase1d_structural_atlas.Phase1DStructuralAtlasIntegrityTests.test_covers_full_grid) ... ok
+test_markdown_exists (tests.test_phase1d_structural_atlas.Phase1DStructuralAtlasIntegrityTests.test_markdown_exists) ... ok
+test_no_nan_or_inf_in_numeric_columns (tests.test_phase1d_structural_atlas.Phase1DStructuralAtlasIntegrityTests.test_no_nan_or_inf_in_numeric_columns) ... ok
+test_row_count_and_families (tests.test_phase1d_structural_atlas.Phase1DStructuralAtlasIntegrityTests.test_row_count_and_families) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.002s
+
+OK
+python3 tools/build_phase1e_extended_structural_atlas.py
+Phase 1E: 135 cells.
+  30/135 cells
+  60/135 cells
+  90/135 cells
+  120/135 cells
+Wrote 135 rows to /home/ignac/sorkin/benchmarks/foundation/phase1e_extended_structural_atlas.csv.
+python3 tools/build_phase2_embedding_bridge.py
+Wrote 5 Phase 2 bridge rows to /home/ignac/sorkin/benchmarks/foundation
+python3 -m unittest tests.test_phase2_embedding_bridge -v
+test_columns_match_expected (tests.test_phase2_embedding_bridge.Phase2EmbeddingBridgeIntegrityTests.test_columns_match_expected) ... ok
+test_completed_rows_have_finite_core_embedding_metrics (tests.test_phase2_embedding_bridge.Phase2EmbeddingBridgeIntegrityTests.test_completed_rows_have_finite_core_embedding_metrics) ... ok
+test_has_minkowski_and_control_rows (tests.test_phase2_embedding_bridge.Phase2EmbeddingBridgeIntegrityTests.test_has_minkowski_and_control_rows) ... ok
+test_markdown_exists (tests.test_phase2_embedding_bridge.Phase2EmbeddingBridgeIntegrityTests.test_markdown_exists) ... ok
+test_post_embedding_columns_exist (tests.test_phase2_embedding_bridge.Phase2EmbeddingBridgeIntegrityTests.test_post_embedding_columns_exist) ... ok
+test_structural_columns_are_finite (tests.test_phase2_embedding_bridge.Phase2EmbeddingBridgeIntegrityTests.test_structural_columns_are_finite) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK
+python3 tools/build_phase2b_annealer_schedule_probe.py
+Wrote 54 Phase 2B schedule-probe rows to /home/ignac/sorkin/benchmarks/foundation
+python3 -m unittest tests.test_phase2b_annealer_schedule_probe -v
+test_columns_match_expected (tests.test_phase2b_annealer_schedule_probe.Phase2BAnnealerScheduleProbeTests.test_columns_match_expected) ... ok
+test_embedding_dim_is_d_minus_one (tests.test_phase2b_annealer_schedule_probe.Phase2BAnnealerScheduleProbeTests.test_embedding_dim_is_d_minus_one) ... ok
+test_energy_gap_and_rmse_are_finite (tests.test_phase2b_annealer_schedule_probe.Phase2BAnnealerScheduleProbeTests.test_energy_gap_and_rmse_are_finite) ... ok
+test_has_at_least_one_row (tests.test_phase2b_annealer_schedule_probe.Phase2BAnnealerScheduleProbeTests.test_has_at_least_one_row) ... ok
+test_markdown_exists (tests.test_phase2b_annealer_schedule_probe.Phase2BAnnealerScheduleProbeTests.test_markdown_exists) ... ok
+test_only_minkowski_family (tests.test_phase2b_annealer_schedule_probe.Phase2BAnnealerScheduleProbeTests.test_only_minkowski_family) ... ok
+test_schedule_labels_cover_short_medium_long (tests.test_phase2b_annealer_schedule_probe.Phase2BAnnealerScheduleProbeTests.test_schedule_labels_cover_short_medium_long) ... ok
+test_success_flag_is_boolean (tests.test_phase2b_annealer_schedule_probe.Phase2BAnnealerScheduleProbeTests.test_success_flag_is_boolean) ... ok
+test_target_dims_cover_2_3_4 (tests.test_phase2b_annealer_schedule_probe.Phase2BAnnealerScheduleProbeTests.test_target_dims_cover_2_3_4) ... ok
+test_truth_energy_compatible_with_zero (tests.test_phase2b_annealer_schedule_probe.Phase2BAnnealerScheduleProbeTests.test_truth_energy_compatible_with_zero) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.002s
+
+OK
+python3 tools/build_phase2c_oracle_embedding_audit.py
+Wrote 18 Phase 2C oracle rows to /home/ignac/sorkin/benchmarks/foundation. All-three-pass: 18/18. Verdict: ORACLE PASSES.
+python3 -m unittest tests.test_phase2c_oracle_embedding_audit -v
+test_columns_match_expected (tests.test_phase2c_oracle_embedding_audit.Phase2COracleAuditTests.test_columns_match_expected) ... ok
+test_d_spatial_is_d_minus_one (tests.test_phase2c_oracle_embedding_audit.Phase2COracleAuditTests.test_d_spatial_is_d_minus_one) ... ok
+test_discordant_counts_consistent (tests.test_phase2c_oracle_embedding_audit.Phase2COracleAuditTests.test_discordant_counts_consistent) ... ok
+test_has_at_least_one_row (tests.test_phase2c_oracle_embedding_audit.Phase2COracleAuditTests.test_has_at_least_one_row) ... ok
+test_markdown_exists (tests.test_phase2c_oracle_embedding_audit.Phase2COracleAuditTests.test_markdown_exists) ... ok
+test_no_kr_or_corona (tests.test_phase2c_oracle_embedding_audit.Phase2COracleAuditTests.test_no_kr_or_corona) ... ok
+test_only_minkowski_family (tests.test_phase2c_oracle_embedding_audit.Phase2COracleAuditTests.test_only_minkowski_family) ... ok
+test_oracle_energy_is_finite (tests.test_phase2c_oracle_embedding_audit.Phase2COracleAuditTests.test_oracle_energy_is_finite) ... ok
+test_oracle_interval_rmse_is_finite (tests.test_phase2c_oracle_embedding_audit.Phase2COracleAuditTests.test_oracle_interval_rmse_is_finite) ... ok
+test_pair_count_matches_n (tests.test_phase2c_oracle_embedding_audit.Phase2COracleAuditTests.test_pair_count_matches_n) ... ok
+test_pass_flags_are_boolean (tests.test_phase2c_oracle_embedding_audit.Phase2COracleAuditTests.test_pass_flags_are_boolean) ... ok
+test_total_discordant_pairs_is_nonneg_int (tests.test_phase2c_oracle_embedding_audit.Phase2COracleAuditTests.test_total_discordant_pairs_is_nonneg_int) ... ok
+test_zero_discordant_implies_pass_causal_matrix (tests.test_phase2c_oracle_embedding_audit.Phase2COracleAuditTests.test_zero_discordant_implies_pass_causal_matrix) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.001s
+
+OK
+python3 tools/build_phase2d_initialization_basin_audit.py
+Wrote 72 Phase 2D rows to /home/ignac/sorkin/benchmarks/foundation. preserved_near_truth: 42/72. Verdict: NARROW_BASIN.
+python3 -m unittest tests.test_phase2d_initialization_basin_audit -v
+test_dims_cover_2_3_4 (tests.test_phase2d_initialization_basin_audit.TestPhase2DFamilyFilter.test_dims_cover_2_3_4) ... ok
+test_no_kr_or_corona (tests.test_phase2d_initialization_basin_audit.TestPhase2DFamilyFilter.test_no_kr_or_corona) ... ok
+test_only_minkowski (tests.test_phase2d_initialization_basin_audit.TestPhase2DFamilyFilter.test_only_minkowski) ... ok
+test_sizes_cover_32_and_64 (tests.test_phase2d_initialization_basin_audit.TestPhase2DFamilyFilter.test_sizes_cover_32_and_64) ... ok
+test_all_init_labels_present (tests.test_phase2d_initialization_basin_audit.TestPhase2DInitLabels.test_all_init_labels_present) ... ok
+test_each_label_has_18_rows (tests.test_phase2d_initialization_basin_audit.TestPhase2DInitLabels.test_each_label_has_18_rows) ... ok
+test_truth_rows_present (tests.test_phase2d_initialization_basin_audit.TestPhase2DInitLabels.test_truth_rows_present) ... ok
+test_boolean_columns_valid (tests.test_phase2d_initialization_basin_audit.TestPhase2DNumericSanity.test_boolean_columns_valid) ... ok
+test_delta_energy_finite_or_na (tests.test_phase2d_initialization_basin_audit.TestPhase2DNumericSanity.test_delta_energy_finite_or_na) ... ok
+test_final_energy_finite_or_na (tests.test_phase2d_initialization_basin_audit.TestPhase2DNumericSanity.test_final_energy_finite_or_na) ... ok
+test_initial_energy_finite_or_na (tests.test_phase2d_initialization_basin_audit.TestPhase2DNumericSanity.test_initial_energy_finite_or_na) ... ok
+test_noise_epsilon_na_only_for_random_init (tests.test_phase2d_initialization_basin_audit.TestPhase2DNumericSanity.test_noise_epsilon_na_only_for_random_init) ... ok
+test_csv_exists (tests.test_phase2d_initialization_basin_audit.TestPhase2DOutputExists.test_csv_exists) ... ok
+test_md_exists (tests.test_phase2d_initialization_basin_audit.TestPhase2DOutputExists.test_md_exists) ... ok
+test_columns_match_expected (tests.test_phase2d_initialization_basin_audit.TestPhase2DSchema.test_columns_match_expected) ... ok
+test_row_count (tests.test_phase2d_initialization_basin_audit.TestPhase2DSchema.test_row_count) ... ok
+test_truth_final_energy_near_zero (tests.test_phase2d_initialization_basin_audit.TestPhase2DTruthInit.test_truth_final_energy_near_zero) ... ok
+test_truth_initial_distance_zero (tests.test_phase2d_initialization_basin_audit.TestPhase2DTruthInit.test_truth_initial_distance_zero) ... ok
+test_truth_initial_energy_near_zero (tests.test_phase2d_initialization_basin_audit.TestPhase2DTruthInit.test_truth_initial_energy_near_zero) ... ok
+test_truth_preserved_near_truth (tests.test_phase2d_initialization_basin_audit.TestPhase2DTruthInit.test_truth_preserved_near_truth) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.004s
+
+OK
+python3 tools/build_phase2e_warmup_skip_probe.py
+Wrote 144 Phase 2E rows to /home/ignac/sorkin/benchmarks/foundation. preserved: 88/144 total (with_warmup=42, skip_warmup=46). Verdict: WARMUP_IS_PRIMARY_FAILURE.
+python3 -m unittest tests.test_phase2e_warmup_skip_probe -v
+test_no_kr_or_corona (tests.test_phase2e_warmup_skip_probe.TestPhase2EFamilyFilter.test_no_kr_or_corona) ... ok
+test_only_minkowski (tests.test_phase2e_warmup_skip_probe.TestPhase2EFamilyFilter.test_only_minkowski) ... ok
+test_boolean_columns_valid (tests.test_phase2e_warmup_skip_probe.TestPhase2ENumericSanity.test_boolean_columns_valid) ... ok
+test_delta_energy_finite_or_na (tests.test_phase2e_warmup_skip_probe.TestPhase2ENumericSanity.test_delta_energy_finite_or_na) ... ok
+test_final_energy_finite_or_na (tests.test_phase2e_warmup_skip_probe.TestPhase2ENumericSanity.test_final_energy_finite_or_na) ... ok
+test_initial_energy_finite_or_na (tests.test_phase2e_warmup_skip_probe.TestPhase2ENumericSanity.test_initial_energy_finite_or_na) ... ok
+test_noise_epsilon_na_only_for_random_init (tests.test_phase2e_warmup_skip_probe.TestPhase2ENumericSanity.test_noise_epsilon_na_only_for_random_init) ... ok
+test_csv_exists (tests.test_phase2e_warmup_skip_probe.TestPhase2EOutputExists.test_csv_exists) ... ok
+test_md_exists (tests.test_phase2e_warmup_skip_probe.TestPhase2EOutputExists.test_md_exists) ... ok
+test_each_paired_key_has_exactly_two_rows (tests.test_phase2e_warmup_skip_probe.TestPhase2EPairedKey.test_each_paired_key_has_exactly_two_rows) ... ok
+test_paired_key_format (tests.test_phase2e_warmup_skip_probe.TestPhase2EPairedKey.test_paired_key_format) ... ok
+test_paired_key_has_both_modes (tests.test_phase2e_warmup_skip_probe.TestPhase2EPairedKey.test_paired_key_has_both_modes) ... ok
+test_columns_match_expected (tests.test_phase2e_warmup_skip_probe.TestPhase2ESchema.test_columns_match_expected) ... ok
+test_row_count (tests.test_phase2e_warmup_skip_probe.TestPhase2ESchema.test_row_count) ... ok
+test_truth_initial_energy_near_zero (tests.test_phase2e_warmup_skip_probe.TestPhase2ETruthInit.test_truth_initial_energy_near_zero) ... ok
+test_truth_preserved_in_both_modes (tests.test_phase2e_warmup_skip_probe.TestPhase2ETruthInit.test_truth_preserved_in_both_modes) ... ok
+test_both_warmup_modes_present (tests.test_phase2e_warmup_skip_probe.TestPhase2EWarmupModes.test_both_warmup_modes_present) ... ok
+test_equal_row_count_per_mode (tests.test_phase2e_warmup_skip_probe.TestPhase2EWarmupModes.test_equal_row_count_per_mode) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 0.006s
+
+OK
+python3 tools/build_phase2f_guarded_warmup_probe.py
+Wrote 216 Phase 2F rows to /home/ignac/sorkin/benchmarks/foundation. preserved: 136/216 total (legacy_warmup=42, skip_warmup=46, guarded_warmup=48). Verdict: GUARDED_WARMUP_FIXES_PRIMARY_FAILURE.
+python3 -m unittest tests.test_phase2f_guarded_warmup_probe -v
+test_no_kr_or_corona (tests.test_phase2f_guarded_warmup_probe.TestPhase2FFamilyFilter.test_no_kr_or_corona) ... ok
+test_only_minkowski (tests.test_phase2f_guarded_warmup_probe.TestPhase2FFamilyFilter.test_only_minkowski) ... ok
+test_guarded_warmup_energy_not_worsened (tests.test_phase2f_guarded_warmup_probe.TestPhase2FGuardedWarmupProperty.test_guarded_warmup_energy_not_worsened) ... ok
+test_legacy_warmup_has_zero_rejected (tests.test_phase2f_guarded_warmup_probe.TestPhase2FGuardedWarmupProperty.test_legacy_warmup_has_zero_rejected) ... ok
+test_skip_warmup_has_zero_moves (tests.test_phase2f_guarded_warmup_probe.TestPhase2FGuardedWarmupProperty.test_skip_warmup_has_zero_moves) ... ok
+test_boolean_columns_valid (tests.test_phase2f_guarded_warmup_probe.TestPhase2FNumericSanity.test_boolean_columns_valid) ... ok
+test_distances_finite (tests.test_phase2f_guarded_warmup_probe.TestPhase2FNumericSanity.test_distances_finite) ... ok
+test_energies_finite (tests.test_phase2f_guarded_warmup_probe.TestPhase2FNumericSanity.test_energies_finite) ... ok
+test_interval_rmse_finite (tests.test_phase2f_guarded_warmup_probe.TestPhase2FNumericSanity.test_interval_rmse_finite) ... ok
+test_warmup_move_counts_consistent (tests.test_phase2f_guarded_warmup_probe.TestPhase2FNumericSanity.test_warmup_move_counts_consistent) ... ok
+test_warmup_move_counts_non_negative (tests.test_phase2f_guarded_warmup_probe.TestPhase2FNumericSanity.test_warmup_move_counts_non_negative) ... ok
+test_csv_exists (tests.test_phase2f_guarded_warmup_probe.TestPhase2FOutputExists.test_csv_exists) ... ok
+test_md_exists (tests.test_phase2f_guarded_warmup_probe.TestPhase2FOutputExists.test_md_exists) ... ok
+test_each_paired_key_has_exactly_three_rows (tests.test_phase2f_guarded_warmup_probe.TestPhase2FPairedKey.test_each_paired_key_has_exactly_three_rows) ... ok
+test_paired_key_has_all_three_modes (tests.test_phase2f_guarded_warmup_probe.TestPhase2FPairedKey.test_paired_key_has_all_three_modes) ... ok
+test_columns_match_expected (tests.test_phase2f_guarded_warmup_probe.TestPhase2FSchema.test_columns_match_expected) ... ok
+test_row_count (tests.test_phase2f_guarded_warmup_probe.TestPhase2FSchema.test_row_count) ... ok
+test_truth_initial_energy_near_zero (tests.test_phase2f_guarded_warmup_probe.TestPhase2FTruthInit.test_truth_initial_energy_near_zero) ... ok
+test_truth_preserved_in_all_modes (tests.test_phase2f_guarded_warmup_probe.TestPhase2FTruthInit.test_truth_preserved_in_all_modes) ... ok
+test_all_warmup_modes_present (tests.test_phase2f_guarded_warmup_probe.TestPhase2FWarmupModes.test_all_warmup_modes_present) ... ok
+test_equal_count_per_mode (tests.test_phase2f_guarded_warmup_probe.TestPhase2FWarmupModes.test_equal_count_per_mode) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.013s
+
+OK
+python3 tools/build_phase2g_extended_guarded_warmup_probe.py
+Phase 2G: 180 guarded-warmup probe runs.
+  55/180 rows  (10s elapsed, ETA 24s)
+  150/180 rows  (20s elapsed, ETA 4s)
+  done: 180/180 in 23s.
+Wrote 180 rows (82 preserved) to /home/ignac/sorkin/benchmarks/foundation.
+python3 tools/build_phase3a_pysr_warmup_rule.py
+  [skip] PySR not available (No module named 'pandas'). Install with: pip install pysr
+  [skip] PySR not available (No module named 'pandas'). Install with: pip install pysr
+Merged 360 rows from phase1d + phase2e + phase2f.
+Dataset A (order-theoretic → log-energy drift): 180 samples.
+Dataset B (warmup dynamics → preserved): 108 samples.
+
+Phase 3A: skeleton written. Install PySR to run the regression.
+Output: /home/ignac/sorkin/benchmarks/foundation/phase3a_pysr_warmup_rule.csv
+        /home/ignac/sorkin/benchmarks/foundation/phase3a_pysr_warmup_rule.md
+python3 tools/build_phase3b_pysr_order_only.py
+  [skip] PySR unavailable (No module named 'pandas'). pip install pysr
+Phase 3B: 180 samples after joining and filtering.
+  preserved=84, destroyed=96
+
+Output: /home/ignac/sorkin/benchmarks/foundation/phase3b_pysr_order_only.csv
+        /home/ignac/sorkin/benchmarks/foundation/phase3b_pysr_order_only.md
+python3 tools/build_phase3c_ablation.py
+  [skip] PySR unavailable: No module named 'pandas'
+  [skip] PySR unavailable: No module named 'pandas'
+  [skip] PySR unavailable: No module named 'pandas'
+  [skip] PySR unavailable: No module named 'pandas'
+Phase 3C: 180 base rows.
+
+--- Phase 3C summary ---
+
+Output: /home/ignac/sorkin/benchmarks/foundation/phase3c_ablation.csv
+        /home/ignac/sorkin/benchmarks/foundation/phase3c_ablation.md
+python3 tools/build_phase3d_pysr_residual_target.py
+  [skip] PySR unavailable: No module named 'pandas'
+  [skip] PySR unavailable: No module named 'pandas'
+  [skip] PySR unavailable: No module named 'pandas'
+  [skip] PySR unavailable: No module named 'pandas'
+  assembled 62 rows (skipped 10 for |initial_energy|<0.0001, 0 missing invariants join).
+  12 strata, 62 rows total.
+  Constant-predictor loss (variance of y): 2690.86
+
+--- Phase 3D summary ---
+  Panel A: (no result)
+  Panel B: (no result)
+  Panel C: (no result)
+  Panel D: (no result)
+
+Output: /home/ignac/sorkin/benchmarks/foundation/phase3d_pysr_residual_target.csv
+        /home/ignac/sorkin/benchmarks/foundation/phase3d_pysr_residual_target.md
+python3 tools/build_phase3e_pysr_residual_by_warmup_mode.py
+  [skip] PySR unavailable: No module named 'pandas'
+  [skip] PySR unavailable: No module named 'pandas'
+  [skip] PySR unavailable: No module named 'pandas'
+  [skip] PySR unavailable: No module named 'pandas'
+  assembled 62 rows (skipped 10 for |initial_energy|<0.0001, 0 missing invariants join).
+  strata=24 (singletons dropped=2), kept=60 rows.
+  target std=20.32, constant-predictor loss=412.711
+
+--- Phase 3E summary ---
+  Panel A: (no result)
+  Panel B: (no result)
+  Panel C: (no result)
+  Panel D: (no result)
+
+Output: /home/ignac/sorkin/benchmarks/foundation/phase3e_pysr_residual_by_warmup_mode.csv
+        /home/ignac/sorkin/benchmarks/foundation/phase3e_pysr_residual_by_warmup_mode.md
+python3 tools/build_phase3f_pysr_final_ablation.py
+  [skip] PySR unavailable: No module named 'pandas'
+  [skip] PySR unavailable: No module named 'pandas'
+  [skip] PySR unavailable: No module named 'pandas'
+  [skip] PySR unavailable: No module named 'pandas'
+  assembled 158 rows (skipped 22 small-E₀, 0 missing-invariants).
+  strata=12 (singletons=0), kept=158 rows.
+  target std=0.1521, constant-predictor loss=0.0231248
+Traceback (most recent call last):
+  File "/home/ignac/sorkin/tools/build_phase3f_pysr_final_ablation.py", line 662, in <module>
+    main()
+  File "/home/ignac/sorkin/tools/build_phase3f_pysr_final_ablation.py", line 631, in main
+    write_markdown(
+  File "/home/ignac/sorkin/tools/build_phase3f_pysr_final_ablation.py", line 444, in write_markdown
+    verdict_label, verdict_text = _verdict(constant_loss, panel_losses, panel_eqs)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ignac/sorkin/tools/build_phase3f_pysr_final_ablation.py", line 420, in _verdict
+    f"the expanded dataset ({len(panel_eqs.get('D',[]))} eqs) order-only "
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+make: *** [Makefile:77: regen-phase3f] Error 1

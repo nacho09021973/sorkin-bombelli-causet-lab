@@ -1,0 +1,33 @@
+panel,complexity,loss,equation,is_best,uses_order,uses_design
+A,1,2690.86,0.0087040765,false,false,false
+A,5,2690.86,(noise_level - 0.31507555) * 0.011615529,true,false,true
+B,1,2690.84,chain3_abundance,false,true,false
+B,2,2689.53,log(midpoint_dim),false,true,false
+B,3,2596.85,warmup_mode_code * -6.1343303,false,false,true
+B,4,2221.72,log(warmup_mode_code) * -46.182617,false,false,true
+B,5,1750.77,(122.643166 / warmup_mode_code) + -91.98233,false,false,true
+B,7,1176.26,noise_level * ((204.29231 / warmup_mode_code) + -153.21942),false,false,true
+B,9,842.607,noise_level * (((109.75351 / warmup_mode_code) + -81.39457) * midpoint_dim),false,true,true
+B,10,609.157,(noise_level * square(midpoint_dim)) * ((51.701862 / warmup_mode_code) + -37.944366),false,true,true
+B,11,486.291,square(square(noise_level * midpoint_dim)) * ((8.443689 / warmup_mode_code) + -6.0887847),false,true,true
+B,12,462.801,(((15.883984 / warmup_mode_code) + -11.629286) * square(noise_level * midpoint_dim)) * target_dim,true,true,true
+C,1,2690.78,ordering_fraction,false,true,false
+C,2,2689.53,log(midpoint_dim),false,true,false
+C,3,2596.85,warmup_mode_code * -6.129034,false,false,true
+C,4,2221.59,log(warmup_mode_code) * -46.03808,false,false,true
+C,5,1680.42,(1.5000092 - warmup_mode_code) * n,false,false,true
+C,7,1580.53,(-47.617744 - (-64.11832 / warmup_mode_code)) * midpoint_dim,false,true,true
+C,8,1412.31,square(midpoint_dim) * (target_dim / (1.4520153 - warmup_mode_code)),false,true,true
+C,9,1403.9,(link_density * (2.5437698 - square(warmup_mode_code))) * square(target_dim),false,true,true
+C,10,1370.77,target_dim * ((square(midpoint_dim) / (1.3275819 - warmup_mode_code)) - target_dim),false,true,true
+C,11,1367.14,target_dim * ((square(midpoint_dim) / (1.3275819 - warmup_mode_code)) - log(n)),true,true,true
+D,1,2690.78,ordering_fraction,false,true,false
+D,2,2689.53,log(midpoint_dim),false,true,false
+D,3,2671.5,-0.012344133 / chain3_abundance,false,true,false
+D,5,2648.39,-0.67332983 / (midpoint_dim + -3.0266519),false,true,false
+D,7,2644.84,square(square(square(square(midpoint_dim + -1.7721493)))),false,true,false
+D,8,2637.55,((square(midpoint_dim) * 0.0132613415) - 0.057432607) / chain3_abundance,false,true,false
+D,9,2630.43,square(square(midpoint_dim) + -4.139362) - (0.018383298 / chain3_abundance),false,true,false
+D,10,2616.88,square(square(square(midpoint_dim + -1.4778565))) - (0.016311547 / chain3_abundance),false,true,false
+D,11,2613.64,square(square(square(square(midpoint_dim + -1.7624222)))) - (0.015887719 / chain3_abundance),false,true,false
+D,12,2612.41,square(square(square(midpoint_dim + -1.3671405)) + -1.5998611) - (0.018984566 / chain3_abundance),true,true,false
