@@ -1,0 +1,43 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1120' height='620' viewBox='0 0 1120 620'>
+  <rect width='100%' height='100%' fill='#f7f4ed'/>
+  <text x='560' y='30' text-anchor='middle' font-family='serif' font-size='22' fill='#222'>N=36 short-budget thermal half-life mini-probe</text>
+  <line x1='76.00' y1='542' x2='380.67' y2='542' stroke='#333' stroke-width='1.5'/>
+  <line x1='76.00' y1='62' x2='76.00' y2='542' stroke='#333' stroke-width='1.5'/>
+  <text x='228.33' y='46' text-anchor='middle' font-family='monospace' font-size='14' fill='#222'>causal F1</text>
+  <polyline fill='none' stroke='#1f77b4' stroke-width='2.5' points='76.00,62.00 143.70,332.54 245.26,542.00 380.67,439.61'/>
+  <circle cx='76.00' cy='62.00' r='4.8' fill='#111' opacity='0.9'/>
+  <circle cx='143.70' cy='332.54' r='4.8' fill='#1f77b4' opacity='0.9'/>
+  <circle cx='245.26' cy='542.00' r='4.8' fill='#1f77b4' opacity='0.9'/>
+  <circle cx='380.67' cy='439.61' r='4.8' fill='#1f77b4' opacity='0.9'/>
+  <text x='76.00' y='564' text-anchor='middle' font-family='monospace' font-size='10' fill='#222'>1</text>
+  <text x='143.70' y='564' text-anchor='middle' font-family='monospace' font-size='10' fill='#222'>3</text>
+  <text x='245.26' y='564' text-anchor='middle' font-family='monospace' font-size='10' fill='#222'>6</text>
+  <text x='380.67' y='564' text-anchor='middle' font-family='monospace' font-size='10' fill='#222'>10</text>
+  <text x='228.33' y='602' text-anchor='middle' font-family='monospace' font-size='13' fill='#222'>half-life h</text>
+  <line x1='428.67' y1='542' x2='733.33' y2='542' stroke='#333' stroke-width='1.5'/>
+  <line x1='428.67' y1='62' x2='428.67' y2='542' stroke='#333' stroke-width='1.5'/>
+  <text x='581.00' y='46' text-anchor='middle' font-family='monospace' font-size='14' fill='#222'>causal recall</text>
+  <polyline fill='none' stroke='#2a9d8f' stroke-width='2.5' points='428.67,62.00 496.37,337.74 597.93,542.00 733.33,450.09'/>
+  <circle cx='428.67' cy='62.00' r='4.8' fill='#111' opacity='0.9'/>
+  <circle cx='496.37' cy='337.74' r='4.8' fill='#2a9d8f' opacity='0.9'/>
+  <circle cx='597.93' cy='542.00' r='4.8' fill='#2a9d8f' opacity='0.9'/>
+  <circle cx='733.33' cy='450.09' r='4.8' fill='#2a9d8f' opacity='0.9'/>
+  <text x='428.67' y='564' text-anchor='middle' font-family='monospace' font-size='10' fill='#222'>1</text>
+  <text x='496.37' y='564' text-anchor='middle' font-family='monospace' font-size='10' fill='#222'>3</text>
+  <text x='597.93' y='564' text-anchor='middle' font-family='monospace' font-size='10' fill='#222'>6</text>
+  <text x='733.33' y='564' text-anchor='middle' font-family='monospace' font-size='10' fill='#222'>10</text>
+  <text x='581.00' y='602' text-anchor='middle' font-family='monospace' font-size='13' fill='#222'>half-life h</text>
+  <line x1='781.33' y1='542' x2='1086.00' y2='542' stroke='#333' stroke-width='1.5'/>
+  <line x1='781.33' y1='62' x2='781.33' y2='542' stroke='#333' stroke-width='1.5'/>
+  <text x='933.67' y='46' text-anchor='middle' font-family='monospace' font-size='14' fill='#222'>missing relations</text>
+  <polyline fill='none' stroke='#d1495b' stroke-width='2.5' points='781.33,542.00 849.04,266.26 950.59,62.00 1086.00,153.91'/>
+  <circle cx='781.33' cy='542.00' r='4.8' fill='#111' opacity='0.9'/>
+  <circle cx='849.04' cy='266.26' r='4.8' fill='#d1495b' opacity='0.9'/>
+  <circle cx='950.59' cy='62.00' r='4.8' fill='#d1495b' opacity='0.9'/>
+  <circle cx='1086.00' cy='153.91' r='4.8' fill='#d1495b' opacity='0.9'/>
+  <text x='781.33' y='564' text-anchor='middle' font-family='monospace' font-size='10' fill='#222'>1</text>
+  <text x='849.04' y='564' text-anchor='middle' font-family='monospace' font-size='10' fill='#222'>3</text>
+  <text x='950.59' y='564' text-anchor='middle' font-family='monospace' font-size='10' fill='#222'>6</text>
+  <text x='1086.00' y='564' text-anchor='middle' font-family='monospace' font-size='10' fill='#222'>10</text>
+  <text x='933.67' y='602' text-anchor='middle' font-family='monospace' font-size='13' fill='#222'>half-life h</text>
+</svg>

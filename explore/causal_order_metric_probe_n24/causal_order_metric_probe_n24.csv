@@ -1,0 +1,4 @@
+gamma,n,initial_temp,warmup_limit,anneal_limit,max_data,final_energy,energy_gap,interval_rmse,mm_dim_truth,mm_dim_recovered,success_flag,total_relations_target,total_relations_induced,correct_relations,missing_relations_count,extra_relations_count,exact_match,causal_precision,causal_recall,causal_f1,false_positive_relation_rate,false_negative_relation_rate,comparability_fraction_error,runtime_seconds
+0.55,24,100,10,10,4,130.4466962,130.4466962,55649.30463,2,1.817623626,false,158,83,57,101,26,false,0.686746988,0.3607594937,0.4730290456,0.2203389831,0.6392405063,-0.2717391304,0.014298938
+0.73,24,100,10,10,4,145.0051914,145.0051914,18585.57105,2,1.817623626,false,158,64,45,113,19,false,0.703125,0.2848101266,0.4054054054,0.1610169492,0.7151898734,-0.3405797101,0.012610286
+0.82,24,100,10,10,4,142.9861456,142.9861456,113319.2225,2,1.817623626,false,158,60,20,138,40,false,0.3333333333,0.1265822785,0.1834862385,0.3389830508,0.8734177215,-0.3550724638,0.011207858

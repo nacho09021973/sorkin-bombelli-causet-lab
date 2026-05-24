@@ -1,0 +1,68 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1040' height='620' viewBox='0 0 1040 620'>
+  <rect width='100%' height='100%' fill='#f7f4ed'/>
+  <text x='520' y='30' text-anchor='middle' font-family='serif' font-size='22' fill='#222'>N=24 causal-order seed stability</text>
+  <text x='280.5' y='58' text-anchor='middle' font-family='monospace' font-size='13'>causal F1 by gamma</text>
+  <text x='759.5' y='58' text-anchor='middle' font-family='monospace' font-size='13'>final energy vs causal F1</text>
+  <line x1='68' y1='552' x2='493.0' y2='552' stroke='#333' stroke-width='2'/>
+  <line x1='68' y1='68' x2='68' y2='552' stroke='#333' stroke-width='2'/>
+  <line x1='547.0' y1='552' x2='972.0' y2='552' stroke='#333' stroke-width='2'/>
+  <line x1='547.0' y1='68' x2='547.0' y2='552' stroke='#333' stroke-width='2'/>
+  <circle cx='47.60' cy='182.62' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='592.72' cy='182.62' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='62.90' cy='254.28' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='628.38' cy='254.28' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='78.20' cy='311.20' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='915.22' cy='311.20' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='93.50' cy='203.54' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='547.00' cy='203.54' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='52.70' cy='165.85' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='594.99' cy='165.85' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='175.10' cy='459.64' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='765.23' cy='459.64' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='190.40' cy='232.54' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='689.10' cy='232.54' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='205.70' cy='236.37' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='904.38' cy='236.37' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='221.00' cy='324.29' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='548.88' cy='324.29' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='180.20' cy='244.44' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='612.70' cy='244.44' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='260.10' cy='265.44' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='862.51' cy='265.44' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='275.40' cy='232.54' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='689.10' cy='232.54' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='290.70' cy='68.00' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='894.79' cy='68.00' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='306.00' cy='324.29' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='548.88' cy='324.29' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='265.20' cy='552.00' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='663.65' cy='552.00' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='345.10' cy='265.44' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='862.51' cy='265.44' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='360.40' cy='400.39' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='726.75' cy='400.39' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='375.70' cy='540.04' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='895.07' cy='540.04' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='391.00' cy='324.29' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='548.88' cy='324.29' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='350.20' cy='374.35' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='675.89' cy='374.35' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='472.60' cy='421.36' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='879.60' cy='421.36' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='487.90' cy='459.45' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='664.83' cy='459.45' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='503.20' cy='404.41' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='972.00' cy='404.41' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='518.50' cy='371.76' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='652.96' cy='371.76' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <circle cx='477.70' cy='374.35' r='4.5' fill='#2a9d8f' opacity='0.78'/>
+  <circle cx='675.89' cy='374.35' r='4.5' fill='#1f77b4' opacity='0.78'/>
+  <polyline fill='none' stroke='#d1495b' stroke-width='2.5' points='68.00,223.50 195.50,299.45 280.50,288.45 365.50,380.90 493.00,406.27'/>
+  <text x='68.00' y='574' text-anchor='middle' font-family='monospace' font-size='10'>0.50</text>
+  <text x='195.50' y='574' text-anchor='middle' font-family='monospace' font-size='10'>0.53</text>
+  <text x='280.50' y='574' text-anchor='middle' font-family='monospace' font-size='10'>0.55</text>
+  <text x='365.50' y='574' text-anchor='middle' font-family='monospace' font-size='10'>0.57</text>
+  <text x='493.00' y='574' text-anchor='middle' font-family='monospace' font-size='10'>0.60</text>
+  <text x='547.0' y='574' font-family='monospace' font-size='10'>final energy low -> high</text>
+  <text x='68' y='600' font-family='monospace' font-size='12' fill='#444'>red line = mean causal F1 by gamma; points = optimizer seeds</text>
+</svg>

@@ -1,0 +1,11 @@
+n,family,d_spacetime,case_seed,optimizer_seed,t0,gamma,h,budget_label,row_status,final_energy,interval_rmse,causal_precision,causal_recall,causal_f1,missing_relations_count,extra_relations_count,exact_match,success_flag,runtime_seconds,note
+36,minkowski,2,1959,1987,100,0.5,1,short_10_10_4,completed,251.4244565,413612.896,0.6616915423,0.387755102,0.4889705882,210,68,false,false,0.059238832,reused from explore/causal_order_budget_scaling_n36/causal_order_budget_scaling_n36.csv
+36,minkowski,2,1959,1987,100,0.5,1,medium_25_25_8,completed,215.6289798,664950.5619,0.6133333333,0.2682215743,0.3732251521,251,58,false,false,688.7154654,reused from explore/causal_order_budget_scaling_n36/causal_order_budget_scaling_n36.csv
+36,minkowski,2,1959,1959,100,0.5,1,short_10_10_4,completed,281.0444981,583447.3943,0.625698324,0.3265306122,0.4291187739,231,67,false,false,0.044290643,
+36,minkowski,2,1959,1959,100,0.5,1,medium_25_25_8,completed,225.8871118,7224.755157,0.6145251397,0.3206997085,0.4214559387,233,69,false,false,275.7776314,
+36,minkowski,2,1959,1962,100,0.5,1,short_10_10_4,completed,274.4580063,2669540.818,0.6081871345,0.3032069971,0.4046692607,239,67,false,false,0.213781534,
+36,minkowski,2,1959,1962,100,0.5,1,medium_25_25_8,completed,220.3473174,7590.657511,0.7007575758,0.5393586006,0.6095551895,158,79,false,false,328.0226163,
+36,minkowski,2,1959,2001,100,0.5,1,short_10_10_4,completed,216.8375361,113689.0693,0.60625,0.2827988338,0.3856858847,246,63,false,false,0.158152056,
+36,minkowski,2,1959,2001,100,0.5,1,medium_25_25_8,completed,234.0683704,335124.0292,0.6078431373,0.2711370262,0.375,250,60,false,false,622.3630517,
+36,minkowski,2,1959,2026,100,0.5,1,short_10_10_4,completed,253.5495504,664918.7426,0.6089108911,0.3586005831,0.4513761468,220,79,false,false,0.063500607,
+36,minkowski,2,1959,2026,100,0.5,1,medium_25_25_8,timeout,NA,NA,NA,NA,NA,0,0,false,false,900.0050587,timeout after 900.0s

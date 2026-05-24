@@ -1,0 +1,58 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1120' height='640' viewBox='0 0 1120 640'>
+  <rect width='100%' height='100%' fill='#f7f4ed'/>
+  <text x='560' y='34' text-anchor='middle' font-family='serif' font-size='22' fill='#222'>N-ladder budget/misalignment probe: delta_F1 and delta_E vs N (short -> medium)</text>
+  <rect x='84' y='78' width='952' height='466' fill='none' stroke='#333' stroke-width='2'/>
+  <line x1='84' y1='456.55' x2='1036' y2='456.55' stroke='#999' stroke-width='1' stroke-dasharray='4 4'/>
+  <line x1='84.00' y1='544' x2='84.00' y2='550' stroke='#333' stroke-width='1.5'/>
+  <text x='84.00' y='566' text-anchor='middle' font-family='monospace' font-size='12' fill='#222'>N=12</text>
+  <line x1='322.00' y1='544' x2='322.00' y2='550' stroke='#333' stroke-width='1.5'/>
+  <text x='322.00' y='566' text-anchor='middle' font-family='monospace' font-size='12' fill='#222'>N=18</text>
+  <line x1='560.00' y1='544' x2='560.00' y2='550' stroke='#333' stroke-width='1.5'/>
+  <text x='560.00' y='566' text-anchor='middle' font-family='monospace' font-size='12' fill='#222'>N=24</text>
+  <line x1='798.00' y1='544' x2='798.00' y2='550' stroke='#333' stroke-width='1.5'/>
+  <text x='798.00' y='566' text-anchor='middle' font-family='monospace' font-size='12' fill='#222'>N=30</text>
+  <line x1='1036.00' y1='544' x2='1036.00' y2='550' stroke='#333' stroke-width='1.5'/>
+  <text x='1036.00' y='566' text-anchor='middle' font-family='monospace' font-size='12' fill='#222'>N=36</text>
+  <text x='560.00' y='600' text-anchor='middle' font-family='monospace' font-size='13' fill='#222'>N</text>
+  <line x1='78' y1='544.00' x2='84' y2='544.00' stroke='#333' stroke-width='1'/>
+  <text x='74' y='548.00' text-anchor='end' font-family='monospace' font-size='11' fill='#1f77b4'>-0.116</text>
+  <line x1='78' y1='427.50' x2='84' y2='427.50' stroke='#333' stroke-width='1'/>
+  <text x='74' y='431.50' text-anchor='end' font-family='monospace' font-size='11' fill='#1f77b4'>0.038</text>
+  <line x1='78' y1='311.00' x2='84' y2='311.00' stroke='#333' stroke-width='1'/>
+  <text x='74' y='315.00' text-anchor='end' font-family='monospace' font-size='11' fill='#1f77b4'>0.193</text>
+  <line x1='78' y1='194.50' x2='84' y2='194.50' stroke='#333' stroke-width='1'/>
+  <text x='74' y='198.50' text-anchor='end' font-family='monospace' font-size='11' fill='#1f77b4'>0.347</text>
+  <line x1='78' y1='78.00' x2='84' y2='78.00' stroke='#333' stroke-width='1'/>
+  <text x='74' y='82.00' text-anchor='end' font-family='monospace' font-size='11' fill='#1f77b4'>0.501</text>
+  <line x1='1036' y1='544.00' x2='1042' y2='544.00' stroke='#333' stroke-width='1'/>
+  <text x='1046' y='548.00' text-anchor='start' font-family='monospace' font-size='11' fill='#d1495b'>-57.94</text>
+  <line x1='1036' y1='427.50' x2='1042' y2='427.50' stroke='#333' stroke-width='1'/>
+  <text x='1046' y='431.50' text-anchor='start' font-family='monospace' font-size='11' fill='#d1495b'>-43.45</text>
+  <line x1='1036' y1='311.00' x2='1042' y2='311.00' stroke='#333' stroke-width='1'/>
+  <text x='1046' y='315.00' text-anchor='start' font-family='monospace' font-size='11' fill='#d1495b'>-28.97</text>
+  <line x1='1036' y1='194.50' x2='1042' y2='194.50' stroke='#333' stroke-width='1'/>
+  <text x='1046' y='198.50' text-anchor='start' font-family='monospace' font-size='11' fill='#d1495b'>-14.48</text>
+  <line x1='1036' y1='78.00' x2='1042' y2='78.00' stroke='#333' stroke-width='1'/>
+  <text x='1046' y='82.00' text-anchor='start' font-family='monospace' font-size='11' fill='#d1495b'>0.00</text>
+  <text x='24' y='311.00' text-anchor='middle' font-family='monospace' font-size='13' fill='#1f77b4' transform='rotate(-90 24 311.00)'>delta_F1 = F1_medium - F1_short</text>
+  <text x='1096' y='311.00' text-anchor='middle' font-family='monospace' font-size='13' fill='#d1495b' transform='rotate(90 1096 311.00)'>delta_E = E_medium - E_short</text>
+  <polyline fill='none' stroke='#1f77b4' stroke-width='2.5' points='84.00,78.00 322.00,309.55 560.00,186.14 798.00,517.91 1036.00,544.00'/>
+  <polyline fill='none' stroke='#d1495b' stroke-width='2' stroke-dasharray='6 5' points='84.00,136.72 322.00,148.91 560.00,486.86 798.00,544.00 1036.00,365.91'/>
+  <circle cx='84.00' cy='78.00' r='6' fill='#1f77b4' stroke='#1f77b4' stroke-width='1'/>
+  <circle cx='84.00' cy='136.72' r='6' fill='none' stroke='#d1495b' stroke-width='2'/>
+  <circle cx='322.00' cy='309.55' r='6' fill='#1f77b4' stroke='#1f77b4' stroke-width='1'/>
+  <circle cx='322.00' cy='148.91' r='6' fill='none' stroke='#d1495b' stroke-width='2'/>
+  <circle cx='560.00' cy='186.14' r='6' fill='#f7f4ed' stroke='#1f77b4' stroke-width='2'/>
+  <circle cx='560.00' cy='486.86' r='6' fill='#f7f4ed' stroke='#d1495b' stroke-width='2' stroke-dasharray='3 2'/>
+  <circle cx='798.00' cy='517.91' r='6' fill='#1f77b4' stroke='#1f77b4' stroke-width='1'/>
+  <circle cx='798.00' cy='544.00' r='6' fill='none' stroke='#d1495b' stroke-width='2'/>
+  <circle cx='1036.00' cy='544.00' r='6' fill='#f7f4ed' stroke='#1f77b4' stroke-width='2'/>
+  <circle cx='1036.00' cy='365.91' r='6' fill='#f7f4ed' stroke='#d1495b' stroke-width='2' stroke-dasharray='3 2'/>
+  <rect x='92' y='80' width='320' height='66' fill='#ffffff' fill-opacity='0.82' stroke='#aaa' stroke-width='1'/>
+  <line x1='100' y1='94' x2='128' y2='94' stroke='#1f77b4' stroke-width='2.5'/>
+  <text x='136' y='98' font-family='monospace' font-size='12' fill='#222'>delta_F1 (left axis, blue)</text>
+  <line x1='100' y1='114' x2='128' y2='114' stroke='#d1495b' stroke-width='2' stroke-dasharray='6 5'/>
+  <text x='136' y='118' font-family='monospace' font-size='12' fill='#222'>delta_E (right axis, red)</text>
+  <text x='100' y='138' font-family='monospace' font-size='11' fill='#444'>filled = this probe; hollow = N=24/N=36 reference</text>
+  <text x='84' y='622' font-family='monospace' font-size='11' fill='#444'>Exploratory only; family minkowski; d_spacetime 2; case seed 1959; optimizer seed 1987; T0 100; gamma 0.5; h 1.</text>
+</svg>

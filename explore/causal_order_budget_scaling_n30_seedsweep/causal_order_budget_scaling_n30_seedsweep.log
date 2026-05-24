@@ -1,0 +1,20 @@
+2026-05-24T16:50:27+00:00 starting N=30 optimizer-seed budget/misalignment probe
+2026-05-24T16:50:27+00:00 reused short_10_10_4 optimizer_seed=1987 from n_ladder_budget_misalignment_probe.csv
+2026-05-24T16:50:27+00:00 reused medium_25_25_8 optimizer_seed=1987 from n_ladder_budget_misalignment_probe.csv
+2026-05-24T16:50:27+00:00 attempting short_10_10_4 optimizer_seed=1959
+2026-05-24T16:50:27+00:00 completed short_10_10_4 optimizer_seed=1959 runtime=0.031s
+2026-05-24T16:50:27+00:00 attempting medium_25_25_8 optimizer_seed=1959
+2026-05-24T16:53:12+00:00 completed medium_25_25_8 optimizer_seed=1959 runtime=164.693s
+2026-05-24T16:53:12+00:00 attempting short_10_10_4 optimizer_seed=1962
+2026-05-24T16:53:12+00:00 completed short_10_10_4 optimizer_seed=1962 runtime=0.030s
+2026-05-24T16:53:12+00:00 attempting medium_25_25_8 optimizer_seed=1962
+2026-05-24T16:55:35+00:00 completed medium_25_25_8 optimizer_seed=1962 runtime=142.528s
+2026-05-24T16:55:35+00:00 attempting short_10_10_4 optimizer_seed=2001
+2026-05-24T16:55:35+00:00 completed short_10_10_4 optimizer_seed=2001 runtime=0.088s
+2026-05-24T16:55:35+00:00 attempting medium_25_25_8 optimizer_seed=2001
+2026-05-24T17:00:02+00:00 completed medium_25_25_8 optimizer_seed=2001 runtime=267.045s
+2026-05-24T17:00:02+00:00 attempting short_10_10_4 optimizer_seed=2026
+2026-05-24T17:00:02+00:00 completed short_10_10_4 optimizer_seed=2026 runtime=0.031s
+2026-05-24T17:00:02+00:00 attempting medium_25_25_8 optimizer_seed=2026
+2026-05-24T17:03:46+00:00 completed medium_25_25_8 optimizer_seed=2026 runtime=224.258s
+2026-05-24T17:03:46+00:00 finished N=30 optimizer-seed budget/misalignment probe

@@ -1,0 +1,11 @@
+n,family,d_spacetime,case_seed,optimizer_seed,t0,gamma,h,budget_label,row_status,final_energy,interval_rmse,causal_precision,causal_recall,causal_f1,missing_relations_count,extra_relations_count,exact_match,success_flag,runtime_seconds,note
+30,minkowski,2,1959,1987,100,0.5,1,short_10_10_4,completed,192.9007527,422233.2087,0.6641221374,0.3595041322,0.4664879357,155,44,false,false,0.025439203,reused from explore/n_ladder_budget_misalignment_probe/n_ladder_budget_misalignment_probe.csv
+30,minkowski,2,1959,1987,100,0.5,1,medium_25_25_8,completed,134.9636109,5973.82171,0.6126126126,0.2809917355,0.3852691218,174,43,false,false,260.1098019,reused from explore/n_ladder_budget_misalignment_probe/n_ladder_budget_misalignment_probe.csv
+30,minkowski,2,1959,1959,100,0.5,1,short_10_10_4,completed,175.5405408,14868.38677,0.6206896552,0.1487603306,0.24,206,22,false,false,0.030925243,
+30,minkowski,2,1959,1959,100,0.5,1,medium_25_25_8,completed,162.6130295,7768.942363,0.6666666667,0.4462809917,0.5346534653,134,54,false,false,164.6929067,
+30,minkowski,2,1959,1962,100,0.5,1,short_10_10_4,completed,163.5987113,14589933.09,0.5669291339,0.2975206612,0.3902439024,170,55,false,false,0.030308496,
+30,minkowski,2,1959,1962,100,0.5,1,medium_25_25_8,completed,152.1966218,211080.4171,0.6304347826,0.3595041322,0.4578947368,155,51,false,false,142.5275982,
+30,minkowski,2,1959,2001,100,0.5,1,short_10_10_4,completed,168.5593126,22446.31068,0.6380952381,0.2768595041,0.386167147,175,38,false,false,0.088046734,
+30,minkowski,2,1959,2001,100,0.5,1,medium_25_25_8,completed,140.934924,989.3000292,0.7811158798,0.7520661157,0.7663157895,60,51,false,false,267.0452642,
+30,minkowski,2,1959,2026,100,0.5,1,short_10_10_4,completed,189.2954038,9923801.709,0.5742574257,0.2396694215,0.3381924198,184,43,false,false,0.031343542,
+30,minkowski,2,1959,2026,100,0.5,1,medium_25_25_8,completed,144.7521438,1810.971974,0.7935483871,0.5082644628,0.6196473552,119,32,false,false,224.2582971,

@@ -1,0 +1,35 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='980' height='620' viewBox='0 0 980 620'>
+  <rect width='100%' height='100%' fill='#f7f4ed'/>
+  <text x='490' y='30' text-anchor='middle' font-family='serif' font-size='22' fill='#222'>N=24 causal-order metric probe</text>
+  <text x='194.7' y='58' text-anchor='middle' font-family='monospace' font-size='13'>final energy</text>
+  <line x1='66.0' y1='554' x2='323.3' y2='554' stroke='#333' stroke-width='2'/>
+  <line x1='66.0' y1='66' x2='66.0' y2='554' stroke='#333' stroke-width='2'/>
+  <polyline fill='none' stroke='#1f77b4' stroke-width='2.5' points='66.00,554.00 237.56,66.00 323.33,133.68'/>
+  <circle cx='66.00' cy='554.00' r='5' fill='#d1495b'/>
+  <text x='66.00' y='576' text-anchor='middle' font-family='monospace' font-size='10'>0.55</text>
+  <circle cx='237.56' cy='66.00' r='5' fill='#2a9d8f'/>
+  <text x='237.56' y='576' text-anchor='middle' font-family='monospace' font-size='10'>0.73</text>
+  <circle cx='323.33' cy='133.68' r='5' fill='#2a9d8f'/>
+  <text x='323.33' y='576' text-anchor='middle' font-family='monospace' font-size='10'>0.82</text>
+  <text x='490.0' y='58' text-anchor='middle' font-family='monospace' font-size='13'>log10 interval RMSE</text>
+  <line x1='361.3' y1='554' x2='618.7' y2='554' stroke='#333' stroke-width='2'/>
+  <line x1='361.3' y1='66' x2='361.3' y2='554' stroke='#333' stroke-width='2'/>
+  <polyline fill='none' stroke='#1f77b4' stroke-width='2.5' points='361.33,257.96 532.89,554.00 618.67,66.00'/>
+  <circle cx='361.33' cy='257.96' r='5' fill='#2a9d8f'/>
+  <text x='361.33' y='576' text-anchor='middle' font-family='monospace' font-size='10'>0.55</text>
+  <circle cx='532.89' cy='554.00' r='5' fill='#d1495b'/>
+  <text x='532.89' y='576' text-anchor='middle' font-family='monospace' font-size='10'>0.73</text>
+  <circle cx='618.67' cy='66.00' r='5' fill='#2a9d8f'/>
+  <text x='618.67' y='576' text-anchor='middle' font-family='monospace' font-size='10'>0.82</text>
+  <text x='785.3' y='58' text-anchor='middle' font-family='monospace' font-size='13'>causal F1</text>
+  <line x1='656.7' y1='554' x2='914.0' y2='554' stroke='#333' stroke-width='2'/>
+  <line x1='656.7' y1='66' x2='656.7' y2='554' stroke='#333' stroke-width='2'/>
+  <polyline fill='none' stroke='#1f77b4' stroke-width='2.5' points='656.67,66.00 828.22,179.97 914.00,554.00'/>
+  <circle cx='656.67' cy='66.00' r='5' fill='#d1495b'/>
+  <text x='656.67' y='576' text-anchor='middle' font-family='monospace' font-size='10'>0.55</text>
+  <circle cx='828.22' cy='179.97' r='5' fill='#2a9d8f'/>
+  <text x='828.22' y='576' text-anchor='middle' font-family='monospace' font-size='10'>0.73</text>
+  <circle cx='914.00' cy='554.00' r='5' fill='#2a9d8f'/>
+  <text x='914.00' y='576' text-anchor='middle' font-family='monospace' font-size='10'>0.82</text>
+  <text x='66' y='600' font-family='monospace' font-size='12' fill='#444'>red marks best by panel metric; lower is better except causal F1</text>
+</svg>

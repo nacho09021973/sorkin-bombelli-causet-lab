@@ -1,0 +1,7 @@
+2026-05-24T10:27:56+00:00 starting N=36 causal-order budget scaling pilot
+2026-05-24T10:27:56+00:00 attempting short_10_10_4
+2026-05-24T10:27:56+00:00 completed short_10_10_4 runtime=0.059s
+2026-05-24T10:27:56+00:00 attempting medium_25_25_8
+2026-05-24T10:39:46+00:00 completed medium_25_25_8 runtime=688.715s
+2026-05-24T10:39:46+00:00 deferred long_50_50_16
+2026-05-24T10:39:46+00:00 finished N=36 causal-order budget scaling pilot
