@@ -1,0 +1,5 @@
+schedule_label,cooling_factor,budget_label,n_seeds,t_initial,t_final,schedule_converged,avg_peak_causal_f1,avg_final_causal_f1,avg_f1_endpoint_loss,avg_f1_range,count_peak_before_final,count_peak_is_first_block,count_peak_in_cold_window,avg_peak_block_index,avg_peak_temperature
+gamma_0p5,0.5,medium_25_25_8,4,100,0.78125,true,0.5728268569,0.4448090701,0.1280177868,0.3031491572,3,0,3,6.75,2.1484375
+gamma_0p8,0.8,medium_25_25_8,4,100,20.97152,false,0.4446014444,0.3940489991,0.05055244533,0.2211213847,3,0,0,6.75,28.59008
+gamma_0p9,0.9,medium_25_25_8,4,100,47.82969,false,0.398414084,0.299990015,0.09842406903,0.1677727565,4,1,0,3.75,77.188525
+gamma_0p95,0.95,medium_25_25_8,4,100,69.83372961,false,0.3995863396,0.2933363861,0.1062499535,0.1825679941,4,2,0,1.75,96.3125

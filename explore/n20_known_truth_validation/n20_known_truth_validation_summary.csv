@@ -1,0 +1,2 @@
+n_runs,avg_final_causal_f1,avg_best_checkpoint_causal_f1,count_exact_match_final,count_exact_match_any_checkpoint,count_best_gt_final,count_best_matches_min_energy,avg_delta_best_minus_final,max_delta_best_minus_final
+4,0.7108051055,0.7219734904,0,0,1,3,0.01116838488,0.04467353952

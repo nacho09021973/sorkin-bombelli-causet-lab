@@ -1,0 +1,5 @@
+schedule_label,cooling_factor,budget_label,n_groups,avg_delta_energy_best_minus_final,median_delta_energy_best_minus_final,avg_delta_best_minus_final,avg_best_checkpoint_causal_f1,avg_final_causal_f1,count_H2a_over_annealing_candidate,count_H2b_escape_or_nonconvergence_candidate,count_inconclusive,count_best_matches_min_energy,avg_block_index_best_causal_f1,avg_block_index_min_energy
+gamma_0p5,0.5,medium_25_25_8,4,56.22095845,62.96804225,0.1280177868,0.5728268569,0.4448090701,3,0,1,1,6.75,8
+gamma_0p8,0.8,medium_25_25_8,4,44.42837418,38.1497661,0.05055244533,0.4446014444,0.3940489991,3,0,1,0,6.75,1
+gamma_0p9,0.9,medium_25_25_8,4,-50.46755725,-14.1210761,0.09842406903,0.398414084,0.299990015,2,2,0,1,3.75,1
+gamma_0p95,0.95,medium_25_25_8,4,-148.8654184,-176.6128137,0.1062499535,0.3995863396,0.2933363861,1,3,0,2,1.75,1

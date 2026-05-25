@@ -1,0 +1,14 @@
+{
+  "case_id": "minkowski_n20_d2_seed1959",
+  "case_seed": 1959,
+  "d_spacetime": 2,
+  "family": "minkowski",
+  "generator": "validation_suite.sprinkle_minkowski_diamond",
+  "geometry": "Minkowski 1+1 unit causal diamond",
+  "n": 20,
+  "notes": [
+    "This is not an external community golden table.",
+    "The target order and coordinates are frozen from validation_suite.sprinkle_minkowski_diamond."
+  ],
+  "truth_status": "manufactured_known_truth_by_fixed_sprinkling_seed"
+}
