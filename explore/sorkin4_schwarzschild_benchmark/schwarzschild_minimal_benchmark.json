@@ -1,0 +1,289 @@
+{
+  "summary": {
+    "benchmark": "Schwarzschild benchmark before Kerr ordinal diagnostics.",
+    "status": "scaffold_no_physical_causal_relations_asserted",
+    "generated_at_utc": "2026-05-25T14:30:58.151469+00:00",
+    "command": "python3 explore/sorkin4_schwarzschild_benchmark/run_schwarzschild_minimal_benchmark.py",
+    "N": 12,
+    "seed": 1959,
+    "schwarzschild_radius": 2.0,
+    "exterior_margin": 0.35,
+    "r_min": 2.35,
+    "r_max": 6.0,
+    "v_min": 0.0,
+    "v_max": 4.0,
+    "coordinate_patch": "exterior ingoing Eddington-Finkelstein-like coordinates",
+    "causal_relation_model": "TODO He & Rideout 2009 null-geodesic decision procedure",
+    "relations": 0,
+    "ordering_fraction": 0.0,
+    "links": 0,
+    "transitive_reduction_implemented": true,
+    "antisymmetric": true,
+    "transitive": true,
+    "possible_pairs": 66,
+    "undecided_pairs": 66,
+    "self_compare_exact_match": true
+  },
+  "events": [
+    {
+      "index": 3,
+      "v": 0.05695632773510351,
+      "r": 5.7284929588561795,
+      "theta": 1.8431787192043916,
+      "phi": 2.005012037145261
+    },
+    {
+      "index": 8,
+      "v": 0.36011469303706134,
+      "r": 3.946065600385644,
+      "theta": 1.8349595638397345,
+      "phi": 2.540826453418033
+    },
+    {
+      "index": 11,
+      "v": 0.4658911607904037,
+      "r": 3.65838415750738,
+      "theta": 1.1586053224458575,
+      "phi": 5.788580332048429
+    },
+    {
+      "index": 5,
+      "v": 0.4701426422581023,
+      "r": 5.580477043552577,
+      "theta": 0.9938001684569008,
+      "phi": 1.4902771182995345
+    },
+    {
+      "index": 2,
+      "v": 1.6108648234890568,
+      "r": 5.636427084815836,
+      "theta": 1.3582490097368942,
+      "phi": 5.115319428212347
+    },
+    {
+      "index": 7,
+      "v": 1.7330178321384042,
+      "r": 5.6206330629322965,
+      "theta": 0.778392352688565,
+      "phi": 2.6304784040747418
+    },
+    {
+      "index": 1,
+      "v": 2.3909186047327506,
+      "r": 2.5581974685712647,
+      "theta": 1.3323096827304983,
+      "phi": 3.294356095618005
+    },
+    {
+      "index": 0,
+      "v": 2.647656524880912,
+      "r": 5.073308334760146,
+      "theta": 1.0751178444308405,
+      "phi": 3.3740930199512373
+    },
+    {
+      "index": 10,
+      "v": 2.7339477961509915,
+      "r": 4.788890675450314,
+      "theta": 1.0044338475486385,
+      "phi": 2.41521621386369
+    },
+    {
+      "index": 9,
+      "v": 2.8577536494076288,
+      "r": 2.803676236370706,
+      "theta": 1.6123709040457683,
+      "phi": 2.6003991541190055
+    },
+    {
+      "index": 4,
+      "v": 3.3966651844517135,
+      "r": 3.8541708124974146,
+      "theta": 0.6359585887231985,
+      "phi": 0.7311729663297022
+    },
+    {
+      "index": 6,
+      "v": 3.5262017496204225,
+      "r": 4.327250375994543,
+      "theta": 1.789166536250012,
+      "phi": 3.2302432183336216
+    }
+  ],
+  "causal_matrix": [
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  ],
+  "links": [],
+  "notes": [
+    "No pairwise Schwarzschild causal relation is asserted in S4-1.",
+    "False matrix entries mean unasserted in this scaffold, not physically spacelike.",
+    "The next required step is the He & Rideout Schwarzschild relation algorithm."
+  ]
+}
