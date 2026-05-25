@@ -1,0 +1,13 @@
+budget_label,block_index,temperature,energy_eave,causal_precision,causal_recall,causal_f1,missing_relations_count,extra_relations_count,total_relations_target,total_relations_induced,correct_relations,exact_match,success_flag,phase,accepted_or_current,note
+short_10_10_4,1,100,110.5572276,0.3884297521,0.1370262391,0.2025862069,296,74,343,121,47,false,false,anneal,accepted_rold_xold,captured by read-only block_callback after statistics/data append
+short_10_10_4,2,50,172.7545403,0.6265060241,0.3032069971,0.4086444008,239,62,343,166,104,false,false,anneal,accepted_rold_xold,captured by read-only block_callback after statistics/data append
+short_10_10_4,3,25,214.807194,0.53,0.1545189504,0.2392776524,290,47,343,100,53,false,false,anneal,accepted_rold_xold,captured by read-only block_callback after statistics/data append
+short_10_10_4,4,12.5,251.4244565,0.6616915423,0.387755102,0.4889705882,210,68,343,201,133,false,false,anneal,accepted_rold_xold,captured by read-only block_callback after statistics/data append
+medium_25_25_8,1,100,322.5500596,0.6055045872,0.1924198251,0.2920353982,277,43,343,109,66,false,false,anneal,accepted_rold_xold,captured by read-only block_callback after statistics/data append
+medium_25_25_8,2,50,444.8486095,0.5209580838,0.2536443149,0.3411764706,256,80,343,167,87,false,false,anneal,accepted_rold_xold,captured by read-only block_callback after statistics/data append
+medium_25_25_8,3,25,548.0369189,0.6211180124,0.2915451895,0.3968253968,243,61,343,161,100,false,false,anneal,accepted_rold_xold,captured by read-only block_callback after statistics/data append
+medium_25_25_8,4,12.5,477.6520778,0.4928571429,0.2011661808,0.2857142857,274,71,343,140,69,false,false,anneal,accepted_rold_xold,captured by read-only block_callback after statistics/data append
+medium_25_25_8,5,6.25,389.6941909,0.6186046512,0.387755102,0.476702509,210,82,343,215,133,false,false,anneal,accepted_rold_xold,captured by read-only block_callback after statistics/data append
+medium_25_25_8,6,3.125,314.5767291,0.619047619,0.4927113703,0.5487012987,174,104,343,273,169,false,false,anneal,accepted_rold_xold,captured by read-only block_callback after statistics/data append
+medium_25_25_8,7,1.5625,263.5178411,0.6475409836,0.4606413994,0.538330494,185,86,343,244,158,false,false,anneal,accepted_rold_xold,captured by read-only block_callback after statistics/data append
+medium_25_25_8,8,0.78125,215.6289798,0.6133333333,0.2682215743,0.3732251521,251,58,343,150,92,false,false,anneal,accepted_rold_xold,captured by read-only block_callback after statistics/data append

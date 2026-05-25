@@ -1,0 +1,74 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='980' height='620' viewBox='0 0 980 620'>
+<rect width='100%' height='100%' fill='#f7f4ed'/>
+<text x='72' y='30' font-family='monospace' font-size='18'>trajectory_audit_n36: energy and causal F1 by block</text>
+<text x='72' y='42' font-family='monospace' font-size='14'>Energy Eave</text>
+<line x1='72' y1='278' x2='952' y2='278' stroke='#333' stroke-width='1.5'/>
+<line x1='72' y1='58' x2='72' y2='278' stroke='#333' stroke-width='1.5'/>
+<line x1='72.00' y1='278' x2='72.00' y2='283' stroke='#333'/>
+<text x='72.00' y='298' text-anchor='middle' font-family='monospace' font-size='11'>1</text>
+<line x1='197.71' y1='278' x2='197.71' y2='283' stroke='#333'/>
+<text x='197.71' y='298' text-anchor='middle' font-family='monospace' font-size='11'>2</text>
+<line x1='323.43' y1='278' x2='323.43' y2='283' stroke='#333'/>
+<text x='323.43' y='298' text-anchor='middle' font-family='monospace' font-size='11'>3</text>
+<line x1='449.14' y1='278' x2='449.14' y2='283' stroke='#333'/>
+<text x='449.14' y='298' text-anchor='middle' font-family='monospace' font-size='11'>4</text>
+<line x1='574.86' y1='278' x2='574.86' y2='283' stroke='#333'/>
+<text x='574.86' y='298' text-anchor='middle' font-family='monospace' font-size='11'>5</text>
+<line x1='700.57' y1='278' x2='700.57' y2='283' stroke='#333'/>
+<text x='700.57' y='298' text-anchor='middle' font-family='monospace' font-size='11'>6</text>
+<line x1='826.29' y1='278' x2='826.29' y2='283' stroke='#333'/>
+<text x='826.29' y='298' text-anchor='middle' font-family='monospace' font-size='11'>7</text>
+<line x1='952.00' y1='278' x2='952.00' y2='283' stroke='#333'/>
+<text x='952.00' y='298' text-anchor='middle' font-family='monospace' font-size='11'>8</text>
+<polyline fill='none' stroke='#1f77b4' stroke-width='2.5' points='72.00,278.00 197.71,246.72 323.43,225.57 449.14,207.16'/>
+<circle cx='72.00' cy='278.00' r='4' fill='#1f77b4'/>
+<circle cx='197.71' cy='246.72' r='4' fill='#1f77b4'/>
+<circle cx='323.43' cy='225.57' r='4' fill='#1f77b4'/>
+<circle cx='449.14' cy='207.16' r='4' fill='#1f77b4'/>
+<polyline fill='none' stroke='#d1495b' stroke-width='2.5' points='72.00,171.39 197.71,109.89 323.43,58.00 449.14,93.40 574.86,137.63 700.57,175.40 826.29,201.08 952.00,225.16'/>
+<circle cx='72.00' cy='171.39' r='4' fill='#d1495b'/>
+<circle cx='197.71' cy='109.89' r='4' fill='#d1495b'/>
+<circle cx='323.43' cy='58.00' r='4' fill='#d1495b'/>
+<circle cx='449.14' cy='93.40' r='4' fill='#d1495b'/>
+<circle cx='574.86' cy='137.63' r='4' fill='#d1495b'/>
+<circle cx='700.57' cy='175.40' r='4' fill='#d1495b'/>
+<circle cx='826.29' cy='201.08' r='4' fill='#d1495b'/>
+<circle cx='952.00' cy='225.16' r='4' fill='#d1495b'/>
+<text x='72' y='330' font-family='monospace' font-size='14'>Causal F1</text>
+<line x1='72' y1='566' x2='952' y2='566' stroke='#333' stroke-width='1.5'/>
+<line x1='72' y1='346' x2='72' y2='566' stroke='#333' stroke-width='1.5'/>
+<line x1='72.00' y1='566' x2='72.00' y2='571' stroke='#333'/>
+<text x='72.00' y='586' text-anchor='middle' font-family='monospace' font-size='11'>1</text>
+<line x1='197.71' y1='566' x2='197.71' y2='571' stroke='#333'/>
+<text x='197.71' y='586' text-anchor='middle' font-family='monospace' font-size='11'>2</text>
+<line x1='323.43' y1='566' x2='323.43' y2='571' stroke='#333'/>
+<text x='323.43' y='586' text-anchor='middle' font-family='monospace' font-size='11'>3</text>
+<line x1='449.14' y1='566' x2='449.14' y2='571' stroke='#333'/>
+<text x='449.14' y='586' text-anchor='middle' font-family='monospace' font-size='11'>4</text>
+<line x1='574.86' y1='566' x2='574.86' y2='571' stroke='#333'/>
+<text x='574.86' y='586' text-anchor='middle' font-family='monospace' font-size='11'>5</text>
+<line x1='700.57' y1='566' x2='700.57' y2='571' stroke='#333'/>
+<text x='700.57' y='586' text-anchor='middle' font-family='monospace' font-size='11'>6</text>
+<line x1='826.29' y1='566' x2='826.29' y2='571' stroke='#333'/>
+<text x='826.29' y='586' text-anchor='middle' font-family='monospace' font-size='11'>7</text>
+<line x1='952.00' y1='566' x2='952.00' y2='571' stroke='#333'/>
+<text x='952.00' y='586' text-anchor='middle' font-family='monospace' font-size='11'>8</text>
+<polyline fill='none' stroke='#1f77b4' stroke-width='2.5' points='72.00,566.00 197.71,435.02 323.43,542.68 449.14,383.97'/>
+<circle cx='72.00' cy='566.00' r='4' fill='#1f77b4'/>
+<circle cx='197.71' cy='435.02' r='4' fill='#1f77b4'/>
+<circle cx='323.43' cy='542.68' r='4' fill='#1f77b4'/>
+<circle cx='449.14' cy='383.97' r='4' fill='#1f77b4'/>
+<polyline fill='none' stroke='#d1495b' stroke-width='2.5' points='72.00,509.14 197.71,477.91 323.43,442.54 449.14,513.16 574.86,391.76 700.57,346.00 826.29,352.59 952.00,457.54'/>
+<circle cx='72.00' cy='509.14' r='4' fill='#d1495b'/>
+<circle cx='197.71' cy='477.91' r='4' fill='#d1495b'/>
+<circle cx='323.43' cy='442.54' r='4' fill='#d1495b'/>
+<circle cx='449.14' cy='513.16' r='4' fill='#d1495b'/>
+<circle cx='574.86' cy='391.76' r='4' fill='#d1495b'/>
+<circle cx='700.57' cy='346.00' r='4' fill='#d1495b'/>
+<circle cx='826.29' cy='352.59' r='4' fill='#d1495b'/>
+<circle cx='952.00' cy='457.54' r='4' fill='#d1495b'/>
+<line x1='72' y1='592' x2='98' y2='592' stroke='#1f77b4' stroke-width='3'/>
+<text x='106' y='596' font-family='monospace' font-size='12'>short_10_10_4</text>
+<line x1='317' y1='592' x2='343' y2='592' stroke='#d1495b' stroke-width='3'/>
+<text x='351' y='596' font-family='monospace' font-size='12'>medium_25_25_8</text>
+</svg>
