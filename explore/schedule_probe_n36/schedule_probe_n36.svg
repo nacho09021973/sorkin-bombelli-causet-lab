@@ -1,0 +1,122 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1080' height='660' viewBox='0 0 1080 660'>
+<rect width='100%' height='100%' fill='#f7f4ed'/>
+<text x='76' y='32' font-family='monospace' font-size='18'>schedule_probe_n36: geometric cooling comparison</text>
+<text x='76' y='46' font-family='monospace' font-size='14'>Energy Eave</text>
+<line x1='76' y1='292' x2='1046' y2='292' stroke='#333' stroke-width='1.5'/>
+<line x1='76' y1='62' x2='76' y2='292' stroke='#333' stroke-width='1.5'/>
+<line x1='76.00' y1='292' x2='76.00' y2='297' stroke='#333'/>
+<text x='76.00' y='312' text-anchor='middle' font-family='monospace' font-size='11'>1</text>
+<line x1='214.57' y1='292' x2='214.57' y2='297' stroke='#333'/>
+<text x='214.57' y='312' text-anchor='middle' font-family='monospace' font-size='11'>2</text>
+<line x1='353.14' y1='292' x2='353.14' y2='297' stroke='#333'/>
+<text x='353.14' y='312' text-anchor='middle' font-family='monospace' font-size='11'>3</text>
+<line x1='491.71' y1='292' x2='491.71' y2='297' stroke='#333'/>
+<text x='491.71' y='312' text-anchor='middle' font-family='monospace' font-size='11'>4</text>
+<line x1='630.29' y1='292' x2='630.29' y2='297' stroke='#333'/>
+<text x='630.29' y='312' text-anchor='middle' font-family='monospace' font-size='11'>5</text>
+<line x1='768.86' y1='292' x2='768.86' y2='297' stroke='#333'/>
+<text x='768.86' y='312' text-anchor='middle' font-family='monospace' font-size='11'>6</text>
+<line x1='907.43' y1='292' x2='907.43' y2='297' stroke='#333'/>
+<text x='907.43' y='312' text-anchor='middle' font-family='monospace' font-size='11'>7</text>
+<line x1='1046.00' y1='292' x2='1046.00' y2='297' stroke='#333'/>
+<text x='1046.00' y='312' text-anchor='middle' font-family='monospace' font-size='11'>8</text>
+<polyline fill='none' stroke='#1f77b4' stroke-width='2.4' points='76.00,230.92 214.57,161.06 353.14,102.12 491.71,142.32 630.29,192.57 768.86,235.48 907.43,264.64 1046.00,292.00'/>
+<circle cx='76.00' cy='230.92' r='3.8' fill='#1f77b4'/>
+<circle cx='214.57' cy='161.06' r='3.8' fill='#1f77b4'/>
+<circle cx='353.14' cy='102.12' r='3.8' fill='#1f77b4'/>
+<circle cx='491.71' cy='142.32' r='3.8' fill='#1f77b4'/>
+<circle cx='630.29' cy='192.57' r='3.8' fill='#1f77b4'/>
+<circle cx='768.86' cy='235.48' r='3.8' fill='#1f77b4'/>
+<circle cx='907.43' cy='264.64' r='3.8' fill='#1f77b4'/>
+<circle cx='1046.00' cy='292.00' r='3.8' fill='#1f77b4'/>
+<polyline fill='none' stroke='#d1495b' stroke-width='2.4' points='76.00,230.92 214.57,142.83 353.14,63.51 491.71,89.17 630.29,101.84 768.86,127.30 907.43,150.36 1046.00,159.77'/>
+<circle cx='76.00' cy='230.92' r='3.8' fill='#d1495b'/>
+<circle cx='214.57' cy='142.83' r='3.8' fill='#d1495b'/>
+<circle cx='353.14' cy='63.51' r='3.8' fill='#d1495b'/>
+<circle cx='491.71' cy='89.17' r='3.8' fill='#d1495b'/>
+<circle cx='630.29' cy='101.84' r='3.8' fill='#d1495b'/>
+<circle cx='768.86' cy='127.30' r='3.8' fill='#d1495b'/>
+<circle cx='907.43' cy='150.36' r='3.8' fill='#d1495b'/>
+<circle cx='1046.00' cy='159.77' r='3.8' fill='#d1495b'/>
+<polyline fill='none' stroke='#2a9d8f' stroke-width='2.4' points='76.00,230.92 214.57,144.83 353.14,69.49 491.71,89.22 630.29,111.39 768.86,121.17 907.43,122.18 1046.00,126.75'/>
+<circle cx='76.00' cy='230.92' r='3.8' fill='#2a9d8f'/>
+<circle cx='214.57' cy='144.83' r='3.8' fill='#2a9d8f'/>
+<circle cx='353.14' cy='69.49' r='3.8' fill='#2a9d8f'/>
+<circle cx='491.71' cy='89.22' r='3.8' fill='#2a9d8f'/>
+<circle cx='630.29' cy='111.39' r='3.8' fill='#2a9d8f'/>
+<circle cx='768.86' cy='121.17' r='3.8' fill='#2a9d8f'/>
+<circle cx='907.43' cy='122.18' r='3.8' fill='#2a9d8f'/>
+<circle cx='1046.00' cy='126.75' r='3.8' fill='#2a9d8f'/>
+<polyline fill='none' stroke='#8a5a44' stroke-width='2.4' points='76.00,230.92 214.57,144.83 353.14,62.00 491.71,68.20 630.29,68.55 768.86,62.77 907.43,68.18 1046.00,73.54'/>
+<circle cx='76.00' cy='230.92' r='3.8' fill='#8a5a44'/>
+<circle cx='214.57' cy='144.83' r='3.8' fill='#8a5a44'/>
+<circle cx='353.14' cy='62.00' r='3.8' fill='#8a5a44'/>
+<circle cx='491.71' cy='68.20' r='3.8' fill='#8a5a44'/>
+<circle cx='630.29' cy='68.55' r='3.8' fill='#8a5a44'/>
+<circle cx='768.86' cy='62.77' r='3.8' fill='#8a5a44'/>
+<circle cx='907.43' cy='68.18' r='3.8' fill='#8a5a44'/>
+<circle cx='1046.00' cy='73.54' r='3.8' fill='#8a5a44'/>
+<text x='76' y='352' font-family='monospace' font-size='14'>Causal F1</text>
+<line x1='76' y1='598' x2='1046' y2='598' stroke='#333' stroke-width='1.5'/>
+<line x1='76' y1='368' x2='76' y2='598' stroke='#333' stroke-width='1.5'/>
+<line x1='76.00' y1='598' x2='76.00' y2='603' stroke='#333'/>
+<text x='76.00' y='618' text-anchor='middle' font-family='monospace' font-size='11'>1</text>
+<line x1='214.57' y1='598' x2='214.57' y2='603' stroke='#333'/>
+<text x='214.57' y='618' text-anchor='middle' font-family='monospace' font-size='11'>2</text>
+<line x1='353.14' y1='598' x2='353.14' y2='603' stroke='#333'/>
+<text x='353.14' y='618' text-anchor='middle' font-family='monospace' font-size='11'>3</text>
+<line x1='491.71' y1='598' x2='491.71' y2='603' stroke='#333'/>
+<text x='491.71' y='618' text-anchor='middle' font-family='monospace' font-size='11'>4</text>
+<line x1='630.29' y1='598' x2='630.29' y2='603' stroke='#333'/>
+<text x='630.29' y='618' text-anchor='middle' font-family='monospace' font-size='11'>5</text>
+<line x1='768.86' y1='598' x2='768.86' y2='603' stroke='#333'/>
+<text x='768.86' y='618' text-anchor='middle' font-family='monospace' font-size='11'>6</text>
+<line x1='907.43' y1='598' x2='907.43' y2='603' stroke='#333'/>
+<text x='907.43' y='618' text-anchor='middle' font-family='monospace' font-size='11'>7</text>
+<line x1='1046.00' y1='598' x2='1046.00' y2='603' stroke='#333'/>
+<text x='1046.00' y='618' text-anchor='middle' font-family='monospace' font-size='11'>8</text>
+<polyline fill='none' stroke='#1f77b4' stroke-width='2.4' points='76.00,546.61 214.57,512.41 353.14,473.69 491.71,551.01 630.29,418.10 768.86,368.00 907.43,375.22 1046.00,490.11'/>
+<circle cx='76.00' cy='546.61' r='3.8' fill='#1f77b4'/>
+<circle cx='214.57' cy='512.41' r='3.8' fill='#1f77b4'/>
+<circle cx='353.14' cy='473.69' r='3.8' fill='#1f77b4'/>
+<circle cx='491.71' cy='551.01' r='3.8' fill='#1f77b4'/>
+<circle cx='630.29' cy='418.10' r='3.8' fill='#1f77b4'/>
+<circle cx='768.86' cy='368.00' r='3.8' fill='#1f77b4'/>
+<circle cx='907.43' cy='375.22' r='3.8' fill='#1f77b4'/>
+<circle cx='1046.00' cy='490.11' r='3.8' fill='#1f77b4'/>
+<polyline fill='none' stroke='#d1495b' stroke-width='2.4' points='76.00,546.61 214.57,598.00 353.14,544.19 491.71,462.32 630.29,450.82 768.86,509.48 907.43,538.42 1046.00,480.37'/>
+<circle cx='76.00' cy='546.61' r='3.8' fill='#d1495b'/>
+<circle cx='214.57' cy='598.00' r='3.8' fill='#d1495b'/>
+<circle cx='353.14' cy='544.19' r='3.8' fill='#d1495b'/>
+<circle cx='491.71' cy='462.32' r='3.8' fill='#d1495b'/>
+<circle cx='630.29' cy='450.82' r='3.8' fill='#d1495b'/>
+<circle cx='768.86' cy='509.48' r='3.8' fill='#d1495b'/>
+<circle cx='907.43' cy='538.42' r='3.8' fill='#d1495b'/>
+<circle cx='1046.00' cy='480.37' r='3.8' fill='#d1495b'/>
+<polyline fill='none' stroke='#2a9d8f' stroke-width='2.4' points='76.00,546.61 214.57,438.58 353.14,533.96 491.71,534.12 630.29,553.13 768.86,569.83 907.43,455.10 1046.00,488.04'/>
+<circle cx='76.00' cy='546.61' r='3.8' fill='#2a9d8f'/>
+<circle cx='214.57' cy='438.58' r='3.8' fill='#2a9d8f'/>
+<circle cx='353.14' cy='533.96' r='3.8' fill='#2a9d8f'/>
+<circle cx='491.71' cy='534.12' r='3.8' fill='#2a9d8f'/>
+<circle cx='630.29' cy='553.13' r='3.8' fill='#2a9d8f'/>
+<circle cx='768.86' cy='569.83' r='3.8' fill='#2a9d8f'/>
+<circle cx='907.43' cy='455.10' r='3.8' fill='#2a9d8f'/>
+<circle cx='1046.00' cy='488.04' r='3.8' fill='#2a9d8f'/>
+<polyline fill='none' stroke='#8a5a44' stroke-width='2.4' points='76.00,546.61 214.57,438.58 353.14,549.27 491.71,485.12 630.29,563.24 768.86,489.40 907.43,575.47 1046.00,503.26'/>
+<circle cx='76.00' cy='546.61' r='3.8' fill='#8a5a44'/>
+<circle cx='214.57' cy='438.58' r='3.8' fill='#8a5a44'/>
+<circle cx='353.14' cy='549.27' r='3.8' fill='#8a5a44'/>
+<circle cx='491.71' cy='485.12' r='3.8' fill='#8a5a44'/>
+<circle cx='630.29' cy='563.24' r='3.8' fill='#8a5a44'/>
+<circle cx='768.86' cy='489.40' r='3.8' fill='#8a5a44'/>
+<circle cx='907.43' cy='575.47' r='3.8' fill='#8a5a44'/>
+<circle cx='1046.00' cy='503.26' r='3.8' fill='#8a5a44'/>
+<line x1='76' y1='632' x2='102' y2='632' stroke='#1f77b4' stroke-width='3'/>
+<text x='110' y='636' font-family='monospace' font-size='12'>gamma_0p5</text>
+<line x1='296' y1='632' x2='322' y2='632' stroke='#d1495b' stroke-width='3'/>
+<text x='330' y='636' font-family='monospace' font-size='12'>gamma_0p8</text>
+<line x1='516' y1='632' x2='542' y2='632' stroke='#2a9d8f' stroke-width='3'/>
+<text x='550' y='636' font-family='monospace' font-size='12'>gamma_0p9</text>
+<line x1='736' y1='632' x2='762' y2='632' stroke='#8a5a44' stroke-width='3'/>
+<text x='770' y='636' font-family='monospace' font-size='12'>gamma_0p95</text>
+</svg>
