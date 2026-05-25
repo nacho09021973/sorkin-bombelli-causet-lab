@@ -1,0 +1,5 @@
+schedule_label,cooling_factor,groups,avg_final_causal_f1,avg_best_causal_f1,avg_delta_best_minus_final_f1,count_best_better_than_final,count_best_better_than_final_gt_0p02,count_best_before_final,count_best_is_final,count_best_f1_block_equals_min_energy_block,avg_final_recall,avg_best_recall,avg_final_missing,avg_best_missing,avg_final_extra,avg_best_extra
+gamma_0p5,0.5,4,0.4448090701,0.5728268569,0.1280177868,3,3,3,1,1,0.3498542274,0.4956268222,223,173,66.5,80.75
+gamma_0p8,0.8,4,0.3940489991,0.4446014444,0.05055244533,3,3,3,1,0,0.2915451895,0.3425655977,243,225.5,62.75,67.5
+gamma_0p9,0.9,4,0.299990015,0.398414084,0.09842406903,4,4,4,0,1,0.2106413994,0.3032069971,270.75,239,63,73.75
+gamma_0p95,0.95,4,0.2933363861,0.3995863396,0.1062499535,4,4,4,0,2,0.2033527697,0.304664723,273.25,238.5,59,74.25
