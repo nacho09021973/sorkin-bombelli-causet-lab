@@ -123,6 +123,11 @@ from run_schwarzschild_minimal_benchmark import (  # noqa: E402
     transitive_reduction_links,
     check_antisymmetric,
     check_transitive,
+    find_direct_shooting_c2,
+    cubic_f,
+    _simpson_integral,
+    SIMPSON_INTERVALS,
+    CUBIC_ROOT_EPS,
 )
 import validation_suite as vs  # noqa: E402
 
@@ -275,11 +280,86 @@ def _interior_outgoing_null_v_upper(
 # Four-case causal criterion in IEF
 # ---------------------------------------------------------------------------
 
+def _direct_ttilde_integral_horizon_regular(
+    u1: float,
+    u2: float,
+    c2: float,
+    mass: float = MASS,
+    intervals: int = SIMPSON_INTERVALS,
+) -> Optional[float]:
+    """He & Rideout EF-time (t~ = t_s + r* - r) elapsed along the direct null
+    branch, written so the integrand stays finite across the horizon.
+
+    This is the rationalisation of direct_time_integral.  The raw integrand
+    (c/sqrt(f) - 2 M u) / (u^2 (1 - 2 M u)) is 0/0 at r = 2M and returns nan,
+    so it cannot be integrated through the horizon.  Multiplying through gives
+
+        g(u) = [c^2 (1 + 2 M u) + 4 M^2 u^4] / [u^2 sqrt(f) (c + 2 M u sqrt(f))]
+
+    which equals direct_time_integral in the exterior (verified to ~1e-14) and
+    is regular at r = 2M, where it equals 4 M^2 + 1/(2 c^2).  For plunging orbits
+    c^2 > 1/(27 M^2) the cubic f(u) has no positive roots, so f > 0 on the whole
+    path and the integrand is finite everywhere.
+    """
+
+    c = math.sqrt(c2)
+
+    def integrand(u: float) -> float:
+        f = cubic_f(u, c2, mass)
+        if f <= CUBIC_ROOT_EPS:
+            return math.nan
+        sf = math.sqrt(f)
+        num = c2 * (1.0 + 2.0 * mass * u) + 4.0 * mass * mass * u ** 4
+        den = u * u * sf * (c + 2.0 * mass * u * sf)
+        if abs(den) <= CUBIC_ROOT_EPS:
+            return math.nan
+        return num / den
+
+    return _simpson_integral(integrand, u1, u2, intervals)
+
+
+def causal_relation_exterior_to_interior_shooting(
+    p: Event,
+    q: Event,
+    mass: float = MASS,
+) -> Optional[bool]:
+    """Generic (non-radial) exterior -> interior crossing via a plunging null.
+
+    Mirrors the validated exterior recipe (causal_relation_schwarzschild_direct_shooting)
+    in the horizon-crossing regime: reuse find_direct_shooting_c2 to find the
+    c^2 = (E/L)^2 whose direct branch sweeps the required dphi from r_p (exterior)
+    to r_q (interior), then compare the EF-time elapsed along that null with the
+    coordinate EF-time q.t - p.t.  find_direct_shooting_c2 already restricts to
+    c^2 > 1/(27 M^2), i.e. impact parameter below 3*sqrt(3)*M: exactly the
+    geodesics that plunge through the horizon.  The fastest direct geodesic is the
+    boundary of the causal future (He & Rideout Appendix A, extended across r=2M).
+
+    Returns None if no plunging geodesic reaches dphi (undecided), matching the
+    conservative convention used elsewhere.
+    """
+
+    phi_target = angular_separation(p, q)
+    if phi_target <= ANGLE_EPS:
+        return None  # radial case handled by the exact ingoing-null criterion
+    u1 = 1.0 / p.r
+    u2 = 1.0 / q.r
+    res = find_direct_shooting_c2(u1, u2, phi_target, mass)
+    if res is None:
+        return None
+    c2, _phi = res
+    null_dt = _direct_ttilde_integral_horizon_regular(u1, u2, c2, mass)
+    if null_dt is None or not math.isfinite(null_dt):
+        return None
+    event_dt = q.t - p.t
+    return null_dt <= event_dt + TIME_EPS
+
+
 def causal_relation_ief(
     p: Event,
     q: Event,
     mass: float = MASS,
     enable_exterior_shooting: bool = False,
+    enable_horizon_shooting: bool = False,
     angle_eps: float = RADIAL_ANGLE_EPS,
 ) -> Optional[bool]:
     """Causal relation in IEF coordinates for any interior/exterior pair.
@@ -328,9 +408,10 @@ def causal_relation_ief(
             # so p.r > q.r is guaranteed by the region check.
             return True
 
-        # Non-radial exterior → interior: undecided.
-        # Deciding requires integrating a null geodesic through the horizon
-        # with angular component, which is not yet implemented.
+        # Non-radial exterior → interior: decide via a plunging null geodesic
+        # through the horizon when enabled; otherwise leave undecided.
+        if enable_horizon_shooting:
+            return causal_relation_exterior_to_interior_shooting(p, q, mass)
         return None
 
     # --- INTERIOR → INTERIOR ---
@@ -456,6 +537,7 @@ def build_horizon_causal_matrix(
     events: list[Event],
     mass: float = MASS,
     enable_exterior_shooting: bool = False,
+    enable_horizon_shooting: bool = False,
     aligned: bool = False,
 ) -> tuple[vs.CausalMatrix, list[list[Optional[bool]]]]:
     """Build the causal matrix using IEF criteria."""
@@ -477,6 +559,7 @@ def build_horizon_causal_matrix(
             rel = causal_relation_ief(
                 events[i], events[j], mass=mass,
                 enable_exterior_shooting=enable_exterior_shooting,
+                enable_horizon_shooting=enable_horizon_shooting,
                 angle_eps=angle_eps,
             )
             states[i][j] = rel
@@ -600,12 +683,14 @@ def run_horizon_case(
     seed: int,
     mass: float = DEFAULT_MASS,
     enable_exterior_shooting: bool = False,
+    enable_horizon_shooting: bool = False,
     aligned: bool = False,
 ) -> tuple[list[Event], vs.CausalMatrix, list[list[Optional[bool]]], dict[str, object]]:
     events = generate_mixed_events(n_exterior, n_interior, seed, mass=mass, aligned=aligned)
     matrix, states = build_horizon_causal_matrix(
         events, mass=mass,
         enable_exterior_shooting=enable_exterior_shooting,
+        enable_horizon_shooting=enable_horizon_shooting,
         aligned=aligned,
     )
     summary = summarize_horizon_case(
@@ -662,6 +747,9 @@ def main() -> None:
     parser.add_argument("--mass", type=float, default=DEFAULT_MASS)
     parser.add_argument("--shooting", action="store_true",
                         help="Enable exterior generic-pair shooting (slow)")
+    parser.add_argument("--horizon-shooting", action="store_true",
+                        help="Enable non-radial exterior->interior crossing via "
+                             "plunging null shooting (enables area sampling in generic mode)")
     parser.add_argument("--aligned", action="store_true",
                         help="Place all events at theta=pi/2, phi=0 (radial strand). "
                              "Required for non-zero horizon_crossing_links in this implementation.")
@@ -675,6 +763,7 @@ def main() -> None:
         seed=args.seed,
         mass=args.mass,
         enable_exterior_shooting=args.shooting,
+        enable_horizon_shooting=args.horizon_shooting,
         aligned=args.aligned,
     )
 
