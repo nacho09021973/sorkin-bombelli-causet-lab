@@ -1,0 +1,293 @@
+{
+  "summary": {
+    "benchmark": "S4 Schwarzschild horizon-crossing causal solver",
+    "status": "minimal_ief_radial_criterion_horizon_shooting",
+    "generated_at_utc": "2026-05-26T17:00:17.087730+00:00",
+    "command": "python3 explore/sorkin4_schwarzschild_benchmark/run_schwarzschild_horizon_benchmark.py",
+    "N": 12,
+    "N_exterior": 8,
+    "N_interior": 4,
+    "seed": 31,
+    "mass": 1.0,
+    "schwarzschild_radius": 2.0,
+    "expected_horizon_area_4pi_rs2": 50.26548245743669,
+    "expected_horizon_area_16pi_M2": 50.26548245743669,
+    "coordinate_system": "ingoing Eddington-Finkelstein (v, r, theta, phi)",
+    "causal_model": "IEF four-case criterion: ext-ext via He-Rideout (shooting=False); ext->int radial exact plus non-radial plunging-null shooting; int->ext always False; int-int radial exact with outgoing-null upper bound; non-radial int-int undecided",
+    "possible_pairs": 66,
+    "true_relations": 3,
+    "false_relations": 60,
+    "undecided_pairs": 3,
+    "decided_pairs": 63,
+    "ordering_fraction": 0.045454545454545456,
+    "solver_coverage": 0.9545454545454546,
+    "links": 3,
+    "horizon_crossing_links": 3,
+    "antisymmetric": true,
+    "transitive": true,
+    "notes": [
+      "horizon_crossing_links counts ext->int links in the transitive reduction.",
+      "Dou-Sorkin: N_links ~ A / l_Planck^2 = 16 pi M^2 in Planck units.",
+      "Non-radial interior pairs are undecided; they contribute to undecided_pairs.",
+      "ordering_fraction denominator is possible_pairs (null = unknown, not non-causal).",
+      "solver_coverage = decided_pairs / possible_pairs is a solver completeness metric."
+    ],
+    "aligned_mode": false
+  },
+  "events": [
+    {
+      "index": 0,
+      "t": 0.16565374324907145,
+      "r": 1.321030122854035,
+      "theta": 1.9084926964230051,
+      "phi": 2.4891846736707373
+    },
+    {
+      "index": 1,
+      "t": 0.372445557062274,
+      "r": 2.576951944814925,
+      "theta": 0.4957675685671319,
+      "phi": 2.531783203103264
+    },
+    {
+      "index": 2,
+      "t": 0.0491129895919018,
+      "r": 3.295719292636091,
+      "theta": 1.7867973291266912,
+      "phi": 4.29684595506661
+    },
+    {
+      "index": 3,
+      "t": 0.5547637328585231,
+      "r": 3.29599778275899,
+      "theta": 2.136956454183616,
+      "phi": 4.760093973063602
+    },
+    {
+      "index": 4,
+      "t": 2.919273029788488,
+      "r": 1.099769064488143,
+      "theta": 1.2851571596896478,
+      "phi": 1.3771688660357575
+    },
+    {
+      "index": 5,
+      "t": 0.8413291193239205,
+      "r": 3.8489210306090254,
+      "theta": 1.400167694689908,
+      "phi": 3.4392991538945186
+    },
+    {
+      "index": 6,
+      "t": 0.7939905287601854,
+      "r": 4.309551385717479,
+      "theta": 1.8444080417988236,
+      "phi": 6.00115100409507
+    },
+    {
+      "index": 7,
+      "t": 3.4734225701892547,
+      "r": 1.6468678151839884,
+      "theta": 2.1691487520527173,
+      "phi": 5.005149430610517
+    },
+    {
+      "index": 8,
+      "t": 3.3456541239041555,
+      "r": 1.8929945308665077,
+      "theta": 2.791265758100607,
+      "phi": 4.618428983738618
+    },
+    {
+      "index": 9,
+      "t": 0.5896048838411136,
+      "r": 5.466432098505415,
+      "theta": 1.2404894717178998,
+      "phi": 0.8581481774403343
+    },
+    {
+      "index": 10,
+      "t": 2.142646990191155,
+      "r": 4.700878367094617,
+      "theta": 1.746559733515284,
+      "phi": 6.26021204393395
+    },
+    {
+      "index": 11,
+      "t": 3.8149722531903825,
+      "r": 5.67998570791651,
+      "theta": 1.863969837311205,
+      "phi": 1.2808763990910206
+    }
+  ],
+  "relation_states": [
+    [
+      false,
+      false,
+      false,
+      false,
+      "None",
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      "None",
+      "None",
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      "None",
+      false,
+      false,
+      false,
+      "None",
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      "None",
+      false,
+      false,
+      false,
+      "None",
+      false,
+      false,
+      "None",
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  ]
+}
