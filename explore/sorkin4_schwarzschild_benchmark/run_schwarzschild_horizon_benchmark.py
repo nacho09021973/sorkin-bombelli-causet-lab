@@ -5,10 +5,10 @@ This module implements causal relations in ingoing Eddington-Finkelstein (IEF)
 coordinates that cover both the exterior (r > r_s) and interior (r < r_s) of
 Schwarzschild spacetime through the future horizon.
 
-IEF metric: ds² = -(1 - 2M/r) dv² + 2 dv dr + r² dΩ²
+IEF metric: ds² = -dt² + dr² + r² dΩ² + (2M/r)(dt + dr)²
 
-where v = t + r*(r) is the advanced null coordinate,
-r*(r) = r + 2M ln|r/2M - 1| is the tortoise coordinate (real for r ≠ 2M).
+where the paper's time coordinate is t = t_s + 2M ln(r/2M - 1) = v - r,
+so v = t + r is the advanced null coordinate.
 
 Sign convention: v is increasing toward the future. The horizon is at r = r_s = 2M.
 The singularity is at r = 0 (in the future interior).
@@ -32,7 +32,7 @@ EXTERIOR → INTERIOR  (r_p > r_s, r_q < r_s):
   Nothing from Region I can reach Region II after the event is in the
   interior — but a signal can ENTER the interior from the exterior.
   For RADIAL pairs (angular separation ≈ 0):
-    p causes q iff v_q >= v_p  [ingoing null carries v = const inward]
+    p causes q iff v_q >= v_p  [ingoing null carries v = t + r = const inward]
   For non-radial pairs:
     UNDECIDED in this implementation (TODO: angular null geodesics
     that cross the horizon; the ingoing null shell from p at v_p reaches
@@ -47,7 +47,7 @@ INTERIOR → INTERIOR  (both r < r_s):
   future singularity). Event p is "earlier" if r_p > r_q.
   For r_p <= r_q: p is not earlier than q; return False.
   For RADIAL pairs (r_p > r_q, same angles):
-    Lower bound (ingoing null v = const): v_q >= v_p
+    Lower bound (ingoing null v = t + r = const): v_q >= v_p
     Upper bound (outgoing null from p reaching r_q):
       v_upper = v_p + 2 * [(r_p - r_q) + 2M * ln((2M - r_p) / (2M - r_q))]
     p causes q iff v_p <= v_q <= v_upper.
@@ -174,9 +174,17 @@ def tortoise(r: float, mass: float = MASS) -> float:
 
 
 def advanced_null_v(t: float, r: float, mass: float = MASS) -> float:
-    """IEF advanced null coordinate v = t + r*(r)."""
+    """IEF advanced null coordinate v = t + r.
 
-    return t + tortoise(r, mass)
+    He & Rideout Eq. (3) uses t = t_s + 2M ln(r/2M - 1) = v - r,
+    so the advanced null time is v = t + r.  Eq. (4) gives the ingoing
+    radial null as dt + dr = 0, hence t + r is constant.
+
+    The mass parameter is retained for API compatibility.
+    """
+
+    _ = mass
+    return t + r
 
 
 # ---------------------------------------------------------------------------
@@ -385,7 +393,7 @@ def generate_mixed_events(
     Interior events: r in [INTERIOR_R_MIN_FRACTION * r_s,
                             INTERIOR_R_MAX_FRACTION * r_s]
 
-    All events use Schwarzschild t coordinate; the IEF v = t + r*(r) is
+    All events use the He-Rideout EF t coordinate; v = t + r is
     computed on demand.  Angular coordinates are uniform on S².
     """
 
@@ -427,7 +435,7 @@ def generate_mixed_events(
             phi = rng.uniform(0.0, 2.0 * math.pi)
         events.append(Event(index=len(events), t=t, r=r, theta=theta, phi=phi))
 
-    # Sort by IEF advanced time v = t + r*(r) as the natural causal ordering.
+    # Sort by IEF advanced time v = t + r as the natural causal ordering.
     def sort_key(e: Event) -> tuple[float, float]:
         try:
             return advanced_null_v(e.t, e.r, mass), e.r

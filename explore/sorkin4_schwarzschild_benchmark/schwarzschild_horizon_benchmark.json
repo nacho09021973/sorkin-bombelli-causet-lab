@@ -2,7 +2,7 @@
   "summary": {
     "benchmark": "S4 Schwarzschild horizon-crossing causal solver",
     "status": "minimal_ief_radial_criterion_nonradial_undecided",
-    "generated_at_utc": "2026-05-26T15:27:23.382614+00:00",
+    "generated_at_utc": "2026-05-26T15:50:05.517870+00:00",
     "command": "python3 explore/sorkin4_schwarzschild_benchmark/run_schwarzschild_horizon_benchmark.py",
     "N": 12,
     "N_exterior": 8,
@@ -15,14 +15,14 @@
     "coordinate_system": "ingoing Eddington-Finkelstein (v, r, theta, phi)",
     "causal_model": "IEF four-case criterion: ext-ext via He-Rideout (shooting=False); ext->int radial exact; int->ext always False; int-int radial exact with outgoing-null upper bound; non-radial undecided",
     "possible_pairs": 66,
-    "true_relations": 14,
-    "false_relations": 52,
+    "true_relations": 15,
+    "false_relations": 51,
     "undecided_pairs": 0,
     "decided_pairs": 66,
-    "ordering_fraction": 0.21212121212121213,
+    "ordering_fraction": 0.22727272727272727,
     "solver_coverage": 1.0,
     "links": 9,
-    "horizon_crossing_links": 2,
+    "horizon_crossing_links": 0,
     "antisymmetric": true,
     "transitive": true,
     "notes": [
@@ -44,15 +44,15 @@
     },
     {
       "index": 1,
-      "t": 2.3909186047327506,
-      "r": 2.5581974685712647,
+      "t": 3.0910177335760767,
+      "r": 1.1762975312185229,
       "theta": 1.5707963267948966,
       "phi": 0.0
     },
     {
       "index": 2,
-      "t": 3.0910177335760767,
-      "r": 1.1762975312185229,
+      "t": 3.609005426794699,
+      "r": 0.9279555940789663,
       "theta": 1.5707963267948966,
       "phi": 0.0
     },
@@ -65,8 +65,8 @@
     },
     {
       "index": 4,
-      "t": 3.609005426794699,
-      "r": 0.9279555940789663,
+      "t": 2.3909186047327506,
+      "r": 2.5581974685712647,
       "theta": 1.5707963267948966,
       "phi": 0.0
     },
@@ -86,15 +86,15 @@
     },
     {
       "index": 7,
-      "t": 2.472464749399609,
-      "r": 4.924533711517832,
+      "t": 1.6108648234890568,
+      "r": 5.636427084815836,
       "theta": 1.5707963267948966,
       "phi": 0.0
     },
     {
       "index": 8,
-      "t": 1.6108648234890568,
-      "r": 5.636427084815836,
+      "t": 2.472464749399609,
+      "r": 4.924533711517832,
       "theta": 1.5707963267948966,
       "phi": 0.0
     },
@@ -123,9 +123,9 @@
   "relation_states": [
     [
       false,
-      false,
-      false,
-      false,
+      true,
+      true,
+      true,
       false,
       false,
       false,
@@ -139,20 +139,6 @@
       false,
       false,
       true,
-      true,
-      true,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-    ],
-    [
-      false,
-      false,
-      false,
       false,
       false,
       false,
@@ -168,7 +154,21 @@
       false,
       false,
       false,
-      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
       false,
       false,
       false,
@@ -228,10 +228,10 @@
       false,
       false,
       false,
-      false,
-      false,
       true,
-      false
+      true,
+      true,
+      true
     ],
     [
       false,
@@ -241,11 +241,11 @@
       false,
       false,
       false,
-      true,
+      false,
+      false,
       false,
       true,
-      true,
-      true
+      false
     ],
     [
       false,
