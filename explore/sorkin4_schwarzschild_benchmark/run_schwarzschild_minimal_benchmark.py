@@ -782,7 +782,12 @@ def summarize_case(
     false_relations = sum(1 for i in range(n - 1) for j in range(i + 1, n) if states[i][j] is False)
     undecided_pairs = sum(1 for i in range(n - 1) for j in range(i + 1, n) if states[i][j] is None)
     decided_pairs = true_relations + false_relations
-    ordering_fraction = true_relations / decided_pairs if decided_pairs else 0.0
+    # ordering_fraction uses total possible pairs as denominator.  Undecided
+    # pairs are unknown (not non-causal) and must not inflate the denominator.
+    # solver_coverage is the fraction of pairs that the solver has decided; it
+    # is a bookkeeping metric, not a physical observable.
+    ordering_fraction = true_relations / possible_pairs if possible_pairs else 0.0
+    solver_coverage = decided_pairs / possible_pairs if possible_pairs else 0.0
     links = transitive_reduction_links(matrix)
     self_comparison = vs.compare_causal_orders(matrix, matrix)
 
@@ -809,18 +814,16 @@ def summarize_case(
         "direct_shooting_enabled": enable_shooting,
         "true_relations": true_relations,
         "false_relations": false_relations,
+        "undecided_pairs": undecided_pairs,
         "decided_pairs": decided_pairs,
-        "relations": true_relations,
+        "possible_pairs": possible_pairs,
         "ordering_fraction": ordering_fraction,
-        "ordering_fraction_decided": ordering_fraction,
-        "ordering_fraction_denominator": "decided_pairs",
+        "solver_coverage": solver_coverage,
         "links": len(links),
         "transitive_reduction_implemented": True,
         "antisymmetric": check_antisymmetric(matrix),
         "transitive_true_matrix": check_transitive(matrix),
         "decided_transitivity_no_false_contradictions": check_decided_transitivity(states),
-        "possible_pairs": possible_pairs,
-        "undecided_pairs": undecided_pairs,
         "warning": "undecided generic pairs remain" if undecided_pairs else "",
         "self_compare_exact_match": self_comparison.exact_match,
     }
