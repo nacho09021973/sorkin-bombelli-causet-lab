@@ -607,6 +607,7 @@ def summarize_horizon_case(
     n_exterior: int,
     n_interior: int,
     enable_exterior_shooting: bool,
+    enable_horizon_shooting: bool,
 ) -> dict[str, object]:
     n = len(events)
     rs = 2.0 * mass
@@ -636,9 +637,16 @@ def summarize_horizon_case(
     n_ext = sum(1 for e in events if e.r > rs + EPS)
     n_int = sum(1 for e in events if e.r < rs - EPS)
 
+    if enable_horizon_shooting:
+        status = "minimal_ief_radial_criterion_horizon_shooting"
+        exterior_to_interior = "ext->int radial exact plus non-radial plunging-null shooting"
+    else:
+        status = "minimal_ief_radial_criterion_nonradial_undecided"
+        exterior_to_interior = "ext->int radial exact; non-radial ext->int undecided"
+
     return {
         "benchmark": "S4 Schwarzschild horizon-crossing causal solver",
-        "status": "minimal_ief_radial_criterion_nonradial_undecided",
+        "status": status,
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "command": COMMAND,
         "N": n,
@@ -653,8 +661,8 @@ def summarize_horizon_case(
         "causal_model": (
             "IEF four-case criterion: ext-ext via He-Rideout (shooting="
             + str(enable_exterior_shooting)
-            + "); ext->int radial exact; int->ext always False; "
-            "int-int radial exact with outgoing-null upper bound; non-radial undecided"
+            + "); " + exterior_to_interior + "; int->ext always False; "
+            "int-int radial exact with outgoing-null upper bound; non-radial int-int undecided"
         ),
         "possible_pairs": possible_pairs,
         "true_relations": true_relations,
@@ -698,6 +706,7 @@ def run_horizon_case(
         mass=mass, seed=seed,
         n_exterior=n_exterior, n_interior=n_interior,
         enable_exterior_shooting=enable_exterior_shooting,
+        enable_horizon_shooting=enable_horizon_shooting,
     )
     summary["aligned_mode"] = aligned
     return events, matrix, states, summary
