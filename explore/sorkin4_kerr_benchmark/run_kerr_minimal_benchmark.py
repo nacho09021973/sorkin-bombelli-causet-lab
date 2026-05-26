@@ -39,7 +39,8 @@ ANGLE_EPS = 1.0e-12
 TIME_EPS = 1.0e-12
 LOCAL_CONE_MARGIN = 0.75
 LOCAL_CONE_EPS = 1.0e-9
-KERR_MODES = ("scaffold", "local_cone_diagnostic")
+RADIAL_PHI_EPS = 1.0e-9
+KERR_MODES = ("scaffold", "local_cone_diagnostic", "equatorial_scaffold")
 CALIBRATION_HEADERS = (
     "seed",
     "i",
@@ -88,7 +89,7 @@ def sample_radius_volume_weighted(rng: random.Random, r_min: float) -> float:
     return (r_min**3 + u * (R_MAX**3 - r_min**3)) ** (1.0 / 3.0)
 
 
-def generate_exterior_events(n: int, seed: int, r_min: float) -> list[Event]:
+def generate_exterior_events(n: int, seed: int, r_min: float, equatorial: bool = False) -> list[Event]:
     """Generate a reproducible bounded exterior point set."""
 
     rng = random.Random(seed)
@@ -97,7 +98,7 @@ def generate_exterior_events(n: int, seed: int, r_min: float) -> list[Event]:
         t = rng.uniform(T_MIN, T_MAX)
         r = sample_radius_volume_weighted(rng, r_min)
         cos_theta = rng.uniform(-1.0, 1.0)
-        theta = math.acos(cos_theta)
+        theta = math.pi / 2.0 if equatorial else math.acos(cos_theta)
         phi = rng.uniform(0.0, 2.0 * math.pi)
         events.append(Event(index=index, t=t, r=r, theta=theta, phi=phi))
     return sorted(events, key=lambda event: (event.t, event.r, event.theta, event.phi))
@@ -116,7 +117,16 @@ def angular_separation(p: Event, q: Event) -> float:
 def angular_delta(phi1: float, phi2: float) -> float:
     """Shortest signed azimuthal coordinate difference."""
 
-    return (phi2 - phi1 + math.pi) % (2.0 * math.pi) - math.pi
+    return signed_delta_phi(phi1, phi2)
+
+
+def signed_delta_phi(phi_i: float, phi_j: float) -> float:
+    """Shortest signed azimuthal difference in (-pi, pi]."""
+
+    delta = (phi_j - phi_i + math.pi) % (2.0 * math.pi) - math.pi
+    if delta <= -math.pi + ANGLE_EPS:
+        return math.pi
+    return delta
 
 
 def outgoing_radial_trip(r1: float, r2: float, mass: float) -> float:
@@ -305,6 +315,8 @@ def causal_relation_model(
         return causal_relation_schwarzschild(p, q, mass)
     if kerr_mode == "local_cone_diagnostic":
         return None
+    if kerr_mode == "equatorial_scaffold":
+        return None
     # TODO(S4-K): add a justified Kerr exterior causal criterion.
     return None
 
@@ -322,6 +334,41 @@ def count_local_cone_candidates(events: list[Event], mass: float, spin: float) -
             elif relation is False:
                 spacelike += 1
     return timelike, spacelike
+
+
+def equatorial_pair_diagnostics(events: list[Event], spin: float) -> dict[str, float | int]:
+    """Classify equatorial pair directions without deciding causality."""
+
+    prograde_pairs = 0
+    retrograde_pairs = 0
+    radial_ish_pairs = 0
+    abs_delta_phi_total = 0.0
+    delta_t_total = 0.0
+    pair_count = 0
+
+    for i in range(len(events) - 1):
+        for j in range(i + 1, len(events)):
+            delta_phi = signed_delta_phi(events[i].phi, events[j].phi)
+            abs_delta_phi = abs(delta_phi)
+            abs_delta_phi_total += abs_delta_phi
+            delta_t_total += events[j].t - events[i].t
+            pair_count += 1
+            if abs_delta_phi <= RADIAL_PHI_EPS:
+                radial_ish_pairs += 1
+            elif abs(spin) > 0.0 and delta_phi * spin > 0.0:
+                prograde_pairs += 1
+            elif abs(spin) > 0.0:
+                retrograde_pairs += 1
+
+    return {
+        "prograde_pairs": prograde_pairs,
+        "retrograde_pairs": retrograde_pairs,
+        "radial_ish_pairs": radial_ish_pairs,
+        "mean_abs_delta_phi": abs_delta_phi_total / pair_count if pair_count else 0.0,
+        "mean_delta_t": delta_t_total / pair_count if pair_count else 0.0,
+        "r_min_observed": min((event.r for event in events), default=0.0),
+        "r_max_observed": max((event.r for event in events), default=0.0),
+    }
 
 
 def build_relation_states(
@@ -385,6 +432,8 @@ def model_label(spin: float, kerr_mode: str) -> str:
         return "Schwarzschild a=0 regression: He & Rideout radial exact tests plus sufficient bounds; generic geodesic shooting TODO"
     if kerr_mode == "local_cone_diagnostic":
         return "Kerr local cone diagnostic, not global geodesic causal relation"
+    if kerr_mode == "equatorial_scaffold":
+        return "Kerr equatorial scaffold: prograde/retrograde diagnostics only; no global geodesic causal relation"
     return "Kerr exterior scaffold only: causal relations undecided; Kerr null geodesic criterion TODO"
 
 
@@ -409,16 +458,28 @@ def summarize_case(
     ordering_fraction = true_relations / decided_pairs if decided_pairs else 0.0
     failed_checks = failed_checks_for(matrix)
     local_diagnostic_active = abs(spin) > 0.0 and kerr_mode == "local_cone_diagnostic"
+    equatorial_active = kerr_mode == "equatorial_scaffold"
     local_timelike_candidates = 0
     local_spacelike_candidates = 0
     if local_diagnostic_active:
         local_timelike_candidates, local_spacelike_candidates = count_local_cone_candidates(events, mass, spin)
+    equatorial = equatorial_pair_diagnostics(events, spin) if equatorial_active else {
+        "prograde_pairs": 0,
+        "retrograde_pairs": 0,
+        "radial_ish_pairs": 0,
+        "mean_abs_delta_phi": 0.0,
+        "mean_delta_t": 0.0,
+        "r_min_observed": min((event.r for event in events), default=0.0),
+        "r_max_observed": max((event.r for event in events), default=0.0),
+    }
 
     return {
-        "benchmark": "S4-K2 Kerr exterior minimal diagnostic scaffold",
+        "benchmark": "S4-K3 Kerr exterior minimal diagnostic scaffold",
         "status": (
             "a0_schwarzschild_regression"
             if abs(spin) <= 0.0
+            else "kerr_equatorial_scaffold"
+            if equatorial_active
             else "kerr_local_cone_diagnostic"
             if local_diagnostic_active
             else "kerr_scaffold_pairs_undecided"
@@ -444,6 +505,13 @@ def summarize_case(
         "local_timelike_candidates": local_timelike_candidates,
         "local_spacelike_candidates": local_spacelike_candidates,
         "local_diagnostic_only": local_diagnostic_active,
+        "prograde_pairs": equatorial["prograde_pairs"],
+        "retrograde_pairs": equatorial["retrograde_pairs"],
+        "radial_ish_pairs": equatorial["radial_ish_pairs"],
+        "mean_abs_delta_phi": equatorial["mean_abs_delta_phi"],
+        "mean_delta_t": equatorial["mean_delta_t"],
+        "r_min_observed": equatorial["r_min_observed"],
+        "r_max_observed": equatorial["r_max_observed"],
         "undecided_pairs": undecided_pairs,
         "decided_pairs": decided_pairs,
         "ordering_fraction_decided": ordering_fraction,
@@ -455,6 +523,8 @@ def summarize_case(
         "warning": (
             "local cone diagnostic is not used as causal decision; failed a=0 calibration as False filter"
             if local_diagnostic_active
+            else "equatorial scaffold only; no Kerr geodesic causal decisions implemented"
+            if equatorial_active and abs(spin) > 0.0
             else ""
         ),
         "causal_relation_model": model_label(spin, kerr_mode),
@@ -497,6 +567,7 @@ def write_outputs(
             "For a=0, the relation model is the Schwarzschild benchmark subset.",
             "For scaffold mode, a!=0 null relation states mean undecided pairs, not non-relations.",
             "For local_cone_diagnostic mode, local metric-cone signs are counted but not used as relation decisions.",
+            "For equatorial_scaffold mode, theta is fixed to pi/2 and prograde/retrograde counts are diagnostic only.",
             "TODO(S4-K): justify and implement global Kerr exterior causal decisions.",
         ],
     }
@@ -687,7 +758,7 @@ def print_calibration_summary(summary: dict[str, object], csv_path: Path, json_p
 
 
 def print_summary(summary: dict[str, object], csv_path: Path, json_path: Path) -> None:
-    print("S4-K2 Kerr minimal benchmark")
+    print("S4-K3 Kerr minimal benchmark")
     print("Regime: exterior only, r > r_plus + margin")
     print(f"N={summary['N']} seed={summary['seed']}")
     print(
@@ -709,6 +780,16 @@ def print_summary(summary: dict[str, object], csv_path: Path, json_path: Path) -
         f"local_timelike_candidates={summary['local_timelike_candidates']} "
         f"local_spacelike_candidates={summary['local_spacelike_candidates']} "
         f"local_diagnostic_only={summary['local_diagnostic_only']}"
+    )
+    print(
+        f"prograde_pairs={summary['prograde_pairs']} "
+        f"retrograde_pairs={summary['retrograde_pairs']} "
+        f"mean_abs_delta_phi={summary['mean_abs_delta_phi']:.6g} "
+        f"mean_delta_t={summary['mean_delta_t']:.6g}"
+    )
+    print(
+        f"r_min_observed={summary['r_min_observed']:.12g} "
+        f"r_max_observed={summary['r_max_observed']:.12g}"
     )
     print(f"decided_pairs={summary['decided_pairs']}")
     print(f"ordering_fraction_decided={summary['ordering_fraction_decided']:.6g}")
@@ -775,7 +856,12 @@ def main() -> None:
 
     r_plus = kerr_horizon_radius(args.M, args.a)
     r_min = r_plus + args.r_min_margin
-    events = generate_exterior_events(args.N, args.seed, r_min)
+    events = generate_exterior_events(
+        args.N,
+        args.seed,
+        r_min,
+        equatorial=args.kerr_mode == "equatorial_scaffold",
+    )
     matrix, states = build_relation_states(events, args.M, args.a, args.kerr_mode)
     summary = summarize_case(
         events,
