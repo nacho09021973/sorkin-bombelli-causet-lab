@@ -1,0 +1,5 @@
+spin_a,M,N,seed,margin,r_plus,r_erg_eq,r_min_observed,all_points_exterior,min_Delta,min_g_rr,min_g_phiphi,max_abs_g_tphi,local_evaluated_pair_count,local_skipped_pair_count,local_max_abs_dr,local_max_abs_dphi,local_max_abs_dt,local_timelike_count,local_nullish_count,local_spacelike_count,global_true_relations,global_false_relations,global_undecided_pairs,schwarzschild_reduction_pass,frame_dragging_sign_pass,all_checks_pass
+0,1,12,1959,0.35,2,2,2.55819746857,true,1.42797935106,1.53640975645,6.5443742882,0,4,62,0.939602283406,0.410204176718,2.67699146842,1,0,3,1,60,5,true,false,true
+0.25,1,12,1959,0.35,1.96824583655,2,2.53198444031,true,1.40947632536,1.53202996001,6.52281359782,0.197473567388,4,62,0.942823061867,0.410204176718,2.67699146842,1,0,3,0,0,66,false,true,true
+0.5,1,12,1959,0.35,1.86602540378,2,2.44883542862,true,1.34912409923,1.51902969387,6.45097364245,0.408357371962,4,62,0.952645068267,0.410204176718,2.67699146842,1,0,3,0,0,66,false,true,true
+0.75,1,12,1959,0.35,1.66143782777,2,2.28890021611,true,1.22376376709,1.49782322126,6.29306662134,0.655336562704,4,62,0.969885183046,0.410204176718,2.67699146842,1,0,3,0,0,66,false,true,true

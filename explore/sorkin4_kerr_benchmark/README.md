@@ -47,6 +47,34 @@ K2 freezes these controls:
 The K2 artifact is
 `kerr_k2_equatorial_diagnostic_n12_seed1959.{csv,json,md}`.
 
+The K3 local cone diagnostic is `audit_kerr_k3_local_cone_001.py`.
+It is still conservative: no Kerr causal relations are decided.
+It fixes `theta = pi/2` and introduces the first genuine Kerr-geometry
+computation: the Boyer-Lindquist equatorial metric coefficients.
+
+K3 computes for each sub-extremal spin in `(0.0, 0.25, 0.5, 0.75)`:
+- `Delta = r² - 2Mr + a²`, `g_tt`, `g_tphi`, `g_rr`, `g_phiphi` at each
+  event point (Delta is computed explicitly before the metric call).
+- For small-displacement equatorial pairs satisfying `|dr| ≤ 1.0` and
+  `|dphi| ≤ 0.5 rad`, the local quadratic interval `ds²` at the midpoint
+  radius: `ds² = g_tt dt² + 2 g_tphi dt dphi + g_rr dr² + g_phiphi dphi²`.
+- Classification of each evaluated pair as `timelike_local_candidate`,
+  `nullish_local_candidate`, or `spacelike_local_candidate`.
+
+K3 freezes these controls:
+
+- `a=0.0` Schwarzschild reduction: `g_tphi = 0`, `g_rr = 1/(1-2M/r)`,
+  `g_phiphi = r²`, all exact to floating-point tolerance.
+- `a>0` frame-dragging sign: `g_tphi = -2Ma/r < 0` at all event points.
+- `a>0` global causal accounting: all unordered pairs remain undecided
+  with true `0`, false `0`, undecided `N*(N-1)/2`.
+- Local interval labels are **metric-sign diagnostics only**.  They do not
+  imply null geodesic connectivity, do not integrate Kerr geodesics, and do
+  not constitute a Kerr causal solver of any kind.
+
+The K3 artifact is
+`kerr_k3_local_cone_001_n12_seed1959.{csv,json,md}`.
+
 Interpretation:
 
 - The `a=0` branch is a regression/control gate.
