@@ -560,6 +560,66 @@ arrives no later than the target event time.  It is not a full numerical proof
 of the causal-boundary lemma: alternative branches and earlier-arrival checks
 remain a separate stronger audit.
 
+## S4 Exterior Turning-Branch Competitor Audit
+
+The exterior direct-shooting branch now has a separate diagnostic for the
+one-turn outgoing competitor.  The relevant competitor is not present for
+ingoing pairs: once the geodesic reaches its turning point, that point is the
+maximum `u`, so it cannot later reach a larger `u`.  The genuine one-turn
+case is outgoing and requires `u2 < u1 < u_turn < 1/(3M)`, which places both
+events outside the photon sphere.
+
+`audit_exterior_turning_branch.py` checks the short exterior sweep
+`N=12`, seeds `1959..1968`.  For the current direct-shooting pairs in that
+sweep it audits 64 outgoing direct branches and finds no one-turn branch that
+hits the same angular separation.  This is a useful falsifiable check of the
+current sample, not a proof that every possible alternative branch is slower.
+The output artifact is
+`schwarzschild_exterior_turning_branch_audit.json`, with regression coverage
+in `tests/test_sorkin4_exterior_turning_branch_audit.py`.
+
+The stronger C' diagnostic is
+`audit_exterior_turning_phase_space.py`.  It scans the outgoing competitor
+phase space on a finite grid with `r2 > r1 > 3M` and compares angular ranges
+before comparing arrival times:
+
+```text
+gap = phi_turning_min - phi_direct_max
+```
+
+On the current grid (`r1=3.1..12.0`, `r2<=20.0`, step `0.1`) all 11,205 grid
+points have positive gap, with minimum gap `0.1446478935306829`.  Thus the
+direct no-root branch and the one-turn branch have disjoint angular ranges on
+that finite grid.  This explains the short-sweep `no_turning_solution` result
+more directly, but remains a numerical phase-space audit rather than an
+analytic proof.
+
+The near-degenerate weak-field corner is tracked separately by
+`audit_exterior_turning_asymptotic.py`, with `r1=R`, `r2=R+eps`.  On the
+current grid
+
+```text
+R in {6, 8, 10, 12, 16, 20, 30, 50, 80, 120}
+eps in {1e-3, 3e-3, 1e-2, 3e-2, 1e-1, 3e-1, 1}
+```
+
+all 70 points again have positive angular gap.  The minimum is
+`0.004287200542867878` at `R=120`, `eps=0.001`; the recorded scaling columns
+suggest the leading small-gap behavior is closer to `O(R^-1/2)` than `O(R^-1)`.
+The local asymptotic note
+`schwarzschild_exterior_turning_asymptotic_note.md` gives the corresponding
+weak-field expansion:
+
+```text
+phi_direct_max  = 3 sqrt(3) M eps / R^2 + lower-order terms
+phi_turning_min = sqrt(2 eps / (R (1 - 3M/R))) + lower-order terms
+gap             ~ sqrt(2 eps / R) > 0
+```
+
+Thus in the dangerous corner the one-turn branch has a larger minimum angular
+sweep than the direct branch has maximum angular reach.  This remains a local
+asymptotic argument, not a global theorem.
+
 ## Why Schwarzschild Before Kerr
 
 The bibliography section identifies Schwarzschild as the strongest concrete
