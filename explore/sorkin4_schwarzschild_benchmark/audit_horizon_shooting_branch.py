@@ -226,6 +226,8 @@ def write_outputs(rows: list[dict[str, Any]], out_prefix: str) -> tuple[Path, Pa
         and row["dt_refine_rel_1024_2048"] <= 1.0e-8
         and row["local_phi_monotone"]
         and row["related_margin"] >= -horizon.TIME_EPS
+        and row["exterior_regular_minus_raw_abs"] is not None
+        and row["exterior_regular_minus_raw_abs"] <= 1.0e-12
         for row in rows
     )
 

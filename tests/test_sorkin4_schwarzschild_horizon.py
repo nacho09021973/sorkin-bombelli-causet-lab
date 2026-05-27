@@ -80,6 +80,7 @@ class SchwarzschildHorizonShootingBranchAuditTests(unittest.TestCase):
         self.assertTrue(self.audit["all_checks_pass"])
         self.assertLessEqual(self.audit["max_phi_error"], 1.0e-8)
         self.assertLessEqual(self.audit["max_dt_refine_rel_1024_2048"], 1.0e-8)
+        self.assertLessEqual(self.audit["max_exterior_regular_minus_raw_abs"], 1.0e-12)
 
     def test_each_crossing_link_passes_branch_audit_checks(self) -> None:
         for row in self.audit["rows"]:
@@ -89,6 +90,8 @@ class SchwarzschildHorizonShootingBranchAuditTests(unittest.TestCase):
             self.assertLessEqual(row["dt_refine_rel_1024_2048"], 1.0e-8)
             self.assertTrue(row["local_phi_monotone"])
             self.assertGreaterEqual(row["related_margin"], -horizon.TIME_EPS)
+            self.assertIsNotNone(row["exterior_regular_minus_raw_abs"])
+            self.assertLessEqual(row["exterior_regular_minus_raw_abs"], 1.0e-12)
 
 
 if __name__ == "__main__":
