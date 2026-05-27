@@ -1,0 +1,9 @@
+spin_a,M,N,seed,margin,radial_grid,r_plus,r_plus_shift,r_plus_shift_over_a2,r_min_evaluated,all_points_exterior,max_abs_g_tphi_minus_linear,max_abs_gphiphi_quadratic_residual,max_abs_grr_formula_residual,max_abs_gtphi_at_a0,max_abs_gphiphi_minus_r2_at_a0,max_abs_grr_schwarzschild_at_a0,horizon_quadratic_check_pass,frame_dragging_linear_check_pass,gphiphi_quadratic_check_pass,grr_formula_check_pass,schwarzschild_metric_limit_pass,global_true_relations,global_false_relations,global_undecided_pairs,all_checks_pass
+0,1,12,1959,0.35,2.5;3.0;4.0;6.0;10.0,2,0,,2.5,true,,,0,0,0,8.88178419700125e-16,true,true,true,true,true,1,60,5,true
+0.0001,1,12,1959,0.35,2.5;3.0;4.0;6.0;10.0,1.999999995,4.99999996961265e-09,0.499999996961265,2.5,true,0,1.4210854715202e-14,0,,,,true,true,true,true,true,0,0,66,true
+0.0003,1,12,1959,0.35,2.5;3.0;4.0;6.0;10.0,1.999999955,4.50000010587814e-08,0.500000011764238,2.5,true,0,0,0,,,,true,true,true,true,true,0,0,66,true
+0.001,1,12,1959,0.35,2.5;3.0;4.0;6.0;10.0,1.99999949999988,5.00000124858957e-07,0.500000124858957,2.5,true,0,0,0,,,,true,true,true,true,true,0,0,66,true
+0.003,1,12,1959,0.35,2.5;3.0;4.0;6.0;10.0,1.99999549998988,4.50001012497481e-06,0.500001124997201,2.5,true,0,1.4210854715202e-14,0,,,,true,true,true,true,true,0,0,66,true
+0.01,1,12,1959,0.35,2.5;3.0;4.0;6.0;10.0,1.99994999874994,5.00012500626035e-05,0.500012500626035,2.5,true,1.11022302462516e-16,1.4210854715202e-14,0,,,,true,true,true,true,true,0,0,66,true
+0.03,1,12,1959,0.35,2.5;3.0;4.0;6.0;10.0,1.99954989870441,0.000450101295588201,0.500112550653557,2.5,true,1.11022302462516e-16,7.105427357601e-15,0,,,,true,true,true,true,true,0,0,66,true
+0.1,1,12,1959,0.35,2.5;3.0;4.0;6.0;10.0,1.99498743710662,0.00501256289338015,0.501256289338014,2.5,true,1.11022302462516e-16,7.105427357601e-15,0,,,,true,true,true,true,true,0,0,66,true

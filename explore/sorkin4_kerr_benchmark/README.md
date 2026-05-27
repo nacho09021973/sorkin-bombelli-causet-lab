@@ -75,6 +75,47 @@ K3 freezes these controls:
 The K3 artifact is
 `kerr_k3_local_cone_001_n12_seed1959.{csv,json,md}`.
 
+The K4 Schwarzschild-limit audit is `audit_kerr_k4_schwarzschild_limit_001.py`.
+It is a **known-truth perturbative metric audit**, not a Kerr causal solver.
+
+It verifies the analytic `a -> 0` Schwarzschild limit of the Boyer-Lindquist
+equatorial metric, at a **fixed radial grid** `r = [2.5, 3.0, 4.0, 6.0, 10.0]`
+(invariant to spin, safely outside `r_+(a=0.1) + margin ≈ 2.345`).
+
+K4 sweeps `a = 0.0, 1e-4, 3e-4, 1e-3, 3e-3, 1e-2, 3e-2, 1e-1` and checks:
+
+1. **Schwarzschild limit at a=0**: `g_tphi = 0`, `g_rr = 1/(1-2M/r)`,
+   `g_phiphi = r²`, all within `1e-12`.
+2. **Frame-dragging linearity** (a>0): `|g_tphi/a - (-2M/r)| ≤ 1e-12`
+   (no catastrophic cancellation; both sides are O(M/r)).
+3. **Azimuthal quadratic** (a>0): `|g_phiphi - r² - a²(1+2M/r)| ≤ 1e-12`
+   (absolute residual; the ratio form `(g_phiphi-r²)/a²` has
+   catastrophic cancellation for small `a`).
+4. **g_rr formula** (all a): `g_rr = r²/Δ` (identity check, near machine epsilon).
+5. **Horizon quadratic shift** (0 < a ≤ 0.01): `|(2M-r_+)/a² - 1/(2M)| ≤ 1e-3`
+   (genuine O(a²) perturbative check; error ≈ a²/8 ≤ 1.25e-5 at a=0.01).
+
+K4 causal accounting follows K1/K2/K3 invariants:
+
+- `a=0`: Schwarzschild/Kerr scaffold control counts preserved.
+- `a>0`: all unordered pairs remain undecided
+  (true=0, false=0, undecided=N*(N-1)/2).
+
+K4 does NOT:
+
+- Implement Kerr causal inference of any kind.
+- Integrate null geodesics.
+- Claim global causal reachability.
+- Create causal true/false relations for `a != 0`.
+
+The K4 artifact is
+`kerr_k4_schwarzschild_limit_001_n12_seed1959.{csv,json,md,png}`.
+
+The PNG diagnostic figure shows perturbative scaling residuals vs. spin `a`
+on a log-scale x-axis (excluding `a=0`), in a 2×2 panel.
+
+---
+
 Interpretation:
 
 - The `a=0` branch is a regression/control gate.
