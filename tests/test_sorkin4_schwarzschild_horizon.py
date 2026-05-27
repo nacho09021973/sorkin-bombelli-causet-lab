@@ -1,11 +1,19 @@
 from __future__ import annotations
 
+import json
 import sys
 import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+
+AUDIT_JSON = (
+    ROOT
+    / "explore"
+    / "sorkin4_schwarzschild_benchmark"
+    / "schwarzschild_horizon_shooting_branch_audit.json"
+)
 
 from explore.sorkin4_schwarzschild_benchmark import run_schwarzschild_horizon_benchmark as horizon
 
@@ -47,6 +55,40 @@ class SchwarzschildHorizonShootingTests(unittest.TestCase):
         self.assertEqual(shooting["horizon_crossing_links"], 3)
         self.assertTrue(shooting["antisymmetric"])
         self.assertTrue(shooting["transitive"])
+
+
+class SchwarzschildHorizonShootingBranchAuditTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.assertTrue(
+            AUDIT_JSON.exists(),
+            msg=(
+                f"missing S4 horizon shooting branch audit at {AUDIT_JSON}; "
+                "run `python explore/sorkin4_schwarzschild_benchmark/"
+                "audit_horizon_shooting_branch.py`"
+            ),
+        )
+        with AUDIT_JSON.open(encoding="utf-8") as fh:
+            self.audit = json.load(fh)
+
+    def test_seed_range_and_crossing_link_count(self) -> None:
+        self.assertEqual(self.audit["seed_start"], 1)
+        self.assertEqual(self.audit["seed_stop"], 40)
+        self.assertEqual(self.audit["audited_crossing_links"], 16)
+        self.assertEqual(len(self.audit["rows"]), 16)
+
+    def test_summary_checks_pass_with_audited_tolerances(self) -> None:
+        self.assertTrue(self.audit["all_checks_pass"])
+        self.assertLessEqual(self.audit["max_phi_error"], 1.0e-8)
+        self.assertLessEqual(self.audit["max_dt_refine_rel_1024_2048"], 1.0e-8)
+
+    def test_each_crossing_link_passes_branch_audit_checks(self) -> None:
+        for row in self.audit["rows"]:
+            self.assertGreater(row["c2_over_critical"], 1.0)
+            self.assertEqual(row["positive_root_count"], 0)
+            self.assertLessEqual(row["phi_error"], 1.0e-8)
+            self.assertLessEqual(row["dt_refine_rel_1024_2048"], 1.0e-8)
+            self.assertTrue(row["local_phi_monotone"])
+            self.assertGreaterEqual(row["related_margin"], -horizon.TIME_EPS)
 
 
 if __name__ == "__main__":

@@ -544,6 +544,22 @@ Do not interpret residual `target_above_direct_max` undecided pairs as
 non-causal relations.  A `None` return is the correct diagnostic output for
 pairs that the algorithm cannot decide.
 
+## S4 Horizon-Crossing Direct-Branch Audit
+
+SORKIN-4 currently contains a diagnostic Schwarzschild horizon-crossing audit.
+The gauge issue has been corrected, horizon shooting is explicit and off by
+default, and the direct-branch audit reproduces the expected 16 crossing links
+for seeds 1..40.  The artifact is
+`schwarzschild_horizon_shooting_branch_audit.json`, with a regression test in
+`tests/test_sorkin4_schwarzschild_horizon.py`.
+
+This freezes the current direct plunging-branch audit only.  It checks that the
+accepted branch has no positive-root obstruction, reproduces the target angular
+separation within the recorded tolerance, has stable Simpson refinement, and
+arrives no later than the target event time.  It is not a full numerical proof
+of the causal-boundary lemma: alternative branches and earlier-arrival checks
+remain a separate stronger audit.
+
 ## Why Schwarzschild Before Kerr
 
 The bibliography section identifies Schwarzschild as the strongest concrete
