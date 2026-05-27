@@ -620,6 +620,36 @@ Thus in the dangerous corner the one-turn branch has a larger minimum angular
 sweep than the direct branch has maximum angular reach.  This remains a local
 asymptotic argument, not a global theorem.
 
+## S4 Aligned Horizon-Area Sweep
+
+`run_schwarzschild_area_sweep.py` provides a small aligned radial-strand sweep
+before any Kerr work.  It varies the Schwarzschild mass and formal horizon area
+
+```text
+A = 16 pi M^2
+```
+
+while keeping the diagnostic deliberately limited: `N_exterior=16`,
+`N_interior=8`, seeds `1..40`, aligned mode enabled, no non-radial undecided
+pairs.  This is a 1+1-like monotonicity diagnostic for the current IEF radial
+criterion, not a 4D Dou-Sorkin area-law measurement.
+
+Current aggregate:
+
+| M | A=16piM^2 | mean horizon links | std | min | max |
+|---:|---:|---:|---:|---:|---:|
+| 0.75 | 28.2743 | 2.775 | 2.37158 | 0 | 10 |
+| 1.00 | 50.2655 | 3.375 | 2.6428 | 0 | 11 |
+| 1.25 | 78.5398 | 3.8 | 2.63818 | 0 | 12 |
+| 1.50 | 113.097 | 4.575 | 2.78287 | 0 | 12 |
+| 1.75 | 153.938 | 4.9 | 2.498 | 1 | 12 |
+| 2.00 | 201.062 | 5.05 | 2.74727 | 1 | 12 |
+
+The mean horizon-link count is monotone non-decreasing over this mass grid, with
+zero order-check failures and full solver coverage in aligned mode.  The
+artifact is `schwarzschild_horizon_area_sweep.json`, with regression coverage
+in `tests/test_sorkin4_schwarzschild_area_sweep.py`.
+
 ## Why Schwarzschild Before Kerr
 
 The bibliography section identifies Schwarzschild as the strongest concrete
