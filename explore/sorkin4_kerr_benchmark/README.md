@@ -29,6 +29,24 @@ K1 freezes these controls:
 The K1 artifact is
 `kerr_k1_control_spin_sweep_n12_seed1959.{csv,json,md}`.
 
+The K2 equatorial diagnostic is `audit_kerr_k2_equatorial_diagnostic.py`.
+It keeps the same conservative boundary: no Kerr causal relations are decided.
+It fixes `theta = pi/2`, records the equatorial ergosphere radius `2M`, and
+counts only scaffold diagnostics such as exterior/ergosphere membership and
+signed prograde/retrograde azimuthal pairs.
+
+K2 freezes these controls:
+
+- `M=1`, `a = 0.0, 0.25, 0.5, 0.75`, and `r > r_+ + margin`.
+- `a=0.0` is the Schwarzschild control subset on equatorial points.
+- `a>0` leaves all unordered pairs undecided with true `0`, false `0`,
+  undecided `N*(N-1)/2`.
+- Prograde/retrograde counts are kinematic bookkeeping, not a frame-dragging
+  claim and not a causal-relation criterion.
+
+The K2 artifact is
+`kerr_k2_equatorial_diagnostic_n12_seed1959.{csv,json,md}`.
+
 Interpretation:
 
 - The `a=0` branch is a regression/control gate.
