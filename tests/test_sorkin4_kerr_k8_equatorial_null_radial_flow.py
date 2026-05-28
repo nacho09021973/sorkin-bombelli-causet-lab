@@ -15,8 +15,6 @@ import sys
 import unittest
 from pathlib import Path
 
-import pytest
-
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
@@ -465,7 +463,7 @@ class KerrK8ComputationTests(unittest.TestCase):
 
     def test_photon_impact_raises_inside_horizon(self):
         """photon_impact_parameter raises if Delta <= 0."""
-        with pytest.raises(ValueError):
+        with self.assertRaises(ValueError):
             photon_impact_parameter(0.5, MASS, 0.0, prograde=True)
 
     # --- run_audit smoke test ---
@@ -480,9 +478,9 @@ class KerrK8ComputationTests(unittest.TestCase):
         assert len(payload["rows"]) == len(DEFAULT_SPINS) * 3
 
     def test_run_audit_invalid_mass_raises(self):
-        with pytest.raises(ValueError, match="M=1"):
+        with self.assertRaisesRegex(ValueError, "M=1"):
             run_audit(mass=2.0)
 
     def test_run_audit_invalid_spin_raises(self):
-        with pytest.raises(ValueError, match=r"\|a\| < M"):
+        with self.assertRaisesRegex(ValueError, r"\|a\| < M"):
             run_audit(spins=(0.0, 1.0, 1.5))

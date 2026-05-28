@@ -324,6 +324,44 @@ error vs step index (semilog y); circular orbit radial drift vs spin (log y).
 
 ---
 
+## S4 Kerr K9: Equatorial Full RHS Preflight
+
+The K9 equatorial full-RHS preflight integrates the equatorial Kerr null
+first-order system
+
+- `dt/dlambda`
+- `dr/dlambda`
+- `dphi/dlambda`
+
+with a local fixed-step RK4 integrator, using known-truth control cases and
+short-interval circular hold diagnostics.
+
+K9 is a preflight diagnostic only:
+
+- It is not point-to-point shooting.
+- It does not decide causal reachability.
+- It does not classify sprinkled event pairs.
+- It is a preflight for a future geodesic integrator/shooter.
+
+Case families in K9:
+
+- `a=0, b=0` Schwarzschild radial controls (outgoing/ingoing), hard gate.
+- `a in {0.25,0.5,0.75}, b=0` safe radial-flow controls (outgoing/ingoing).
+- Circular photon-orbit hold diagnostics (prograde/retrograde) on short
+  intervals; these are drift diagnostics, not stability claims.
+
+Interpretation constraints:
+
+- `b=0` cases are safe radial-flow control cases, not generic Kerr null-geodesic
+  families.
+- Circular cases marked advisory are not used as evidence of orbital stability.
+- K9 remains outside global causal-reachability inference.
+
+The K9 artifact set is
+`kerr_k9_equatorial_full_rhs_preflight_001_n12_seed1959.{csv,json,md,png}`.
+
+---
+
 ## K1–K8 known-truth status (as of K8)
 
 What the K-sequence has verified by known-truth checks:
