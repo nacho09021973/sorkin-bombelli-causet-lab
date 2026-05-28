@@ -160,6 +160,51 @@ The PNG shows a 2×2 diagnostic panel: mean cone center vs spin, small-a
 linear scaling residuals, omega_± vs r for representative spins, and
 discriminant/width positivity vs spin.
 
+The K6 near-horizon convergence audit is `audit_kerr_k6_zamo_omega_horizon_001.py`.
+It is a **near-horizon convergence diagnostic**, not a Kerr causal solver.
+
+It verifies that the local ZAMO angular velocity
+`omega_ZAMO = -g_tphi/g_phiphi` (same as omega_center from K5) converges to
+the known-truth horizon angular velocity `Omega_H = a/(r_+^2 + a^2)` as
+`r -> r_+` from outside the horizon.  The convergence is linear in
+`delta = r - r_+`.
+
+K6 fixes `M=1`, sweeps `a = 0.0, 0.25, 0.5, 0.75, 0.9`, and evaluates
+`omega_ZAMO` at `r_+ + delta` for `delta = (1e-1, 3e-2, 1e-2, 3e-3, 1e-3)`.
+
+K6 freezes these controls:
+
+- `a=0`: `Omega_H = omega_ZAMO = 0` everywhere; trivially True by convention.
+- `a>0`: `omega_ZAMO < Omega_H` at all evaluation points (monotone from below).
+- `a>0`: residuals `|omega_ZAMO - Omega_H|` decrease strictly as `delta -> 0`,
+  consistent with `O(delta)` linear convergence.
+- Causal accounting: `a>0` => all global pairs undecided
+  (true=0, false=0, undecided=N*(N-1)/2).
+
+K6 does NOT:
+
+- Cross the horizon.
+- Implement Kerr causal inference of any kind.
+- Integrate null geodesics.
+- Claim global causal reachability.
+- Convergence of `omega_ZAMO` to `Omega_H` is a **local metric identity**,
+  not a causal relation.  It satisfies the level-A criterion from the Hawking
+  consistency guardrail (AGENTS.md): a closed-form identity check, not a
+  discrete pipeline rediscovery.
+
+Connection to the K-sequence: K5 measured `omega_ZAMO` asymmetry at fixed `r`;
+K6 measures `omega_ZAMO` convergence to `Omega_H` near the horizon.  Together
+they bridge local frame-dragging -> horizon angular velocity without crossing
+the Hawking/Bekenstein thermodynamic guardrail.
+
+The K6 artifact is
+`kerr_k6_zamo_omega_horizon_001_n12_seed1959.{csv,json,md,png}`.
+
+The PNG shows a 2×2 diagnostic panel: `omega_ZAMO` vs delta per spin (with
+`Omega_H` dashed), residual `|omega_ZAMO - Omega_H|` vs delta on a log-log
+scale with a slope-1 reference, `Omega_H` vs `a` (analytic curve + test
+points), and residual/delta vs delta (linear convergence rate plateau).
+
 ---
 
 Interpretation:

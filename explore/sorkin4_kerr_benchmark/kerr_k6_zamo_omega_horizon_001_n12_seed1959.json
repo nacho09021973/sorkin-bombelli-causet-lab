@@ -1,0 +1,484 @@
+{
+  "aggregate": {
+    "audit": "S4-KERR-K6-ZAMO-OMEGA-HORIZON-001",
+    "benchmark": "S4-K6 Kerr ZAMO angular velocity horizon convergence",
+    "generated_at_utc": "2026-05-28T07:22:03.279730+00:00",
+    "command": "python3 explore/sorkin4_kerr_benchmark/audit_kerr_k6_zamo_omega_horizon_001.py",
+    "N": 12,
+    "seed": 1959,
+    "M": 1.0,
+    "spins": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      0.9
+    ],
+    "deltas": [
+      0.1,
+      0.03,
+      0.01,
+      0.003,
+      0.001
+    ],
+    "margin": 0.35,
+    "possible_pairs": 66,
+    "all_checks_pass": true,
+    "positive_spin_cases_all_undecided": true,
+    "scope_note": "K6 is a near-horizon convergence diagnostic. It verifies that the ZAMO angular velocity omega_ZAMO = -g_tphi/g_phiphi converges to the horizon angular velocity Omega_H = a/(r_+^2+a^2) as r -> r_+ from outside the horizon. It does not cross the horizon, does not integrate null geodesics, and does not claim global causal reachability. Convergence of omega_ZAMO to Omega_H is a local metric identity, not a causal relation."
+  },
+  "spin_summaries": [
+    {
+      "spin_a": 0.0,
+      "r_plus": 2.0,
+      "Omega_H": 0.0,
+      "deltas": [
+        0.1,
+        0.03,
+        0.01,
+        0.003,
+        0.001
+      ],
+      "omega_zamo_values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "residuals": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "min_residual": 0.0,
+      "max_residual": 0.0,
+      "all_exterior": true,
+      "convergence_monotone_pass": true,
+      "omega_zamo_below_Omega_H": true,
+      "global_true_relations": 1,
+      "global_false_relations": 60,
+      "global_undecided_pairs": 5,
+      "all_checks_pass": true
+    },
+    {
+      "spin_a": 0.25,
+      "r_plus": 1.9682458365518543,
+      "Omega_H": 0.06350832689629156,
+      "deltas": [
+        0.1,
+        0.03,
+        0.01,
+        0.003,
+        0.001
+      ],
+      "omega_zamo_values": [
+        0.054936131003813685,
+        0.060761766421505735,
+        0.06257493684909468,
+        0.06322639268603343,
+        0.0634141649121238
+      ],
+      "residuals": [
+        0.008572195892477874,
+        0.002746560474785824,
+        0.0009333900471968776,
+        0.0002819342102581279,
+        9.416198416775656e-05
+      ],
+      "min_residual": 9.416198416775656e-05,
+      "max_residual": 0.008572195892477874,
+      "all_exterior": true,
+      "convergence_monotone_pass": true,
+      "omega_zamo_below_Omega_H": true,
+      "global_true_relations": 0,
+      "global_false_relations": 0,
+      "global_undecided_pairs": 66,
+      "all_checks_pass": true
+    },
+    {
+      "spin_a": 0.5,
+      "r_plus": 1.8660254037844386,
+      "Omega_H": 0.13397459621556135,
+      "deltas": [
+        0.1,
+        0.03,
+        0.01,
+        0.003,
+        0.001
+      ],
+      "omega_zamo_values": [
+        0.11640498179420816,
+        0.12836885681637725,
+        0.13207206366846455,
+        0.133400202726815,
+        0.13378278343259692
+      ],
+      "residuals": [
+        0.017569614421353186,
+        0.005605739399184101,
+        0.0019025325470967969,
+        0.0005743934887463553,
+        0.00019181278296442894
+      ],
+      "min_residual": 0.00019181278296442894,
+      "max_residual": 0.017569614421353186,
+      "all_exterior": true,
+      "convergence_monotone_pass": true,
+      "omega_zamo_below_Omega_H": true,
+      "global_true_relations": 0,
+      "global_false_relations": 0,
+      "global_undecided_pairs": 66,
+      "all_checks_pass": true
+    },
+    {
+      "spin_a": 0.75,
+      "r_plus": 1.6614378277661477,
+      "Omega_H": 0.22570811482256822,
+      "deltas": [
+        0.1,
+        0.03,
+        0.01,
+        0.003,
+        0.001
+      ],
+      "omega_zamo_values": [
+        0.19786419732931093,
+        0.21690176642244477,
+        0.2227274997798263,
+        0.2248091231909135,
+        0.22540799105561926
+      ],
+      "residuals": [
+        0.027843917493257292,
+        0.008806348400123454,
+        0.002980615042741913,
+        0.0008989916316547164,
+        0.00030012376694896203
+      ],
+      "min_residual": 0.00030012376694896203,
+      "max_residual": 0.027843917493257292,
+      "all_exterior": true,
+      "convergence_monotone_pass": true,
+      "omega_zamo_below_Omega_H": true,
+      "global_true_relations": 0,
+      "global_false_relations": 0,
+      "global_undecided_pairs": 66,
+      "all_checks_pass": true
+    },
+    {
+      "spin_a": 0.9,
+      "r_plus": 1.4358898943540672,
+      "Omega_H": 0.3133945031366293,
+      "deltas": [
+        0.1,
+        0.03,
+        0.01,
+        0.003,
+        0.001
+      ],
+      "omega_zamo_values": [
+        0.2774707524995803,
+        0.3021491029183358,
+        0.30960046596607577,
+        0.3122514786393082,
+        0.31301303567715094
+      ],
+      "residuals": [
+        0.035923750637049,
+        0.011245400218293511,
+        0.0037940371705535436,
+        0.0011430244973211212,
+        0.00038146745947836846
+      ],
+      "min_residual": 0.00038146745947836846,
+      "max_residual": 0.035923750637049,
+      "all_exterior": true,
+      "convergence_monotone_pass": true,
+      "omega_zamo_below_Omega_H": true,
+      "global_true_relations": 0,
+      "global_false_relations": 0,
+      "global_undecided_pairs": 66,
+      "all_checks_pass": true
+    }
+  ],
+  "rows": [
+    {
+      "spin_a": 0.0,
+      "M": 1.0,
+      "delta": 0.1,
+      "r_eval": 2.1,
+      "r_plus": 2.0,
+      "Omega_H": 0.0,
+      "omega_zamo": 0.0,
+      "residual_abs": 0.0,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.0,
+      "M": 1.0,
+      "delta": 0.03,
+      "r_eval": 2.03,
+      "r_plus": 2.0,
+      "Omega_H": 0.0,
+      "omega_zamo": 0.0,
+      "residual_abs": 0.0,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.0,
+      "M": 1.0,
+      "delta": 0.01,
+      "r_eval": 2.01,
+      "r_plus": 2.0,
+      "Omega_H": 0.0,
+      "omega_zamo": 0.0,
+      "residual_abs": 0.0,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.0,
+      "M": 1.0,
+      "delta": 0.003,
+      "r_eval": 2.003,
+      "r_plus": 2.0,
+      "Omega_H": 0.0,
+      "omega_zamo": 0.0,
+      "residual_abs": 0.0,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.0,
+      "M": 1.0,
+      "delta": 0.001,
+      "r_eval": 2.001,
+      "r_plus": 2.0,
+      "Omega_H": 0.0,
+      "omega_zamo": 0.0,
+      "residual_abs": 0.0,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.25,
+      "M": 1.0,
+      "delta": 0.1,
+      "r_eval": 2.068245836551854,
+      "r_plus": 1.9682458365518543,
+      "Omega_H": 0.06350832689629156,
+      "omega_zamo": 0.054936131003813685,
+      "residual_abs": 0.008572195892477874,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.25,
+      "M": 1.0,
+      "delta": 0.03,
+      "r_eval": 1.9982458365518543,
+      "r_plus": 1.9682458365518543,
+      "Omega_H": 0.06350832689629156,
+      "omega_zamo": 0.060761766421505735,
+      "residual_abs": 0.002746560474785824,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.25,
+      "M": 1.0,
+      "delta": 0.01,
+      "r_eval": 1.9782458365518543,
+      "r_plus": 1.9682458365518543,
+      "Omega_H": 0.06350832689629156,
+      "omega_zamo": 0.06257493684909468,
+      "residual_abs": 0.0009333900471968776,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.25,
+      "M": 1.0,
+      "delta": 0.003,
+      "r_eval": 1.9712458365518541,
+      "r_plus": 1.9682458365518543,
+      "Omega_H": 0.06350832689629156,
+      "omega_zamo": 0.06322639268603343,
+      "residual_abs": 0.0002819342102581279,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.25,
+      "M": 1.0,
+      "delta": 0.001,
+      "r_eval": 1.9692458365518541,
+      "r_plus": 1.9682458365518543,
+      "Omega_H": 0.06350832689629156,
+      "omega_zamo": 0.0634141649121238,
+      "residual_abs": 9.416198416775656e-05,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.5,
+      "M": 1.0,
+      "delta": 0.1,
+      "r_eval": 1.9660254037844387,
+      "r_plus": 1.8660254037844386,
+      "Omega_H": 0.13397459621556135,
+      "omega_zamo": 0.11640498179420816,
+      "residual_abs": 0.017569614421353186,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.5,
+      "M": 1.0,
+      "delta": 0.03,
+      "r_eval": 1.8960254037844386,
+      "r_plus": 1.8660254037844386,
+      "Omega_H": 0.13397459621556135,
+      "omega_zamo": 0.12836885681637725,
+      "residual_abs": 0.005605739399184101,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.5,
+      "M": 1.0,
+      "delta": 0.01,
+      "r_eval": 1.8760254037844386,
+      "r_plus": 1.8660254037844386,
+      "Omega_H": 0.13397459621556135,
+      "omega_zamo": 0.13207206366846455,
+      "residual_abs": 0.0019025325470967969,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.5,
+      "M": 1.0,
+      "delta": 0.003,
+      "r_eval": 1.8690254037844385,
+      "r_plus": 1.8660254037844386,
+      "Omega_H": 0.13397459621556135,
+      "omega_zamo": 0.133400202726815,
+      "residual_abs": 0.0005743934887463553,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.5,
+      "M": 1.0,
+      "delta": 0.001,
+      "r_eval": 1.8670254037844385,
+      "r_plus": 1.8660254037844386,
+      "Omega_H": 0.13397459621556135,
+      "omega_zamo": 0.13378278343259692,
+      "residual_abs": 0.00019181278296442894,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.75,
+      "M": 1.0,
+      "delta": 0.1,
+      "r_eval": 1.7614378277661478,
+      "r_plus": 1.6614378277661477,
+      "Omega_H": 0.22570811482256822,
+      "omega_zamo": 0.19786419732931093,
+      "residual_abs": 0.027843917493257292,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.75,
+      "M": 1.0,
+      "delta": 0.03,
+      "r_eval": 1.6914378277661477,
+      "r_plus": 1.6614378277661477,
+      "Omega_H": 0.22570811482256822,
+      "omega_zamo": 0.21690176642244477,
+      "residual_abs": 0.008806348400123454,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.75,
+      "M": 1.0,
+      "delta": 0.01,
+      "r_eval": 1.6714378277661477,
+      "r_plus": 1.6614378277661477,
+      "Omega_H": 0.22570811482256822,
+      "omega_zamo": 0.2227274997798263,
+      "residual_abs": 0.002980615042741913,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.75,
+      "M": 1.0,
+      "delta": 0.003,
+      "r_eval": 1.6644378277661476,
+      "r_plus": 1.6614378277661477,
+      "Omega_H": 0.22570811482256822,
+      "omega_zamo": 0.2248091231909135,
+      "residual_abs": 0.0008989916316547164,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.75,
+      "M": 1.0,
+      "delta": 0.001,
+      "r_eval": 1.6624378277661476,
+      "r_plus": 1.6614378277661477,
+      "Omega_H": 0.22570811482256822,
+      "omega_zamo": 0.22540799105561926,
+      "residual_abs": 0.00030012376694896203,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.9,
+      "M": 1.0,
+      "delta": 0.1,
+      "r_eval": 1.5358898943540673,
+      "r_plus": 1.4358898943540672,
+      "Omega_H": 0.3133945031366293,
+      "omega_zamo": 0.2774707524995803,
+      "residual_abs": 0.035923750637049,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.9,
+      "M": 1.0,
+      "delta": 0.03,
+      "r_eval": 1.4658898943540672,
+      "r_plus": 1.4358898943540672,
+      "Omega_H": 0.3133945031366293,
+      "omega_zamo": 0.3021491029183358,
+      "residual_abs": 0.011245400218293511,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.9,
+      "M": 1.0,
+      "delta": 0.01,
+      "r_eval": 1.4458898943540672,
+      "r_plus": 1.4358898943540672,
+      "Omega_H": 0.3133945031366293,
+      "omega_zamo": 0.30960046596607577,
+      "residual_abs": 0.0037940371705535436,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.9,
+      "M": 1.0,
+      "delta": 0.003,
+      "r_eval": 1.4388898943540671,
+      "r_plus": 1.4358898943540672,
+      "Omega_H": 0.3133945031366293,
+      "omega_zamo": 0.3122514786393082,
+      "residual_abs": 0.0011430244973211212,
+      "exterior_pass": true
+    },
+    {
+      "spin_a": 0.9,
+      "M": 1.0,
+      "delta": 0.001,
+      "r_eval": 1.436889894354067,
+      "r_plus": 1.4358898943540672,
+      "Omega_H": 0.3133945031366293,
+      "omega_zamo": 0.31301303567715094,
+      "residual_abs": 0.00038146745947836846,
+      "exterior_pass": true
+    }
+  ]
+}
