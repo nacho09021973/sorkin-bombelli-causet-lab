@@ -350,12 +350,25 @@ What the K-sequence has verified by known-truth checks:
   (machine precision); circular orbit drift < 1e-6; RHS consistency ≤ 2e-6
   for all tested spins (K8).
 
+**Addendum after K7–K8:**
+
+- K7 verifies the equatorial Kerr null radial potential `R(r; a, b)` and the
+  circular photon orbit conditions `R = 0` and `dR/dr = 0`, recovering the
+  Schwarzschild photon sphere (`r=3M`, `b=±3√3M`) exactly at `a=0`.
+- K8 integrates only the radial equation `dr/dλ = ±sqrt(R)/r²` for safe
+  control cases (`b=0`, circular-orbit starts) and verifies radial RHS
+  consistency, exterior support, circular-orbit drift control, and the
+  Schwarzschild radial-flow limit `r(λ) = r0 ± λ` to machine precision.
+
 What has NOT been shown:
 
-- No Kerr causal relations have been decided for `a != 0`.
-  All global pairs remain undecided (K1–K8 invariant).
-- Null geodesics have been integrated only with `b=0` (safe test case);
-  generic `b` trajectories, multi-angle integration, and angular evolution
+- No full Kerr geodesic integration: `t(λ)` and `φ(λ)` are not integrated;
+  K8 advances only the `r`-equation.
+- No point-to-point shooting between arbitrary events.
+- No causal reachability between sprinkled events; all global pairs remain
+  undecided for `a != 0` (K1–K8 invariant).
+- `b=0` in K8 is a safe radial-flow control case, not a generic Kerr
+  null-geodesic family; generic `b` trajectories and angular evolution
   `dphi/dlambda` are not yet implemented.
 - No global causal reachability has been claimed.
 - No Hawking/Bekenstein thermodynamic quantity has been reconstructed from
