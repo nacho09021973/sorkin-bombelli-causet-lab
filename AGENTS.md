@@ -58,6 +58,46 @@ Technical diagnostic: on the Phase2F grid, guarded warmup preserves all small-no
 - Schedule sensitivity is an algorithmic diagnostic to map, not a physical observable.
 - Phase2E/2F are warmup diagnostics. Phase4C/4D are optimizer-seed and robustness diagnostics.
 
+### Hawking consistency layer / established-law rediscovery
+
+Before any new causal, near-horizon, Kerr, or thermodynamic interpretation is
+claimed, the pipeline must first reproduce the established Schwarzschild/Kerr
+geometric and thermodynamic identities relevant to that interpretation.
+
+There are two distinct levels, and they must not be conflated:
+
+**A. Closed-form identity checks.**
+These verify that formulas are implemented correctly: e.g. r_+ = 2M,
+A = 16πM², κ = 1/(4M) for Schwarzschild; r_±, A, Ω_H, κ, T_H, S_BH for Kerr.
+Residuals are near machine precision because both sides use the same closed-form
+expression. These checks are useful as lightweight regression and unit guards
+against algebraic or implementation mistakes. They are not physical discovery
+and must not be presented as such.
+
+**B. Discrete pipeline rediscovery.**
+This is the substantive guardrail. It would mean that the discrete output of
+the causal-set pipeline — sprinklings, causal relations, links, horizon
+crossings, or horizon molecules — reconstructs known continuum horizon laws
+without those laws being hard-coded as the measured output. The pipeline output
+is the input; the continuum law is the target. This has not yet been achieved
+for Hawking/Bekenstein thermodynamics.
+
+The current project is **not yet at level B** for Hawking/Bekenstein
+thermodynamics. Therefore:
+
+- No standalone Hawking audit block or figure should be added unless it
+  directly protects active Kerr or near-horizon code that is already under
+  development.
+- Schwarzschild closed-form horizon identities (level A) may live as asserts
+  inside existing Schwarzschild horizon tests; they do not need a separate
+  audit script.
+- Kerr closed-form thermodynamic identities (level A) should be added only
+  when they guard active Kerr near-horizon or causal diagnostics that are
+  actively being extended.
+- The main active front remains the causal and geometric benchmark sequence
+  (K1–K4 and beyond). Hawking consistency is an epistemic guardrail, not a
+  parallel project to run alongside it.
+
 ---
 
 ## Biblioteca Archive (historical — read this for `biblioteca/` work)
