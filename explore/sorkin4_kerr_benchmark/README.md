@@ -205,9 +205,67 @@ The PNG shows a 2×2 diagnostic panel: `omega_ZAMO` vs delta per spin (with
 scale with a slope-1 reference, `Omega_H` vs `a` (analytic curve + test
 points), and residual/delta vs delta (linear convergence rate plateau).
 
+The K7 equatorial null-potential audit is
+`audit_kerr_k7_equatorial_null_potential_001.py`.
+It is an **analytic radial-potential known-truth audit**, not a Kerr causal
+solver.
+
+It verifies the Kerr equatorial null-geodesic radial potential
+
+```text
+R(r; a, b) = [r^2 + a^2 - a*b]^2 - Delta*(b - a)^2
+Delta = r^2 - 2*M*r + a^2
+```
+
+and its analytic derivative `dR/dr` at the circular photon orbit radii.
+
+K7 fixes `M=1`, sweeps `a = 0.0, 1e-4, 1e-3, 1e-2, 0.1, 0.25, 0.5, 0.75, 0.9`,
+and computes for each spin:
+- Prograde circular photon orbit radius:
+  `r_ph_pro = 2M[1 + cos((2/3)*arccos(-a/M))]`
+- Retrograde circular photon orbit radius:
+  `r_ph_retro = 2M[1 + cos((2/3)*arccos(+a/M))]`
+- Impact parameters:
+  `b_ph_pro = a + 2*r_ph_pro*sqrt(Delta(r_ph_pro))/(r_ph_pro - M)` (prograde, b>0)
+  `b_ph_retro = a - 2*r_ph_retro*sqrt(Delta(r_ph_retro))/(r_ph_retro - M)` (retrograde, b<0)
+- `R(r_ph_pro; b_ph_pro)`, `dR/dr` at `r_ph_pro`
+- `R(r_ph_retro; b_ph_retro)`, `dR/dr` at `r_ph_retro`
+
+K7 freezes these controls:
+
+- `a=0`: Schwarzschild photon sphere at `r=3M`, `b_pro=+3√3M`, `b_retro=-3√3M`.
+- All spins: `|R| <= 1e-9` and `|dR/dr| <= 1e-9` at circular orbit radii.
+- `a>0`: prograde orbit inside `3M`, retrograde orbit outside `3M`.
+- `a>0`: `b_pro > 0`, `b_retro < 0`.
+- Causal accounting: `a>0` => all global pairs undecided.
+
+K7 does NOT:
+
+- Integrate null geodesics.
+- Decide causal reachability between sprinkled events.
+- Create Kerr causal relations between any events.
+- Cross the Hawking/Bekenstein thermodynamic guardrail.
+
+It is a **preflight check** before any future Kerr geodesic integration.
+It satisfies the level-A criterion from the Hawking consistency guardrail
+(AGENTS.md): a closed-form identity check, not a discrete pipeline rediscovery.
+
+Connection to the K-sequence:
+- K5 measured local null slopes `dphi/dt` at fixed `r`.
+- K6 measured `omega_ZAMO` convergence to `Omega_H` near the horizon.
+- K7 introduces the radial potential `R(r; a, b)`, verifying the circular
+  photon orbit structure.
+
+The K7 artifact is
+`kerr_k7_equatorial_null_potential_001_n12_seed1959.{csv,json,md,png}`.
+
+The PNG shows a 2×2 diagnostic panel: circular photon orbit radii vs spin,
+impact parameters vs spin, residuals `|R|` and `|dR/dr|` on a log-log scale
+with the tolerance line, and photon orbit clearance above the horizon vs spin.
+
 ---
 
-## K1–K6 known-truth status (as of K6)
+## K1–K7 known-truth status (as of K7)
 
 What the K-sequence has verified by known-truth checks:
 
@@ -224,17 +282,23 @@ What the K-sequence has verified by known-truth checks:
   for `a > 0`; linear scaling `omega_center/a -> 2M/r³` for small `a` (K5).
 - Horizon angular velocity recovered from outside: `omega_ZAMO(r_+ + δ) -> Ω_H`
   with `O(δ)` linear convergence for `a = 0.25, 0.5, 0.75, 0.9` (K6).
+- Circular photon orbit structure: `R(r_ph; a, b_ph) = 0` and `dR/dr = 0`
+  at circular orbit radii for all spins to within 1e-9; prograde orbit inside
+  `3M`, retrograde outside `3M` for `a > 0`; exact Schwarzschild limit
+  `r_ph=3M`, `b=±3√3M` at `a=0` (K7).
 
 What has NOT been shown:
 
 - No Kerr causal relations have been decided for `a != 0`.
-  All global pairs remain undecided (K1–K6 invariant).
-- No null geodesics have been integrated.
+  All global pairs remain undecided (K1–K7 invariant).
+- No null geodesics have been integrated (K7 is a potential identity check,
+  not a geodesic integrator).
 - No global causal reachability has been claimed.
 - No Hawking/Bekenstein thermodynamic quantity has been reconstructed from
   the discrete pipeline output (level B of the Hawking guardrail, AGENTS.md).
-- The near-horizon convergence of `omega_ZAMO` to `Ω_H` is a closed-form
-  metric identity check (level A), not a causal-set rediscovery.
+- The circular photon orbit identity and the near-horizon omega_ZAMO convergence
+  are closed-form metric identity checks (level A), not discrete pipeline
+  rediscoveries.
 
 ---
 
