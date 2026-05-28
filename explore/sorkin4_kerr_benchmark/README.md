@@ -429,6 +429,30 @@ The K11 artifact set is
 
 ---
 
+## S4 Kerr K12: Equatorial Winding-Sector Audit
+
+K12 audits winding-sector bookkeeping on synthetic equatorial Kerr targets.
+Targets are forward-generated under controlled initial data and checked against
+sector residuals over tested winding indices `m`.
+
+K12 constraints:
+
+- synthetic targets only;
+- no sprinkling event pairs;
+- no causal reachability decisions;
+- no production Kerr causal classifier.
+
+Interpretation constraint:
+
+- `correct_sector_recovered` is synthetic bookkeeping only and not physical
+  causal reachability.
+- advisory near-photon-sphere winding probes are diagnostics only.
+
+The K12 artifact set is
+`kerr_k12_equatorial_winding_sector_audit_001_n12_seed1959.{csv,json,md,png}`.
+
+---
+
 ## K1–K11 Status Summary
 
 Verified through K11:
