@@ -207,6 +207,37 @@ points), and residual/delta vs delta (linear convergence rate plateau).
 
 ---
 
+## K1–K6 known-truth status (as of K6)
+
+What the K-sequence has verified by known-truth checks:
+
+- `a -> 0` Schwarzschild limit: Boyer-Lindquist equatorial metric reduces to
+  Schwarzschild exact to floating-point tolerance (K3, K4).
+- Frame-dragging sign: `g_tphi = -2Ma/r < 0` for all `a > 0` (K3).
+- Perturbative metric scaling: `g_tphi/a`, `g_phiphi - r²`, `g_rr = r²/Δ`,
+  and horizon shift `r_+ - 2M = O(a²)` all confirmed to within stated
+  tolerances across `a = 0` to `a = 0.1` (K4).
+- Local light cone structure: equatorial null slopes `omega_±` are real,
+  well-separated, and symmetric at `a=0`; discriminant positive at all
+  exterior points (K3, K5).
+- Prograde/retrograde asymmetry: `omega_center = -g_tphi/g_phiphi > 0`
+  for `a > 0`; linear scaling `omega_center/a -> 2M/r³` for small `a` (K5).
+- Horizon angular velocity recovered from outside: `omega_ZAMO(r_+ + δ) -> Ω_H`
+  with `O(δ)` linear convergence for `a = 0.25, 0.5, 0.75, 0.9` (K6).
+
+What has NOT been shown:
+
+- No Kerr causal relations have been decided for `a != 0`.
+  All global pairs remain undecided (K1–K6 invariant).
+- No null geodesics have been integrated.
+- No global causal reachability has been claimed.
+- No Hawking/Bekenstein thermodynamic quantity has been reconstructed from
+  the discrete pipeline output (level B of the Hawking guardrail, AGENTS.md).
+- The near-horizon convergence of `omega_ZAMO` to `Ω_H` is a closed-form
+  metric identity check (level A), not a causal-set rediscovery.
+
+---
+
 Interpretation:
 
 - The `a=0` branch is a regression/control gate.
