@@ -68,6 +68,7 @@ class KerrK11ArtifactTests(unittest.TestCase):
         for case in _load_json()["cases"]:
             assert case["target_was_forward_generated"] is True, case["case_id"]
             assert case["no_sprinkling_pair_used"] is True, case["case_id"]
+            assert case["no_global_causal_relations_decided"] is True, case["case_id"]
 
     def test_all_points_exterior(self):
         for case in _load_json()["cases"]:
@@ -107,6 +108,7 @@ class KerrK11ArtifactTests(unittest.TestCase):
             "does not use sprinkling event pairs",
             "does not decide causal reachability",
             "does not implement a production kerr causal classifier",
+            "synthetic_target_hit is not the same as physical causal reachability",
         ]
         for needle in required:
             assert needle in text, needle
@@ -121,4 +123,6 @@ class KerrK11ArtifactTests(unittest.TestCase):
         for row in _load_csv():
             assert _to_bool(row["target_was_forward_generated"]), row["case_id"]
             assert _to_bool(row["no_sprinkling_pair_used"]), row["case_id"]
+            assert _to_bool(row["no_global_causal_relations_decided"]), row["case_id"]
+            assert _to_bool(row["synthetic_known_answer_recovered"]) == _to_bool(row["synthetic_target_hit"]), row["case_id"]
             assert _to_bool(row["all_points_exterior"]), row["case_id"]

@@ -421,6 +421,8 @@ Interpretation constraints:
   not hidden.
 - `a>0` retains global control accounting invariants:
   true `0`, false `0`, undecided `66` (`N=12`).
+- S4-THERMO-001 remains a Level-A horizon/thermo guardrail, not Level-B
+  discrete rediscovery.
 
 The K11 artifact set is
 `kerr_k11_equatorial_shooting_sandbox_001_n12_seed1959.{csv,json,md,png}`.

@@ -288,6 +288,7 @@ def _case(
     )
     if unresolved:
         all_pass = False
+    synthetic_known_answer_recovered = synthetic_target_hit
 
     return {
         "case_id": case_id,
@@ -307,7 +308,9 @@ def _case(
         "solver_iterations": solver_iterations,
         "target_was_forward_generated": checks_extra["target_was_forward_generated"],
         "no_sprinkling_pair_used": checks_extra["no_sprinkling_pair_used"],
+        "no_global_causal_relations_decided": checks_extra["no_global_causal_relations_decided"],
         "synthetic_target_hit": checks_extra["synthetic_target_hit"],
+        "synthetic_known_answer_recovered": synthetic_known_answer_recovered,
         "endpoint_t_residual": dt,
         "endpoint_r_residual": dr,
         "endpoint_phi_residual": dphi,
@@ -411,7 +414,8 @@ def write_csv(rows: list[dict[str, Any]], path: Path) -> None:
         "case_id", "spin_a", "M", "E", "direction", "case_type", "r_plus", "r0",
         "lambda_true", "b_true", "b_recovered", "lambda_recovered", "bracket_found",
         "solver_converged", "solver_iterations", "target_was_forward_generated",
-        "no_sprinkling_pair_used", "synthetic_target_hit", "endpoint_t_residual",
+        "no_sprinkling_pair_used", "no_global_causal_relations_decided",
+        "synthetic_target_hit", "synthetic_known_answer_recovered", "endpoint_t_residual",
         "endpoint_r_residual", "endpoint_phi_residual", "endpoint_weighted_residual",
         "recovered_b_error", "recovered_lambda_error", "min_r", "max_r", "min_Delta",
         "min_R", "max_abs_null_residual", "max_abs_E_residual", "max_abs_L_residual",
@@ -452,6 +456,7 @@ def write_md(summary: dict[str, Any], path: Path) -> None:
         "K11 does not decide causal reachability.",
         "K11 does not implement a production Kerr causal classifier.",
         "synthetic_target_hit is not the same as physical causal reachability.",
+        "S4-THERMO-001 remains a Level-A horizon/thermo guardrail, not Level-B discrete rediscovery.",
         "Unresolved or unbracketed cases are allowed and are reported explicitly.",
         "",
         f"- Total cases: {summary['total_cases']}",

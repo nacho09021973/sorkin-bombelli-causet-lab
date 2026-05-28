@@ -6,6 +6,7 @@ K11 does not use sprinkling event pairs.
 K11 does not decide causal reachability.
 K11 does not implement a production Kerr causal classifier.
 synthetic_target_hit is not the same as physical causal reachability.
+S4-THERMO-001 remains a Level-A horizon/thermo guardrail, not Level-B discrete rediscovery.
 Unresolved or unbracketed cases are allowed and are reported explicitly.
 
 - Total cases: 10
