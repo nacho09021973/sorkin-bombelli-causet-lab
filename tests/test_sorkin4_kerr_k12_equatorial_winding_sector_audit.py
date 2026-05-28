@@ -87,6 +87,18 @@ class KerrK12ArtifactTests(unittest.TestCase):
                 assert c["best_sector_m"] == c["correct_sector_m"], c["case_id"]
                 assert abs(c["best_sector_residual"]) <= 1.0e-6, c["case_id"]
 
+    def test_has_nontrivial_plus_minus_one_sectors(self):
+        cases = _load_json()["cases"]
+        assert any((not c["advisory_only"]) and c["correct_sector_m"] == 1 for c in cases)
+        assert any((not c["advisory_only"]) and c["correct_sector_m"] == -1 for c in cases)
+
+    def test_lifted_sector_rows_recover_correct_sector(self):
+        for c in _load_json()["cases"]:
+            if (not c["advisory_only"]) and (not c["unresolved"]) and c["case_type"].startswith("synthetic_lifted_sector"):
+                assert c["best_sector_m"] == c["correct_sector_m"], c["case_id"]
+                assert c["correct_sector_recovered"] is True, c["case_id"]
+                assert c["synthetic_winding_sector_recovered"] is True, c["case_id"]
+
     def test_caveats_in_md_and_readme(self):
         text = (
             MD_PATH.read_text(encoding="utf-8").lower()
@@ -99,6 +111,8 @@ class KerrK12ArtifactTests(unittest.TestCase):
             "does not decide causal reachability",
             "does not implement a production kerr causal classifier",
             "correct_sector_recovered is not physical reachability",
+            "synthetic angular-lift bookkeeping cases",
+            "not physical multi-winding",
         ]
         for needle in required:
             assert needle in text, needle

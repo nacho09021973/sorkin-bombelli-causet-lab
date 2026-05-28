@@ -434,6 +434,8 @@ The K11 artifact set is
 K12 audits winding-sector bookkeeping on synthetic equatorial Kerr targets.
 Targets are forward-generated under controlled initial data and checked against
 sector residuals over tested winding indices `m`.
+K12 includes both: (1) physical low-winding synthetic trajectories and
+(2) synthetic angular-lift bookkeeping cases with `phi` shifted by `±2π`.
 
 K12 constraints:
 
@@ -446,6 +448,8 @@ Interpretation constraint:
 
 - `correct_sector_recovered` is synthetic bookkeeping only and not physical
   causal reachability.
+- lifted-sector cases are bookkeeping tests, not physical multi-winding
+  geodesic accumulation evidence.
 - advisory near-photon-sphere winding probes are diagnostics only.
 
 The K12 artifact set is

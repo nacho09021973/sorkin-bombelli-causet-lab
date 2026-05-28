@@ -57,8 +57,7 @@ def _wrap_to_pi(x: float) -> float:
 def _sector_metrics(phi_final: float, phi_target_full: float) -> tuple[float, int, dict[int, float], int, float]:
     delta_phi_raw = phi_target_full
     winding_m_estimate = int(round(delta_phi_raw / (2.0 * math.pi)))
-    phi_target_wrapped = _wrap_to_pi(phi_target_full)
-    residuals = {m: (phi_final - phi_target_wrapped + 2.0 * math.pi * m) for m in SECTOR_MS}
+    residuals = {m: (phi_final - phi_target_full + 2.0 * math.pi * m) for m in SECTOR_MS}
     best_m = min(SECTOR_MS, key=lambda m: abs(residuals[m]))
     best_res = residuals[best_m]
     return delta_phi_raw, winding_m_estimate, residuals, best_m, best_res
@@ -74,6 +73,7 @@ def _run_case(
     lambda_end: float,
     case_type: str,
     sign_expectation: str | None = None,
+    sector_lift_m: int = 0,
     advisory_only: bool = False,
 ) -> dict[str, Any]:
     # Forward-generate synthetic target.
@@ -87,7 +87,8 @@ def _run_case(
     phi_initial = shot["states"][0][2]
     t_initial = shot["states"][0][0]
     delta_t = t_final - t_initial
-    phi_target = phi_final - phi_initial
+    phi_target_raw = phi_final - phi_initial
+    phi_target = phi_target_raw + 2.0 * math.pi * sector_lift_m
     delta_phi_raw, winding_m_estimate, sector_residuals, best_sector_m, best_sector_residual = _sector_metrics(
         phi_final=phi_final, phi_target_full=phi_target
     )
@@ -135,6 +136,7 @@ def _run_case(
         "b": b,
         "direction": "outgoing" if direction > 0 else "ingoing",
         "case_type": case_type,
+        "sector_lift_m": sector_lift_m,
         "r_plus": kerr_horizon_radius(MASS, spin),
         "r0": r0,
         "lambda_end": lambda_end,
@@ -255,6 +257,35 @@ def build_cases() -> list[dict[str, Any]]:
             )
         )
 
+    # 3b) explicit lifted-sector bookkeeping checks (non-physical lifts)
+    for spin in (0.25, 0.5):
+        r_plus = kerr_horizon_radius(MASS, spin)
+        r0 = r_plus + schwarz.EXTERIOR_MARGIN + 1.3
+        cases.append(
+            _run_case(
+                case_id=f"k12_lifted_mplus1_a{spin:.2f}",
+                spin=spin,
+                b=+1.0,
+                direction=+1.0,
+                r0=r0,
+                lambda_end=0.25,
+                case_type="synthetic_lifted_sector_m_plus_1",
+                sector_lift_m=+1,
+            )
+        )
+        cases.append(
+            _run_case(
+                case_id=f"k12_lifted_mminus1_a{spin:.2f}",
+                spin=spin,
+                b=-1.0,
+                direction=+1.0,
+                r0=r0,
+                lambda_end=0.25,
+                case_type="synthetic_lifted_sector_m_minus_1",
+                sector_lift_m=-1,
+            )
+        )
+
     # 4) Optional advisory near-photon probe
     for spin in (0.25, 0.5):
         rph = photon_sphere_radius_pro(MASS, spin)
@@ -293,7 +324,7 @@ def build_cases() -> list[dict[str, Any]]:
 def write_csv(rows: list[dict[str, Any]], path: Path) -> None:
     fields = [
         "case_id", "spin_a", "M", "E", "b", "direction", "case_type", "r_plus", "r0",
-        "lambda_end", "delta_t", "delta_phi_raw", "winding_m_estimate", "correct_sector_m",
+        "lambda_end", "delta_t", "delta_phi_raw", "winding_m_estimate", "sector_lift_m", "correct_sector_m",
         "best_sector_m", "best_sector_residual", "correct_sector_recovered",
         "synthetic_winding_sector_recovered", "prograde_retrograde_sign_pass", "min_r",
         "max_r", "min_Delta", "min_R", "max_abs_null_residual", "max_abs_E_residual",
@@ -342,10 +373,13 @@ def write_md(summary: dict[str, Any], path: Path) -> None:
         "# S4-KERR-K12 equatorial winding-sector audit",
         "",
         "K12 audits winding-sector bookkeeping on synthetic targets.",
+        "K12 includes two levels: (1) physical low-winding synthetic trajectories; "
+        "(2) synthetic angular-lift bookkeeping cases with phi shifted by ±2π.",
         "It does not use sprinkling event pairs.",
         "It does not decide causal reachability.",
         "It does not implement a production Kerr causal classifier.",
         "correct_sector_recovered is not physical reachability.",
+        "Angular-lift cases test sector bookkeeping only, not physical multi-winding accumulation.",
         "advisory near-photon-sphere cases are diagnostics only.",
         "",
         f"- Total cases: {summary['total_cases']}",
