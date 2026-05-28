@@ -400,6 +400,33 @@ K10 is the final preflight before a future K11 shooting sandbox.
 
 ---
 
+## S4 Kerr K11: Equatorial Shooting Sandbox
+
+K11 is a synthetic known-answer shooting sandbox on equatorial Kerr null
+geodesics. Targets are generated first by forward integration from controlled
+initial data, and only then recovered by small deterministic shooting routines.
+
+K11 constraints:
+
+- synthetic known-answer targets only (forward-generated first);
+- no sprinkling event pairs;
+- no causal reachability decisions;
+- no production Kerr causal classifier.
+
+Interpretation constraints:
+
+- `synthetic_target_hit` means synthetic recovery in this sandbox only;
+  it is not a physical Kerr causal-reachability statement.
+- unresolved/unbracketed cases are allowed and must be reported explicitly,
+  not hidden.
+- `a>0` retains global control accounting invariants:
+  true `0`, false `0`, undecided `66` (`N=12`).
+
+The K11 artifact set is
+`kerr_k11_equatorial_shooting_sandbox_001_n12_seed1959.{csv,json,md,png}`.
+
+---
+
 ## K1–K8 known-truth status (as of K8)
 
 What the K-sequence has verified by known-truth checks:
