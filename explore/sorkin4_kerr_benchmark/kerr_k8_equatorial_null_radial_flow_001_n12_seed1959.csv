@@ -1,0 +1,13 @@
+spin_a,M,r_plus,case_id,r0,b,s,r_final,all_points_exterior,min_R,min_R_nonneg,rhs_max_error,rhs_consistency_pass,monotonic_pass,circular_drift,circular_drift_pass,schwarzschild_limit_error,schwarzschild_radial_limit_pass,global_true_relations,global_false_relations,global_undecided_pairs,no_global_causal_relations_decided,all_checks_pass
+0,1,2,outgoing_b0,5,0,1,7.49999999999999,true,625,true,3.5527136788005e-15,true,true,,true,8.88178419700125e-15,true,1,60,5,true,true
+0,1,2,ingoing_b0,10,0,-1,7.49999999999997,true,3164.06249999996,true,1.4210854715202e-14,true,true,,true,2.57571741713036e-14,true,1,60,5,true,true
+0,1,2,circular_pro,3,5.19615242270663,1,3,true,0,true,0,true,true,0,true,,true,1,60,5,true,true
+0.25,1,1.96824583655185,outgoing_b0,5,0,1,7.5027747827349,true,627.1875,true,2.1564768015736e-07,true,true,,true,,true,0,0,66,true,true
+0.25,1,1.96824583655185,ingoing_b0,10,0,-1,7.4987153969151,true,3166.34704938721,true,3.68361361413605e-08,true,true,,true,,true,0,0,66,true,true
+0.25,1,1.96824583655185,circular_pro,2.69545315101577,4.67535058235878,1,2.69545315101577,true,-1.4210854715202e-14,true,0,true,true,0,true,,true,0,0,66,true,true
+0.5,1,1.86602540378444,outgoing_b0,5,0,1,7.51106345068673,true,633.75,true,8.66795208054327e-07,true,true,,true,,true,0,0,66,true,true
+0.5,1,1.86602540378444,ingoing_b0,10,0,-1,7.49486301407415,true,3173.1934127518,true,1.47969991592944e-07,true,true,,true,,true,0,0,66,true,true
+0.5,1,1.86602540378444,circular_pro,2.34729635533386,4.09626665871387,1,2.34729635533386,true,-1.77635683940025e-15,true,0,true,true,0,true,,true,0,0,66,true,true
+0.75,1,1.66143782776615,outgoing_b0,5,0,1,7.52476087690786,true,644.6875,true,1.9659358332369e-06,true,true,,true,,true,0,0,66,true,true
+0.75,1,1.66143782776615,ingoing_b0,10,0,-1,7.48844710654603,true,3184.57971749304,true,3.35288015795854e-07,true,true,,true,,true,0,0,66,true,true
+0.75,1,1.66143782776615,circular_pro,1.91647241330344,3.40310145791443,1,1.91647241330344,true,-3.10862446895044e-15,true,0,true,true,0,true,,true,0,0,66,true,true

@@ -265,7 +265,66 @@ with the tolerance line, and photon orbit clearance above the horizon vs spin.
 
 ---
 
-## K1–K7 known-truth status (as of K7)
+## S4 Kerr K8: Equatorial Null Radial-Flow Preflight
+
+The K8 equatorial null radial-flow preflight is
+`audit_kerr_k8_equatorial_null_radial_flow_001.py`.
+It is a **first numerical ODE preflight audit**, not a Kerr causal solver.
+
+It integrates the equatorial Kerr null radial-flow equation
+
+```text
+dr/dlambda = s * sqrt(R(r; a, b)) / r^2     [Sigma = r^2 for theta=pi/2]
+s = +1 outgoing, -1 ingoing
+```
+
+using a local RK4 integrator (no new dependencies) and verifies
+known-truth trajectory properties.
+
+K8 fixes `M=1`, sweeps `a = 0.0, 0.25, 0.5, 0.75`, and for each spin
+runs three cases:
+
+- `outgoing_b0`: `r0=5M`, `b=0`, `s=+1`
+- `ingoing_b0`: `r0=10M`, `b=0`, `s=-1`
+- `circular_pro`: `r0=r_ph_pro`, `b=b_ph_pro`, `s=+1`
+
+The safe choice `b=0` gives `R(r; a, 0) = r²(r²+a²) + 2Ma²r ≥ 0` for all
+`r > 0`; no turning point for any `r > 0`.
+
+K8 freezes these controls:
+
+- All trajectory points remain exterior to the outer horizon.
+- `R(r) >= 0` along the trajectory (no forbidden-region excursion).
+- RHS consistency: max central-difference error ≤ 0.01 for all cases.
+- `b=0` outgoing/ingoing trajectories are monotonically increasing/decreasing.
+- Schwarzschild limit (`a=0`, `b=0`): `dr/dlambda = ±1` everywhere (constant);
+  `r(lambda) = r0 ± lambda`; RK4 error ≤ 1e-10 (machine precision).
+- Circular orbit drift: `|r_final - r0| < 1e-6` (advisory; prograde circular
+  orbit has `R ≈ 0`, so the RHS ≈ 0 and the trajectory barely moves).
+- Causal accounting: `a>0` => all global pairs undecided (K1–K8 invariant).
+
+K8 does NOT:
+
+- Decide causal reachability between sprinkled events.
+- Create Kerr causal relations between any pair.
+- Constitute a global Kerr causal solver of any kind.
+- Cross the Hawking/Bekenstein thermodynamic guardrail.
+
+Connection to the K-sequence:
+- K7 verified `R(r_ph; a, b_ph) = 0` and `dR/dr = 0` at circular photon orbit radii.
+- K8 takes the first numerical step: integrating `dr/dlambda = s*sqrt(R)/r^2`
+  with `b=0` (safe) trajectories and verifying the Schwarzschild limit exactly.
+
+The K8 artifact is
+`kerr_k8_equatorial_null_radial_flow_001_n12_seed1959.{csv,json,md,png}`.
+
+The PNG shows a 2×2 diagnostic panel: `b=0` outgoing trajectories `r(λ)` for
+all spins + analytic line (`a=0`); `b=0` ingoing trajectories; RHS consistency
+error vs step index (semilog y); circular orbit radial drift vs spin (log y).
+
+---
+
+## K1–K8 known-truth status (as of K8)
 
 What the K-sequence has verified by known-truth checks:
 
@@ -286,13 +345,18 @@ What the K-sequence has verified by known-truth checks:
   at circular orbit radii for all spins to within 1e-9; prograde orbit inside
   `3M`, retrograde outside `3M` for `a > 0`; exact Schwarzschild limit
   `r_ph=3M`, `b=±3√3M` at `a=0` (K7).
+- Equatorial null radial-flow integration: `dr/dlambda = s*sqrt(R)/r^2`
+  with `b=0` integrates correctly via RK4; Schwarzschild limit error ≤ 1e-10
+  (machine precision); circular orbit drift < 1e-6; RHS consistency ≤ 2e-6
+  for all tested spins (K8).
 
 What has NOT been shown:
 
 - No Kerr causal relations have been decided for `a != 0`.
-  All global pairs remain undecided (K1–K7 invariant).
-- No null geodesics have been integrated (K7 is a potential identity check,
-  not a geodesic integrator).
+  All global pairs remain undecided (K1–K8 invariant).
+- Null geodesics have been integrated only with `b=0` (safe test case);
+  generic `b` trajectories, multi-angle integration, and angular evolution
+  `dphi/dlambda` are not yet implemented.
 - No global causal reachability has been claimed.
 - No Hawking/Bekenstein thermodynamic quantity has been reconstructed from
   the discrete pipeline output (level B of the Hawking guardrail, AGENTS.md).
