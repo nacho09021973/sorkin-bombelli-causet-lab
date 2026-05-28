@@ -362,6 +362,44 @@ The K9 artifact set is
 
 ---
 
+## S4 Kerr K10: Equatorial Geodesic Segment Audit
+
+The K10 equatorial geodesic segment audit integrates complete
+initial-value Kerr null geodesic segments in the equatorial plane
+(`t(lambda), r(lambda), phi(lambda)`) using the K9 full-RHS/RK4 core.
+
+K10 is a preflight diagnostic only:
+
+- It does not do point-to-point shooting.
+- It does not solve boundary-value problems.
+- It does not decide causal reachability.
+- It does not classify sprinkled event pairs.
+- `Delta_phi` and `Delta_t` are diagnostics only, not evidence of endpoint
+  connection.
+
+Case families in K10:
+
+- `a=0, b=0` Schwarzschild radial controls (outgoing/ingoing), hard gate.
+- `a in {0.25,0.5,0.75}, b=0` safe control segments (outgoing/ingoing), not a
+  generic Kerr null family.
+- `a in {0.25,0.5,0.75}` non-circular safe segments with one positive-`b`
+  prograde and one negative-`b` retrograde case, only when `R(r;a,b)` stays
+  non-negative over the integration interval.
+- near-photon-sphere short segments (`b` near circular `b_ph`) to observe
+  angular accumulation and slow radial motion without capture/scattering
+  classification.
+
+K10 keeps the K-sequence causal accounting invariant for `a>0`:
+global true `0`, global false `0`, global undecided `N*(N-1)/2 = 66`
+(`N=12`).
+
+The K10 artifact set is
+`kerr_k10_equatorial_geodesic_segment_audit_001_n12_seed1959.{csv,json,md,png}`.
+
+K10 is the final preflight before a future K11 shooting sandbox.
+
+---
+
 ## K1–K8 known-truth status (as of K8)
 
 What the K-sequence has verified by known-truth checks:
