@@ -114,6 +114,52 @@ The K4 artifact is
 The PNG diagnostic figure shows perturbative scaling residuals vs. spin `a`
 on a log-scale x-axis (excluding `a=0`), in a 2×2 panel.
 
+The K5 prograde/retrograde local cone diagnostic is
+`audit_kerr_k5_prograde_retrograde_local_cone_001.py`.
+It is a **local null-slope diagnostic**, not a Kerr causal solver.
+
+It measures the local prograde/retrograde asymmetry of the equatorial Kerr
+light cone caused by the frame-dragging term g_tphi.  At fixed r with
+dr = dtheta = 0, imposing ds² = 0 gives:
+
+    omega_± = (-g_tphi ± sqrt(g_tphi² - g_tt g_phiphi)) / g_phiphi
+    omega_center = (omega_+ + omega_-)/2 = -g_tphi / g_phiphi
+    omega_width  = (omega_+ - omega_-)/2 = sqrt(disc) / g_phiphi
+
+K5 sweeps `a = 0.0, 1e-4, 3e-4, 1e-3, 3e-3, 1e-2, 3e-2, 1e-1, 0.25, 0.5, 0.75`
+at the same fixed radial grid `r = [2.5, 3.0, 4.0, 6.0, 10.0]` as K4 and checks:
+
+1. **Discriminant positivity** (all a): `disc > 0` outside the horizon.
+2. **Cone width positivity** (all a): `omega_width > 0`.
+3. **Exact center identity** (all a): `(omega_+ + omega_-)/2 = -g_tphi/g_phiphi`
+   (algebraic identity; residual ≤ 1e-12).
+4. **Schwarzschild symmetry** (a=0): `omega_+ = -omega_-`, `omega_center = 0`.
+5. **Frame-dragging sign** (a>0): `omega_center > 0`
+   (g_tphi < 0 tilts the cone in the prograde direction).
+6. **Linear scaling** (0<a≤0.01): `omega_center/a → 2M/r³`
+   (leading-order frame-dragging; residual ≤ 1e-4).
+
+K5 does NOT:
+
+- Implement Kerr causal inference of any kind.
+- Integrate null geodesics.
+- Claim global causal reachability.
+- Assert global causal relations.  Local null slopes are not global causal
+  relations.
+
+K5 causal accounting follows K1–K4 invariants:
+
+- `a=0`: Schwarzschild/Kerr scaffold control counts preserved.
+- `a>0`: all unordered pairs remain undecided
+  (true=0, false=0, undecided=N*(N-1)/2).
+
+The K5 artifact is
+`kerr_k5_prograde_retrograde_local_cone_001_n12_seed1959.{csv,json,md,png}`.
+
+The PNG shows a 2×2 diagnostic panel: mean cone center vs spin, small-a
+linear scaling residuals, omega_± vs r for representative spins, and
+discriminant/width positivity vs spin.
+
 ---
 
 Interpretation:
