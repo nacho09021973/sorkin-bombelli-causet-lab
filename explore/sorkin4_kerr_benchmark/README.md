@@ -457,6 +457,24 @@ The K12 artifact set is
 
 ---
 
+## S4 Kerr K13: Near-Photon Winding Probe
+
+K13 probes physical angular accumulation near photon-sphere neighborhoods on
+controlled equatorial initial-value segments.
+
+K13 constraints:
+
+- no sprinkling event pairs;
+- no causal reachability classification;
+- no production Kerr causal classifier.
+
+Interpretation constraint:
+
+- large `|Delta_phi|` in K13 is angular accumulation in an initial-value
+  segment, not endpoint reachability.
+
+---
+
 ## K1–K11 Status Summary
 
 Verified through K11:
