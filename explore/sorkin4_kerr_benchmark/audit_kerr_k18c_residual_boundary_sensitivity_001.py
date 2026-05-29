@@ -155,6 +155,11 @@ CAVEATS = [
 NULL_SHUFFLE_SEED = 19001
 NULL_SHUFFLE_N = 64
 
+# K19-002 proxy for a boundary/sampling-preserving null:
+# evaluate nearby endpoint substitutions, ranked by same-cloud coordinate
+# proximity to the original A and B endpoints.
+NULL_LOCAL_ENDPOINT_N = 64
+
 
 # ----------------------------------------------------------------------------
 # Reused residual evaluation: identical call site to K17d._probe_best.
@@ -310,6 +315,128 @@ def _pair_label_shuffle_null(pair: dict[str, Any], baseline_residual: float) -> 
     }
 
 
+def _phi_distance(x: float, y: float) -> float:
+    d = abs(x - y) % (2.0 * math.pi)
+    return min(d, 2.0 * math.pi - d)
+
+
+def _cloud_scales(events: list["kerr.Event"]) -> dict[str, float]:
+    ts = [e.t for e in events]
+    rs = [e.r for e in events]
+    phis = [e.phi for e in events]
+    return {
+        "t": max(max(ts) - min(ts), 1.0e-12),
+        "r": max(max(rs) - min(rs), 1.0e-12),
+        "phi": max(max(phis) - min(phis), 1.0e-12),
+    }
+
+
+def _endpoint_distance(
+    event: "kerr.Event", reference: "kerr.Event", scales: dict[str, float]
+) -> float:
+    dt = (event.t - reference.t) / scales["t"]
+    dr = (event.r - reference.r) / scales["r"]
+    dphi = _phi_distance(event.phi, reference.phi) / scales["phi"]
+    return math.sqrt(dt * dt + dr * dr + dphi * dphi)
+
+
+def _local_endpoint_null(pair: dict[str, Any], baseline_residual: float) -> dict[str, Any]:
+    """Evaluate a local endpoint-neighborhood null.
+
+    This is a first proxy for preserving boundary/sampling structure: A' and B'
+    are chosen from the same cloud and ranked by proximity to the original A and B
+    coordinates. The exact original pair is excluded.
+    """
+    events = list(pair["events"])
+    A0 = pair["A"]
+    B0 = pair["B"]
+    scales = _cloud_scales(events)
+
+    candidates = []
+    for a in events:
+        for b in events:
+            if a.index == b.index:
+                continue
+            if a.index == CAND_A_INDEX and b.index == CAND_B_INDEX:
+                continue
+            d_a = _endpoint_distance(a, A0, scales)
+            d_b = _endpoint_distance(b, B0, scales)
+            candidates.append((d_a + d_b, d_a, d_b, a, b))
+
+    candidates.sort(key=lambda x: (x[0], x[1], x[2], x[3].index, x[4].index))
+    selected = candidates[: min(NULL_LOCAL_ENDPOINT_N, len(candidates))]
+
+    samples = []
+    for score, d_a, d_b, a, b in selected:
+        out = _eval_residual(
+            CAND_SPIN,
+            a,
+            b,
+            b=K17D_BEST_B,
+            lam=K17D_BEST_LAMBDA,
+            direction=CAND_DIRECTION,
+        )
+        samples.append(
+            {
+                "A_index": a.index,
+                "B_index": b.index,
+                "local_score": score,
+                "A_distance_to_baseline_A": d_a,
+                "B_distance_to_baseline_B": d_b,
+                **out,
+            }
+        )
+
+    finite = [
+        float(s["weighted_residual"])
+        for s in samples
+        if math.isfinite(float(s["weighted_residual"]))
+    ]
+    finite_sorted = sorted(finite)
+
+    if finite_sorted:
+        n_better_or_equal = sum(1 for x in finite_sorted if x <= baseline_residual)
+        rank_fraction_lower_is_better = n_better_or_equal / len(finite_sorted)
+        summary = {
+            "finite_n": len(finite_sorted),
+            "min": finite_sorted[0],
+            "median": finite_sorted[len(finite_sorted) // 2],
+            "max": finite_sorted[-1],
+            "n_better_or_equal_to_baseline": n_better_or_equal,
+            "rank_fraction_lower_is_better": rank_fraction_lower_is_better,
+            "baseline_below_all_nulls": baseline_residual < finite_sorted[0],
+        }
+    else:
+        summary = {
+            "finite_n": 0,
+            "min": None,
+            "median": None,
+            "max": None,
+            "n_better_or_equal_to_baseline": None,
+            "rank_fraction_lower_is_better": None,
+            "baseline_below_all_nulls": False,
+        }
+
+    return {
+        "kind": "local_endpoint_neighborhood_same_cloud",
+        "requested_n": NULL_LOCAL_ENDPOINT_N,
+        "evaluated_n": len(selected),
+        "fixed_b": K17D_BEST_B,
+        "fixed_lambda": K17D_BEST_LAMBDA,
+        "fixed_direction": CAND_DIRECTION_LABEL,
+        "baseline_weighted_residual": baseline_residual,
+        "distance_definition": "normalized Euclidean distance in (t,r,phi) with circular phi separation",
+        "summary": summary,
+        "samples": samples,
+        "guardrails": [
+            "local endpoint null is only a boundary/sampling-preserving proxy",
+            "same-cloud local substitutions preserve endpoint coordinate neighborhoods but not exact causal relation",
+            "lower weighted_residual is better under the reused K17d/K18C objective",
+            "no new metric or causal truth label is introduced",
+        ],
+    }
+
+
 # ----------------------------------------------------------------------------
 # Pre-registered classification of a 1D cut.
 # ----------------------------------------------------------------------------
@@ -388,6 +515,9 @@ def run() -> dict[str, Any]:
     null_pair_label_shuffle = _pair_label_shuffle_null(
         pair, baseline_residual=repro["weighted_residual"]
     )
+    null_local_endpoint = _local_endpoint_null(
+        pair, baseline_residual=repro["weighted_residual"]
+    )
 
     class_b = _classify_cut(b_cut, "b", extension_is_increasing=True)
     class_lambda = _classify_cut(lambda_cut, "lambda", extension_is_increasing=False)
@@ -410,6 +540,7 @@ def run() -> dict[str, Any]:
             "reproduced": repro_ok,
         },
         "null_pair_label_shuffle": null_pair_label_shuffle,
+        "null_local_endpoint": null_local_endpoint,
         "b_cut": b_cut,
         "lambda_cut": lambda_cut,
         "corner": corner,
@@ -527,6 +658,38 @@ def _null_shuffle_table(null_result: dict[str, Any]) -> list[str]:
         lines.append(
             f"| {_fmt(p['A_index'])} | {_fmt(p['B_index'])} | {_fmt(p['weighted_residual'])} | "
             f"{_fmt(p['best_sector_m'])} | {_fmt(p['t_residual'])} | {_fmt(p['r_residual'])} | "
+            f"{_fmt(p['phi_residual_sector_adjusted'])} |"
+        )
+    return lines
+
+
+def _local_endpoint_null_table(null_result: dict[str, Any]) -> list[str]:
+    summary = null_result["summary"]
+    lines = [
+        "K19-002 proxy: same-cloud local endpoint-neighborhood null.",
+        "",
+        f"- requested_n = {null_result['requested_n']}",
+        f"- evaluated_n = {null_result['evaluated_n']}",
+        f"- fixed b = {null_result['fixed_b']}",
+        f"- fixed lambda = {null_result['fixed_lambda']}",
+        f"- fixed direction = {null_result['fixed_direction']}",
+        f"- baseline weighted_residual = {_fmt(null_result['baseline_weighted_residual'])}",
+        f"- distance definition = {null_result['distance_definition']}",
+        f"- finite null n = {_fmt(summary['finite_n'])}",
+        f"- null min / median / max = {_fmt(summary['min'])} / {_fmt(summary['median'])} / {_fmt(summary['max'])}",
+        f"- null samples with residual <= baseline = {_fmt(summary['n_better_or_equal_to_baseline'])}",
+        f"- rank_fraction_lower_is_better = {_fmt(summary['rank_fraction_lower_is_better'])}",
+        f"- baseline_below_all_nulls = {summary['baseline_below_all_nulls']}",
+        "",
+        "| A_index | B_index | local_score | A_dist | B_dist | weighted_residual | best_sector_m | t_residual | r_residual | phi_residual_sector_adj |",
+        "|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    for p in null_result["samples"]:
+        lines.append(
+            f"| {_fmt(p['A_index'])} | {_fmt(p['B_index'])} | {_fmt(p['local_score'])} | "
+            f"{_fmt(p['A_distance_to_baseline_A'])} | {_fmt(p['B_distance_to_baseline_B'])} | "
+            f"{_fmt(p['weighted_residual'])} | {_fmt(p['best_sector_m'])} | "
+            f"{_fmt(p['t_residual'])} | {_fmt(p['r_residual'])} | "
             f"{_fmt(p['phi_residual_sector_adjusted'])} |"
         )
     return lines
@@ -686,6 +849,23 @@ def write_artifacts(result: dict[str, Any]) -> tuple[Path, Path]:
         "",
     ]
 
+    lines += ["## K19-002 exploratory null: local endpoint neighborhood", ""]
+    lines += _local_endpoint_null_table(result["null_local_endpoint"])
+    lines += [
+        "",
+        "Reading: this proxy asks whether the reproduced baseline endpoint pair remains "
+        "exceptional when endpoints are substituted by nearby same-cloud events. This "
+        "preserves endpoint sampling neighborhoods better than the global pair-label "
+        "shuffle, but it is still not a full boundary/sampling-preserving null.",
+        "",
+        "K19-002 verdict: if baseline_below_all_nulls is true and zero local endpoint "
+        "substitutions match or improve the baseline, the reproduced K18B endpoint pair "
+        "survives this first boundary/sampling proxy. If not, the residual may be "
+        "explainable by local sampling/boundary structure rather than a robust Kerr-like "
+        "relation.",
+        "",
+    ]
+
     lines += ["## Classification: INTERIOR / RUNAWAY / INCONCLUSIVE", ""]
     lines += [
         f"- b-cut: **{result['classification_b_cut']}**",
@@ -766,6 +946,7 @@ def write_artifacts(result: dict[str, Any]) -> tuple[Path, Path]:
         "provenance": result["provenance"],
         "reproduction": result["reproduction"],
         "null_pair_label_shuffle": result["null_pair_label_shuffle"],
+        "null_local_endpoint": result["null_local_endpoint"],
         "b_cut": result["b_cut"],
         "lambda_cut": result["lambda_cut"],
         "corner": result["corner"],
