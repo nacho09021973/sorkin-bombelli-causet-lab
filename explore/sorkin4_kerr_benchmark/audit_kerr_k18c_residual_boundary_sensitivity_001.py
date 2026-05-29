@@ -46,6 +46,7 @@ from __future__ import annotations
 
 import json
 import math
+import random
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -141,6 +142,19 @@ CAVEATS = [
     "this audit is local to ONE K18A/K18B candidate family",
 ]
 
+# ----------------------------------------------------------------------------
+# K19 exploratory add-on: pair-label shuffle null.
+#
+# This is deliberately minimal:
+#   - same cloud
+#   - same residual evaluator
+#   - same b/lambda/direction as the reproduced K17d/K18B point
+#   - no new metric
+#   - no causal truth labels
+# ----------------------------------------------------------------------------
+NULL_SHUFFLE_SEED = 19001
+NULL_SHUFFLE_N = 64
+
 
 # ----------------------------------------------------------------------------
 # Reused residual evaluation: identical call site to K17d._probe_best.
@@ -183,7 +197,7 @@ def _build_fixed_pair() -> dict[str, Any]:
     emap = {e.index: e for e in events}
     A = emap[CAND_A_INDEX]
     B = emap[CAND_B_INDEX]
-    return {"r_plus": r_plus, "A": A, "B": B, "n_events": len(events)}
+    return {"r_plus": r_plus, "A": A, "B": B, "events": events, "n_events": len(events)}
 
 
 def _provenance_check(A: "kerr.Event", B: "kerr.Event") -> dict[str, Any]:
@@ -205,6 +219,94 @@ def _provenance_check(A: "kerr.Event", B: "kerr.Event") -> dict[str, Any]:
         "event_B_matches_k18b": b_ok,
         "A": {"t": A.t, "r": A.r, "phi": A.phi},
         "B": {"t": B.t, "r": B.r, "phi": B.phi},
+    }
+
+
+def _pair_label_shuffle_null(pair: dict[str, Any], baseline_residual: float) -> dict[str, Any]:
+    """Evaluate a minimal same-cloud pair-label shuffle null.
+
+    The null breaks the specific A/B endpoint assignment while preserving the
+    generated cloud, spin, b/lambda point, direction, and residual evaluator.
+    This is an exploratory K19 audit add-on, not a causal classifier.
+    """
+    events = list(pair["events"])
+    candidates = [
+        (a, b)
+        for a in events
+        for b in events
+        if a.index != b.index
+        and not (a.index == CAND_A_INDEX and b.index == CAND_B_INDEX)
+    ]
+
+    rng = random.Random(NULL_SHUFFLE_SEED)
+    sample_n = min(NULL_SHUFFLE_N, len(candidates))
+    sampled = rng.sample(candidates, sample_n)
+
+    samples = []
+    for a, b in sampled:
+        out = _eval_residual(
+            CAND_SPIN,
+            a,
+            b,
+            b=K17D_BEST_B,
+            lam=K17D_BEST_LAMBDA,
+            direction=CAND_DIRECTION,
+        )
+        samples.append(
+            {
+                "A_index": a.index,
+                "B_index": b.index,
+                **out,
+            }
+        )
+
+    finite = [
+        float(s["weighted_residual"])
+        for s in samples
+        if math.isfinite(float(s["weighted_residual"]))
+    ]
+    finite_sorted = sorted(finite)
+
+    if finite_sorted:
+        n_better_or_equal = sum(1 for x in finite_sorted if x <= baseline_residual)
+        rank_fraction_lower_is_better = n_better_or_equal / len(finite_sorted)
+        summary = {
+            "finite_n": len(finite_sorted),
+            "min": finite_sorted[0],
+            "median": finite_sorted[len(finite_sorted) // 2],
+            "max": finite_sorted[-1],
+            "n_better_or_equal_to_baseline": n_better_or_equal,
+            "rank_fraction_lower_is_better": rank_fraction_lower_is_better,
+            "baseline_below_all_nulls": baseline_residual < finite_sorted[0],
+        }
+    else:
+        summary = {
+            "finite_n": 0,
+            "min": None,
+            "median": None,
+            "max": None,
+            "n_better_or_equal_to_baseline": None,
+            "rank_fraction_lower_is_better": None,
+            "baseline_below_all_nulls": False,
+        }
+
+    return {
+        "kind": "pair_label_shuffle_same_cloud",
+        "seed": NULL_SHUFFLE_SEED,
+        "requested_n": NULL_SHUFFLE_N,
+        "evaluated_n": sample_n,
+        "fixed_b": K17D_BEST_B,
+        "fixed_lambda": K17D_BEST_LAMBDA,
+        "fixed_direction": CAND_DIRECTION_LABEL,
+        "baseline_weighted_residual": baseline_residual,
+        "summary": summary,
+        "samples": samples,
+        "guardrails": [
+            "pair-label shuffle is a causal-destroyed null, not a boundary-preserving null",
+            "same-cloud shuffle preserves the generated event cloud but not the selected endpoint relation",
+            "lower weighted_residual is better under the reused K17d/K18C objective",
+            "no new metric or causal truth label is introduced",
+        ],
     }
 
 
@@ -283,6 +385,10 @@ def run() -> dict[str, Any]:
         and abs(repro["weighted_residual"] - REF_RESIDUAL_AT_BEST) <= 1.0e-9
     )
 
+    null_pair_label_shuffle = _pair_label_shuffle_null(
+        pair, baseline_residual=repro["weighted_residual"]
+    )
+
     class_b = _classify_cut(b_cut, "b", extension_is_increasing=True)
     class_lambda = _classify_cut(lambda_cut, "lambda", extension_is_increasing=False)
     overall = _combine(class_b, class_lambda)
@@ -303,6 +409,7 @@ def run() -> dict[str, Any]:
             "reference_residual_at_best": REF_RESIDUAL_AT_BEST,
             "reproduced": repro_ok,
         },
+        "null_pair_label_shuffle": null_pair_label_shuffle,
         "b_cut": b_cut,
         "lambda_cut": lambda_cut,
         "corner": corner,
@@ -392,6 +499,36 @@ def _corner_table(points: list[dict[str, Any]]) -> list[str]:
         for la in CORNER_LAMBDA_GRID:
             row.append(_fmt(cell.get((b, la), float("inf"))))
         lines.append("| " + " | ".join(row) + " |")
+    return lines
+
+
+def _null_shuffle_table(null_result: dict[str, Any]) -> list[str]:
+    summary = null_result["summary"]
+    lines = [
+        "Minimal K19 exploratory add-on: same-cloud pair-label shuffle null.",
+        "",
+        f"- seed = {null_result['seed']}",
+        f"- requested_n = {null_result['requested_n']}",
+        f"- evaluated_n = {null_result['evaluated_n']}",
+        f"- fixed b = {null_result['fixed_b']}",
+        f"- fixed lambda = {null_result['fixed_lambda']}",
+        f"- fixed direction = {null_result['fixed_direction']}",
+        f"- baseline weighted_residual = {_fmt(null_result['baseline_weighted_residual'])}",
+        f"- finite null n = {_fmt(summary['finite_n'])}",
+        f"- null min / median / max = {_fmt(summary['min'])} / {_fmt(summary['median'])} / {_fmt(summary['max'])}",
+        f"- null samples with residual <= baseline = {_fmt(summary['n_better_or_equal_to_baseline'])}",
+        f"- rank_fraction_lower_is_better = {_fmt(summary['rank_fraction_lower_is_better'])}",
+        f"- baseline_below_all_nulls = {summary['baseline_below_all_nulls']}",
+        "",
+        "| A_index | B_index | weighted_residual | best_sector_m | t_residual | r_residual | phi_residual_sector_adj |",
+        "|---:|---:|---:|---:|---:|---:|---:|",
+    ]
+    for p in null_result["samples"]:
+        lines.append(
+            f"| {_fmt(p['A_index'])} | {_fmt(p['B_index'])} | {_fmt(p['weighted_residual'])} | "
+            f"{_fmt(p['best_sector_m'])} | {_fmt(p['t_residual'])} | {_fmt(p['r_residual'])} | "
+            f"{_fmt(p['phi_residual_sector_adjusted'])} |"
+        )
     return lines
 
 
@@ -532,6 +669,23 @@ def write_artifacts(result: dict[str, Any]) -> tuple[Path, Path]:
     lines += _corner_table(result["corner"])
     lines += [""]
 
+    lines += ["## K19 exploratory null: pair-label shuffle", ""]
+    lines += _null_shuffle_table(result["null_pair_label_shuffle"])
+    lines += [
+        "",
+        "Reading: this null only asks whether the reproduced baseline endpoint pair is "
+        "exceptional under the same residual objective when A/B labels are shuffled inside "
+        "the same generated cloud. It does not preserve boundary/sampling structure beyond "
+        "using the same cloud, and it is not a Kerr confirmation test.",
+        "",
+        "K19-001 verdict: if baseline_below_all_nulls is true and zero null samples "
+        "match or improve the baseline, the reproduced K18B endpoint pair is exceptional "
+        "against this same-cloud pair-label shuffle null. This supports continuing to a "
+        "stronger boundary/sampling-preserving null, but does not establish causal "
+        "reachability or Kerr structure.",
+        "",
+    ]
+
     lines += ["## Classification: INTERIOR / RUNAWAY / INCONCLUSIVE", ""]
     lines += [
         f"- b-cut: **{result['classification_b_cut']}**",
@@ -611,6 +765,7 @@ def write_artifacts(result: dict[str, Any]) -> tuple[Path, Path]:
         },
         "provenance": result["provenance"],
         "reproduction": result["reproduction"],
+        "null_pair_label_shuffle": result["null_pair_label_shuffle"],
         "b_cut": result["b_cut"],
         "lambda_cut": result["lambda_cut"],
         "corner": result["corner"],
