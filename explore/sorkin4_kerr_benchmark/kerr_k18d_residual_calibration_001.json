@@ -1,0 +1,136 @@
+{
+  "benchmark": "S4-KERR-K18D residual calibration (Phase 0 + Phase 1)",
+  "generated_at_utc": "2026-05-29T12:02:16.530008+00:00",
+  "phases_run": [
+    "phase0",
+    "phase1"
+  ],
+  "status": "PARTIAL \u2014 Phase 0 ok; Phase 1 complete; floor_off_grid = 0.0416334976665 >= 1e-2 \u2192 trending OBJECTIVE_UNRESOLVED",
+  "fixed_point": {
+    "N": 24,
+    "seed": 1961,
+    "spin_a": 0.5,
+    "event_A": 15,
+    "event_B": 4,
+    "direction": "ingoing",
+    "reference_residual": 0.12546941635537312
+  },
+  "calibration_grid": {
+    "CAL_B_GRID": [
+      0.6,
+      0.8,
+      0.9,
+      1.0,
+      1.1,
+      1.2,
+      1.4
+    ],
+    "CAL_LAMBDA_GRID": [
+      0.25,
+      0.375,
+      0.5,
+      0.625,
+      0.75,
+      1.0
+    ],
+    "direction": "ingoing"
+  },
+  "phase0": {
+    "r_plus": 1.8660254037844386,
+    "n_events": 24,
+    "A": {
+      "t": 2.9103567417252916,
+      "r": 4.917680370166319,
+      "phi": 4.9572224569140015
+    },
+    "B_real": {
+      "t": 3.8983298507599984,
+      "r": 4.550588789137428,
+      "phi": 5.106522579152854
+    },
+    "event_A_matches_k18c": true,
+    "event_B_matches_k18c": true,
+    "recomputed_residual": 0.12546941635537312,
+    "reference_residual": 0.12546941635537312,
+    "residual_reproduced": true,
+    "provenance_ok": true
+  },
+  "phase1": {
+    "on_grid_constructions": [
+      {
+        "b_star": 1.0,
+        "lambda_star": 0.5,
+        "status": "ok",
+        "failed_reason": null,
+        "B_syn": {
+          "t": 3.7740900153674537,
+          "r": 4.425119372782055,
+          "phi": 4.988226158702541
+        },
+        "probe_best_residual": 0.0,
+        "probe_best_b": 1.0,
+        "probe_best_lambda": 0.5,
+        "edge": false
+      }
+    ],
+    "off_grid_constructions": [
+      {
+        "b_star": 0.95,
+        "lambda_star": 0.45,
+        "status": "ok",
+        "failed_reason": null,
+        "B_syn": {
+          "t": 3.685107982512465,
+          "r": 4.473507788315212,
+          "phi": 4.98375266829645
+        },
+        "probe_best_residual": 0.08503417706770211,
+        "probe_best_b": 1.4,
+        "probe_best_lambda": 0.5,
+        "edge": true
+      },
+      {
+        "b_star": 1.05,
+        "lambda_star": 0.55,
+        "status": "ok",
+        "failed_reason": null,
+        "B_syn": {
+          "t": 3.863705531337477,
+          "r": 4.376982676422324,
+          "phi": 4.993041561831142
+        },
+        "probe_best_residual": 0.08579545233470265,
+        "probe_best_b": 0.6,
+        "probe_best_lambda": 0.5,
+        "edge": true
+      },
+      {
+        "b_star": 1.1,
+        "lambda_star": 0.6,
+        "status": "ok",
+        "failed_reason": null,
+        "B_syn": {
+          "t": 3.9539695892196605,
+          "r": 4.329115377825305,
+          "phi": 4.998209828180907
+        },
+        "probe_best_residual": 0.0416334976665258,
+        "probe_best_b": 1.4,
+        "probe_best_lambda": 0.625,
+        "edge": true
+      }
+    ],
+    "floor_on_grid": 0.0,
+    "floor_off_grid": 0.0416334976665258
+  },
+  "guardrails": [
+    "residual profile != causal_true",
+    "interior minimum != reachability",
+    "low residual != proof",
+    "synthetic reachable target != causal_true (it is a numerical self-consistency anchor)",
+    "candidate_hit != reachability; candidate_miss != spacelike separation",
+    "K18D is a numerical objective calibration only; it makes no causal claim",
+    "floor_off_grid measures the floor the probe faces for a generic target at CAL spacing",
+    "floor_on_grid measures the integrator/float-noise floor (expected near machine epsilon)"
+  ]
+}
