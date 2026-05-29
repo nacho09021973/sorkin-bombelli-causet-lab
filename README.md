@@ -13,6 +13,17 @@ classifier, not a Hauptvermutung test, and not currently an ML project.
 The framing note is
 [`docs/SORKIN2_algorithmic_recoverability_note.md`](docs/SORKIN2_algorithmic_recoverability_note.md).
 
+## Current active line
+
+Current active line:
+SORKIN-4 Kerr exploratory benchmark lives under:
+`explore/sorkin4_kerr_benchmark/`
+
+This repository currently contains both:
+
+- **SORKIN-2 / Bombelli revival and recoverability work**.
+- **SORKIN-4 / Kerr exploratory benchmark sequence**.
+
 ## Motivation
 
 The original Bombelli program asks a constructive question: given a causal set
@@ -33,6 +44,30 @@ setup. It is not direct evidence that no realization exists.
 
 - **Historical revival:** complete and archived in v1.0.0.
 - **Current continuation:** SORKIN-2 diagnostic framing is fixed.
+- **Active exploratory benchmark:** SORKIN-4 Kerr sequence is active under
+  `explore/sorkin4_kerr_benchmark/`.
+- **SORKIN-4 status summary:**
+  - K1-K6: Kerr local/geometric known-truths.
+  - K7-K10: equatorial null geodesic preflights and segment audits.
+  - K11-K12: synthetic shooting and winding-sector bookkeeping.
+  - K13/K13b: near-photon whirling probe; physical angular accumulation found.
+  - K14-K16: synthetic and semi-synthetic shooting/pair sandboxes.
+  - K17-K17d: controlled cloud-cloud candidate-pair diagnostics; random
+    cloud-cloud pairs remain non-informative.
+- **K17d verdict (current):**
+  - 27 cells over N={12,24,48}, seed={1959,1960,1961}, spin={0,0.25,0.5}.
+  - 2159 selected pairs probed.
+  - best_residual_overall = 0.12547 ~= 125*W_TOL.
+  - median_per_N: 12 -> 0.454, 24 -> 0.265, 48 -> 0.265.
+  - near_hits_overall = 0.
+  - conclusion: naive cloud-cloud random search is not yet informative.
+- **Current caveats:**
+  - no production Kerr causal classifier;
+  - no physical/global Kerr reachability claim;
+  - no arbitrary sprinkling causal classification;
+  - no Level-B Hawking/Bekenstein rediscovery;
+  - current outputs are audits, probes, synthetic/semi-synthetic sandboxes,
+    and candidate diagnostics.
 - **Next scientific step:** design a minimal matrix of known-truth cases.
 - **Provenance freeze:** warmup and robustness diagnostics are committed locally.
 - **Exploratory artifacts:** Phase3/4A/4B/5 remain non-claim exploratory
@@ -40,6 +75,13 @@ setup. It is not direct evidence that no realization exists.
   under `legacy/`.
 - **Foundation README reconciliation:** may still be pending if
   `benchmarks/foundation/README.md` has unresolved diff.
+
+Key SORKIN-4 paths:
+
+- `explore/sorkin4_kerr_benchmark/`
+- `explore/sorkin4_thermo_benchmark/`
+- Latest K17d artifact:
+  `explore/sorkin4_kerr_benchmark/kerr_k17d_cloud_size_seed_scan_001.md`
 
 Implemented so far:
 
@@ -79,14 +121,20 @@ whether the historical annealer reaches zero energy or exact relation recovery.
 
 ### Why this section exists
 
-Before programming Kerr diagnostics, we need to separate what the causal-set
+While extending Kerr diagnostics, we separate what the causal-set
 black-hole literature already provides from what SORKIN would still have to
 invent. SORKIN-2 showed endpoint and selection failures in the historical
 Bombelli annealer at N=36, while SORKIN-3 is exploring exact recovery in
-Minkowski 1+1D through order-embedding structure. A future SORKIN-4/Kerr line
-should therefore begin as a modest ordinal-diagnostic program: generate
-known-truth causal sets in black-hole backgrounds, audit order-only
-observables, and avoid claiming Kerr reconstruction.
+Minkowski 1+1D through order-embedding structure. The SORKIN-4/Kerr line
+remains a modest ordinal-diagnostic program: generate known-truth causal sets
+in black-hole backgrounds, audit order-only observables, and avoid claiming
+Kerr reconstruction.
+
+### Earlier plan (historical note)
+
+This README previously described SORKIN-4/Kerr as future work. That wording is
+kept as historical context only; SORKIN-4 exploratory benchmarking is now
+active (see current status above).
 
 Local bibliography artifacts are stored under
 `docs/bibliography/sorkin4_black_holes/`. Dhital (2023) is included from its
